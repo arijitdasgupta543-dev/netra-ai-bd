@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated/review'
 import { Route as AuthenticatedScreeningRouteImport } from './routes/_authenticated/screening'
 
 const IndexRoute = IndexRouteImport.update({
@@ -28,6 +29,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedScreeningRoute = AuthenticatedScreeningRouteImport.update({
   id: '/screening',
   path: '/screening',
@@ -37,11 +43,13 @@ const AuthenticatedScreeningRoute = AuthenticatedScreeningRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/review': typeof AuthenticatedReviewRoute
   '/screening': typeof AuthenticatedScreeningRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/review': typeof AuthenticatedReviewRoute
   '/screening': typeof AuthenticatedScreeningRoute
 }
 export interface FileRoutesById {
@@ -49,15 +57,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/review': typeof AuthenticatedReviewRoute
   '/_authenticated/screening': typeof AuthenticatedScreeningRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/screening'
+  fullPaths: '/' | '/auth' | '/review' | '/screening'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/screening'
+  to: '/' | '/auth' | '/review' | '/screening'
   id:
-    '__root__' | '/' | '/_authenticated' | '/auth' | '/_authenticated/screening'
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/review'
+    | '/_authenticated/screening'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -89,6 +103,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/review': {
+      id: '/_authenticated/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof AuthenticatedReviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/screening': {
       id: '/_authenticated/screening'
       path: '/screening'
@@ -100,10 +121,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
   AuthenticatedScreeningRoute: typeof AuthenticatedScreeningRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedReviewRoute: AuthenticatedReviewRoute,
   AuthenticatedScreeningRoute: AuthenticatedScreeningRoute,
 }
 
