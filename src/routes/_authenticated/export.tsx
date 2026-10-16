@@ -42,7 +42,7 @@ function ExportPage() {
     setProgress(0);
     try {
       for (let i = 0; i < eyes.length; i++) {
-        const { p, e } = eyes[i];
+        const { p, e } = eyes[i]!;
         const folder = folderFor(e.reviews.map((r) => r.diagnosis));
         const name = `${p.study_id}_${e.eye}.jpg`;
         const { data, error } = await supabase.storage.from(BUCKET).download(e.storage_path);

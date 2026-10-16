@@ -50,7 +50,7 @@ function Demo() {
       const out = model.predict(input) as import("@tensorflow/tfjs").Tensor;
       const v = (await out.data())[0];
       tf.dispose([input, out]);
-      setProb(v);
+      setProb(v ?? null);
       setStatus("idle");
     } catch (e) {
       setErr((e as Error).message);

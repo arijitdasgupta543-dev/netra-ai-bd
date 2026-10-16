@@ -57,7 +57,7 @@ function Dashboard() {
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <Chart title={L("Consensus labels", "সম্মত লেবেল")} data={s.labels.map((x) => ({ ...x, name: L(diagnosisLabel[x.name as keyof typeof diagnosisLabel].en, diagnosisLabel[x.name as keyof typeof diagnosisLabel].bn).split(" (")[0] ?? x.name }))} />
-        <Chart title={L("By sex", "লিঙ্গ অনুযায়ী")} data={s.sex.map((x) => ({ ...x, name: sexLabel[x.name] ? L(sexLabel[x.name].en, sexLabel[x.name].bn) : x.name }))} />
+        <Chart title={L("By sex", "লিঙ্গ অনুযায়ী")} data={s.sex.map((x) => { const sl = sexLabel[x.name]; return { ...x, name: sl ? L(sl.en, sl.bn) : x.name }; })} />
         <Chart title={L("By age group", "বয়স অনুযায়ী")} data={s.age} />
         <Chart title={L("Photos per site", "সাইট অনুযায়ী ছবি")} data={s.sites} />
       </div>
