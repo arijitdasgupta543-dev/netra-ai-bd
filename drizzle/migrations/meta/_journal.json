@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1792172844345,
+      "tag": "0000_netra_schema",
+      "breakpoints": true
+    }
+  ]
+}
