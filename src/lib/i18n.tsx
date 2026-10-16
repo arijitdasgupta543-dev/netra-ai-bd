@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 
 export type Lang = "bn" | "en";
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; L: (en: string, bn: string) => string };
+type Ctx = { lang: Lang; setLang: (l: Lang) => void; L: (en: string, bn: string) => string; T: (b?: BiText) => string };
 
 const LangContext = createContext<Ctx | null>(null);
 
@@ -25,7 +25,9 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   const L = (en: string, bn: string) => (lang === "bn" ? bn : en);
 
-  return <LangContext.Provider value={{ lang, setLang, L }}>{children}</LangContext.Provider>;
+  const T = (b?: BiText) => (b ? L(b.en, b.bn) : "–");
+
+  return <LangContext.Provider value={{ lang, setLang, L, T }}>{children}</LangContext.Provider>;
 }
 
 export function useLang() {

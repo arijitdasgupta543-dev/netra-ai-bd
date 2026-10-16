@@ -27,7 +27,7 @@ export const Route = createFileRoute("/_authenticated/records/$studyId")({
 
 function Detail() {
   const { studyId } = Route.useParams();
-  const { L } = useLang();
+  const { L, T } = useLang();
   const { role } = useAuth();
   const navigate = useNavigate();
   const qc = useQueryClient();
@@ -42,7 +42,10 @@ function Detail() {
     const paths = [...p.eye_images.map((e) => e.storage_path), ...(p.consent_photo_path ? [p.consent_photo_path] : [])];
     if (paths.length) await supabase.storage.from(BUCKET).remove(paths);
     const { error } = await supabase.from("patients").delete().eq("id", p.id);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     await qc.invalidateQueries({ queryKey: recordsKey });
     toast.success(L("Record deleted", "রেকর্ড মুছে ফেলা হয়েছে"));
     navigate({ to: "/records" });
@@ -55,7 +58,7 @@ function Detail() {
       </PageTitle>
       <div className="grid grid-cols-2 gap-3 rounded-2xl border bg-card p-4 text-sm sm:grid-cols-4">
         <Info k={L("Age", "বয়স")} v={String(p.age ?? "–")} />
-        <Info k={L("Sex", "লিঙ্গ")} v={p.sex ? L(sexLabel[p.sex].en, sexLabel[p.sex].bn) : "–"} />
+        <Info k={L("Sex", "লিঙ্গ")} v={p.sex ? T(sexLabel[p.sex]) : "–"} />
         <Info k={L("Area", "এলাকা")} v={p.area ?? "–"} />
         <Info k={L("Consent", "সম্মতি")} v={p.consent_type === "written" ? L("Written", "লিখিত") : L("Verbal", "মৌখিক")} />
       </div>
@@ -89,7 +92,7 @@ function Detail() {
 }
 
 function EyeBlock({ e }: { e: EyeRow }) {
-  const { L } = useLang();
+  const { L, T } = useLang();
   const url = useSignedUrl(e.storage_path);
   const profiles = useProfiles();
   const cons = majority(e.reviews.map((r) => r.diagnosis));
@@ -97,7 +100,7 @@ function EyeBlock({ e }: { e: EyeRow }) {
   return (
     <section className="space-y-3 rounded-2xl border bg-card p-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">{L(eyeLabel[e.eye].en, eyeLabel[e.eye].bn)}</h2>
+        <h2 className="text-lg font-semibold">{T(eyeLabel[e.eye])}</h2>
         <QualityBadge status={e.quality_status} />
       </div>
       <ZoomImage src={url.data} circle={circle} />
@@ -114,12 +117,12 @@ function EyeBlock({ e }: { e: EyeRow }) {
       <div className="border-t pt-3">
         <p className="text-sm font-semibold">
           {L("Doctor reviews", "ডাক্তারের মূল্যায়ন")} ({e.reviews.length})
-          {cons && <span className="ml-2 text-primary">· {L("Consensus", "সম্মত মত")}: {L(diagnosisLabel[cons].en, diagnosisLabel[cons].bn)}</span>}
+          {cons && <span className="ml-2 text-primary">· {L("Consensus", "সম্মত মত")}: {T(diagnosisLabel[cons])}</span>}
         </p>
         <ul className="mt-2 space-y-2 text-sm">
           {e.reviews.map((r) => (
             <li key={r.id} className="rounded-lg bg-muted p-2">
-              <span className="font-medium">{L(diagnosisLabel[r.diagnosis].en, diagnosisLabel[r.diagnosis].bn)}</span>
+              <span className="font-medium">{T(diagnosisLabel[r.diagnosis])}</span>
               {r.other_text && ` (${r.other_text})`} · {L("conf.", "আস্থা")} {r.confidence} · {r.referral ? L("refer", "রেফার") : L("no referral", "রেফার নয়")}
               <span className="block text-xs text-muted-foreground">{profiles.data?.[r.doctor_id] ?? r.doctor_id.slice(0, 8)} · {new Date(r.created_at).toLocaleString()}</span>
               {r.comments && <span className="block text-xs">{r.comments}</span>}

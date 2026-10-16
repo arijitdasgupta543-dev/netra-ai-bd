@@ -37,7 +37,7 @@ type QueueItem = {
 };
 
 function ReviewQueue() {
-  const { L } = useLang();
+  const { L, T } = useLang();
   const { userId } = useAuth();
   const q = useQuery({
     queryKey: ["review-queue", userId],
@@ -66,7 +66,7 @@ function ReviewQueue() {
 }
 
 function ReviewForm({ item }: { item: QueueItem }) {
-  const { L } = useLang();
+  const { L, T } = useLang();
   const { userId } = useAuth();
   const qc = useQueryClient();
   const url = useSignedUrl(item.storage_path);
@@ -102,9 +102,9 @@ function ReviewForm({ item }: { item: QueueItem }) {
     <div className="space-y-5">
       <div className="flex flex-wrap gap-2 text-sm">
         <span className="rounded-full bg-secondary px-3 py-1 font-mono">{p?.study_id}</span>
-        <span className="rounded-full bg-secondary px-3 py-1">{L(eyeLabel[item.eye].en, eyeLabel[item.eye].bn)}</span>
+        <span className="rounded-full bg-secondary px-3 py-1">{T(eyeLabel[item.eye])}</span>
         <span className="rounded-full bg-secondary px-3 py-1">{L("Age", "বয়স")} {p?.age ?? "?"}</span>
-        {p?.sex && <span className="rounded-full bg-secondary px-3 py-1">{L(sexLabel[p.sex].en, sexLabel[p.sex].bn)}</span>}
+        {p?.sex && <span className="rounded-full bg-secondary px-3 py-1">{T(sexLabel[p.sex])}</span>}
       </div>
       <ZoomImage src={url.data} circle={circle} />
 
@@ -118,7 +118,7 @@ function ReviewForm({ item }: { item: QueueItem }) {
               onClick={() => setDiagnosis(d)}
               className={cn("min-h-12 rounded-xl border px-4 text-left font-medium", diagnosis === d ? "border-primary bg-primary text-primary-foreground" : "bg-card")}
             >
-              {L(diagnosisLabel[d].en, diagnosisLabel[d].bn)}
+              {T(diagnosisLabel[d])}
             </button>
           ))}
         </div>

@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_authenticated/records/")({
 });
 
 function Records() {
-  const { L } = useLang();
+  const { L, T } = useLang();
   const { data, isLoading } = useRecords();
   const [q, setQ] = useState("");
   const rows = useMemo(() => {
@@ -45,7 +45,7 @@ function Records() {
               <span className="text-xs text-muted-foreground">{p.screening_date} · {p.sites?.name}</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              {p.age ?? "?"} {L("yrs", "বছর")} · {p.sex ? L(sexLabel[p.sex].en, sexLabel[p.sex].bn) : "–"} {p.area && `· ${p.area}`}
+              {p.age ?? "?"} {L("yrs", "বছর")} · {p.sex ? T(sexLabel[p.sex]) : "–"} {p.area && `· ${p.area}`}
             </p>
             <div className="mt-3 grid grid-cols-2 gap-3">
               {p.eye_images.sort((a, b) => a.eye.localeCompare(b.eye)).map((e) => {
@@ -56,10 +56,10 @@ function Records() {
                       {urls.data?.[e.storage_path] && <img src={urls.data[e.storage_path]} alt="" loading="lazy" className="h-full w-full object-cover" />}
                     </div>
                     <div className="min-w-0 space-y-1 text-xs">
-                      <p className="font-medium">{L(eyeLabel[e.eye].en, eyeLabel[e.eye].bn)}</p>
+                      <p className="font-medium">{T(eyeLabel[e.eye])}</p>
                       <QualityBadge status={e.quality_status} />
                       <p className="text-muted-foreground">{e.reviews.length} {L("reviews", "মূল্যায়ন")}</p>
-                      {cons && <p className="truncate font-medium text-primary">{L(diagnosisLabel[cons].en, diagnosisLabel[cons].bn)}</p>}
+                      {cons && <p className="truncate font-medium text-primary">{T(diagnosisLabel[cons])}</p>}
                     </div>
                   </div>
                 );

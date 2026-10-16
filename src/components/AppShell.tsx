@@ -38,7 +38,7 @@ export function LangToggle() {
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { L } = useLang();
+  const { L, T } = useLang();
   const { session, role, signOut } = useAuth();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const items = NAV.filter((n) => role && n.roles.includes(role));
@@ -89,7 +89,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </header>
       {session && role && (
         <div className="mx-auto max-w-5xl px-4 pt-3 text-xs text-muted-foreground">
-          {session.user.email} · {L(roleLabel[role].en, roleLabel[role].bn)}
+          {session.user.email} · {T(roleLabel[role])}
         </div>
       )}
       <main className="mx-auto max-w-5xl px-4 py-5 pb-16">{children}</main>
@@ -98,7 +98,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 }
 
 export function RoleGate({ roles, children }: { roles: Role[]; children: ReactNode }) {
-  const { L } = useLang();
+  const { L, T } = useLang();
   const { role, loading } = useAuth();
   if (loading) return <p className="text-muted-foreground">{L("Loading…", "লোড হচ্ছে…")}</p>;
   if (!role)

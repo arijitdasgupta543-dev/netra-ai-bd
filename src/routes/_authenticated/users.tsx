@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/users")({
 });
 
 function UsersPage() {
-  const { L } = useLang();
+  const { L, T } = useLang();
   const { userId } = useAuth();
   const qc = useQueryClient();
   const users = useQuery({
@@ -63,7 +63,7 @@ function UsersPage() {
                 <SelectContent>
                   <SelectItem value="none">{L("No access", "প্রবেশাধিকার নেই")}</SelectItem>
                   {(Object.keys(roleLabel) as Role[]).map((r) => (
-                    <SelectItem key={r} value={r}>{L(roleLabel[r].en, roleLabel[r].bn)}</SelectItem>
+                    <SelectItem key={r} value={r}>{T(roleLabel[r])}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -77,7 +77,7 @@ function UsersPage() {
 }
 
 function Sites() {
-  const { L } = useLang();
+  const { L, T } = useLang();
   const qc = useQueryClient();
   const sites = useSites();
   const [name, setName] = useState("");
