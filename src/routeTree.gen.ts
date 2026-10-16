@@ -13,8 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDemoRouteImport } from './routes/_authenticated/demo'
+import { Route as AuthenticatedExportRouteImport } from './routes/_authenticated/export'
 import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated/review'
 import { Route as AuthenticatedScreeningRouteImport } from './routes/_authenticated/screening'
+import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedRecordsIndexRouteImport } from './routes/_authenticated/records.index'
 import { Route as AuthenticatedRecordsStudyIdRouteImport } from './routes/_authenticated/records.$studyId'
 
@@ -37,6 +40,16 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDemoRoute = AuthenticatedDemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedExportRoute = AuthenticatedExportRouteImport.update({
+  id: '/export',
+  path: '/export',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
   id: '/review',
   path: '/review',
@@ -45,6 +58,11 @@ const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
 const AuthenticatedScreeningRoute = AuthenticatedScreeningRouteImport.update({
   id: '/screening',
   path: '/screening',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRecordsIndexRoute =
@@ -64,8 +82,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/demo': typeof AuthenticatedDemoRoute
+  '/export': typeof AuthenticatedExportRoute
   '/review': typeof AuthenticatedReviewRoute
   '/screening': typeof AuthenticatedScreeningRoute
+  '/users': typeof AuthenticatedUsersRoute
   '/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
   '/records/': typeof AuthenticatedRecordsIndexRoute
 }
@@ -73,8 +94,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/demo': typeof AuthenticatedDemoRoute
+  '/export': typeof AuthenticatedExportRoute
   '/review': typeof AuthenticatedReviewRoute
   '/screening': typeof AuthenticatedScreeningRoute
+  '/users': typeof AuthenticatedUsersRoute
   '/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
   '/records': typeof AuthenticatedRecordsIndexRoute
 }
@@ -84,8 +108,11 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/demo': typeof AuthenticatedDemoRoute
+  '/_authenticated/export': typeof AuthenticatedExportRoute
   '/_authenticated/review': typeof AuthenticatedReviewRoute
   '/_authenticated/screening': typeof AuthenticatedScreeningRoute
+  '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/_authenticated/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
   '/_authenticated/records/': typeof AuthenticatedRecordsIndexRoute
 }
@@ -95,8 +122,11 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/dashboard'
+    | '/demo'
+    | '/export'
     | '/review'
     | '/screening'
+    | '/users'
     | '/records/$studyId'
     | '/records/'
   fileRoutesByTo: FileRoutesByTo
@@ -104,8 +134,11 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/dashboard'
+    | '/demo'
+    | '/export'
     | '/review'
     | '/screening'
+    | '/users'
     | '/records/$studyId'
     | '/records'
   id:
@@ -114,8 +147,11 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/dashboard'
+    | '/_authenticated/demo'
+    | '/_authenticated/export'
     | '/_authenticated/review'
     | '/_authenticated/screening'
+    | '/_authenticated/users'
     | '/_authenticated/records/$studyId'
     | '/_authenticated/records/'
   fileRoutesById: FileRoutesById
@@ -156,6 +192,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/demo': {
+      id: '/_authenticated/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof AuthenticatedDemoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/export': {
+      id: '/_authenticated/export'
+      path: '/export'
+      fullPath: '/export'
+      preLoaderRoute: typeof AuthenticatedExportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/review': {
       id: '/_authenticated/review'
       path: '/review'
@@ -168,6 +218,13 @@ declare module '@tanstack/react-router' {
       path: '/screening'
       fullPath: '/screening'
       preLoaderRoute: typeof AuthenticatedScreeningRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/users': {
+      id: '/_authenticated/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedUsersRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/records/': {
@@ -189,16 +246,22 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDemoRoute: typeof AuthenticatedDemoRoute
+  AuthenticatedExportRoute: typeof AuthenticatedExportRoute
   AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
   AuthenticatedScreeningRoute: typeof AuthenticatedScreeningRoute
+  AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedRecordsStudyIdRoute: typeof AuthenticatedRecordsStudyIdRoute
   AuthenticatedRecordsIndexRoute: typeof AuthenticatedRecordsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDemoRoute: AuthenticatedDemoRoute,
+  AuthenticatedExportRoute: AuthenticatedExportRoute,
   AuthenticatedReviewRoute: AuthenticatedReviewRoute,
   AuthenticatedScreeningRoute: AuthenticatedScreeningRoute,
+  AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedRecordsStudyIdRoute: AuthenticatedRecordsStudyIdRoute,
   AuthenticatedRecordsIndexRoute: AuthenticatedRecordsIndexRoute,
 }
