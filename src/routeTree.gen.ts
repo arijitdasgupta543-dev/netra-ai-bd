@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated/review'
 import { Route as AuthenticatedScreeningRouteImport } from './routes/_authenticated/screening'
+import { Route as AuthenticatedRecordsIndexRouteImport } from './routes/_authenticated/records.index'
+import { Route as AuthenticatedRecordsStudyIdRouteImport } from './routes/_authenticated/records.$studyId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,6 +32,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
   id: '/review',
   path: '/review',
@@ -39,39 +47,77 @@ const AuthenticatedScreeningRoute = AuthenticatedScreeningRouteImport.update({
   path: '/screening',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRecordsIndexRoute =
+  AuthenticatedRecordsIndexRouteImport.update({
+    id: '/records/',
+    path: '/records/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedRecordsStudyIdRoute =
+  AuthenticatedRecordsStudyIdRouteImport.update({
+    id: '/records/$studyId',
+    path: '/records/$studyId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/review': typeof AuthenticatedReviewRoute
   '/screening': typeof AuthenticatedScreeningRoute
+  '/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
+  '/records/': typeof AuthenticatedRecordsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/review': typeof AuthenticatedReviewRoute
   '/screening': typeof AuthenticatedScreeningRoute
+  '/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
+  '/records': typeof AuthenticatedRecordsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/review': typeof AuthenticatedReviewRoute
   '/_authenticated/screening': typeof AuthenticatedScreeningRoute
+  '/_authenticated/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
+  '/_authenticated/records/': typeof AuthenticatedRecordsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/review' | '/screening'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/review'
+    | '/screening'
+    | '/records/$studyId'
+    | '/records/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/review' | '/screening'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/review'
+    | '/screening'
+    | '/records/$studyId'
+    | '/records'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/dashboard'
     | '/_authenticated/review'
     | '/_authenticated/screening'
+    | '/_authenticated/records/$studyId'
+    | '/_authenticated/records/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -103,6 +149,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/review': {
       id: '/_authenticated/review'
       path: '/review'
@@ -117,17 +170,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedScreeningRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/records/': {
+      id: '/_authenticated/records/'
+      path: '/records'
+      fullPath: '/records/'
+      preLoaderRoute: typeof AuthenticatedRecordsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/records/$studyId': {
+      id: '/_authenticated/records/$studyId'
+      path: '/records/$studyId'
+      fullPath: '/records/$studyId'
+      preLoaderRoute: typeof AuthenticatedRecordsStudyIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
   AuthenticatedScreeningRoute: typeof AuthenticatedScreeningRoute
+  AuthenticatedRecordsStudyIdRoute: typeof AuthenticatedRecordsStudyIdRoute
+  AuthenticatedRecordsIndexRoute: typeof AuthenticatedRecordsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedReviewRoute: AuthenticatedReviewRoute,
   AuthenticatedScreeningRoute: AuthenticatedScreeningRoute,
+  AuthenticatedRecordsStudyIdRoute: AuthenticatedRecordsStudyIdRoute,
+  AuthenticatedRecordsIndexRoute: AuthenticatedRecordsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
