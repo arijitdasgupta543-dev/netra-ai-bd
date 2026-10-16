@@ -42,7 +42,7 @@ function UsersPage() {
       role === "none"
         ? await supabase.from("user_roles").delete().eq("user_id", uid)
         : await supabase.from("user_roles").upsert({ user_id: uid, role }, { onConflict: "user_id" });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(L("Role updated", "ভূমিকা হালনাগাদ হয়েছে"));
     qc.invalidateQueries({ queryKey: ["users-admin"] });
   };
@@ -84,13 +84,13 @@ function Sites() {
   const add = async () => {
     if (!name.trim()) return;
     const { error } = await supabase.from("sites").insert({ name: name.trim() });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setName("");
     qc.invalidateQueries({ queryKey: ["sites"] });
   };
   const remove = async (id: string) => {
     const { error } = await supabase.from("sites").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["sites"] });
   };
   return (

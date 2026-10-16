@@ -54,7 +54,7 @@ function AuthPage() {
       options: { emailRedirectTo: window.location.origin, data: { full_name: name } },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     if (!data.session) setSent(true);
   };
 

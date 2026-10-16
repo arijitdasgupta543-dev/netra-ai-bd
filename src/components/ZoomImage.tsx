@@ -3,7 +3,7 @@ import { ZoomIn, ZoomOut, Circle as CircleIcon } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 
-export function ZoomImage({ src, circle }: { src?: string; circle?: { cx: number; cy: number; r: number } | null }) {
+export function ZoomImage({ src, circle }: { src: string | undefined; circle: { cx: number; cy: number; r: number } | null }) {
   const { L } = useLang();
   const [zoom, setZoom] = useState(1);
   const [show, setShow] = useState(true);

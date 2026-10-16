@@ -92,7 +92,7 @@ function ReviewForm({ item }: { item: QueueItem }) {
       comments: comments || null,
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(L("Review saved", "মূল্যায়ন সংরক্ষিত"));
     qc.invalidateQueries();
     window.scrollTo({ top: 0 });

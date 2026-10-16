@@ -50,7 +50,7 @@ function ScreeningWizard() {
   useEffect(() => {
     if (!patient.siteId && sites.data?.length) {
       const def = sites.data.find((s) => s.name === "Medical Centre 1") ?? sites.data[0];
-      setPatient((p) => ({ ...p, siteId: def.id }));
+      if (def) setPatient((p) => ({ ...p, siteId: def.id }));
     }
   }, [sites.data, patient.siteId]);
 
