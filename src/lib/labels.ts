@@ -41,8 +41,8 @@ export function majority<T extends string>(values: T[]): T | null {
   const counts = new Map<T, number>();
   for (const v of values) counts.set(v, (counts.get(v) ?? 0) + 1);
   const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
-  if (sorted.length > 1 && sorted[0][1] === sorted[1][1]) return null;
-  return sorted[0][0];
+  if (sorted.length > 1 && sorted[0]![1] === sorted[1]![1]) return null;
+  return sorted[0]![0];
 }
 
 /** Folder name used in the training ZIP. */
@@ -61,7 +61,7 @@ export function ageGroup(age: number | null): string {
 
 export function guessPhoneModel(ua: string): string {
   const m = ua.match(/Android [\d.]+;\s*([^;)]+?)(?:\s+Build|\))/);
-  if (m) return m[1].trim();
+  if (m?.[1]) return m[1].trim();
   if (/iPhone/.test(ua)) return "iPhone";
   return "Unknown";
 }

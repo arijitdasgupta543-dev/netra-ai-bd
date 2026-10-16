@@ -116,7 +116,7 @@ export function CircleEditor({
             max={60}
             step={0.5}
             value={[value.r * 100]}
-            onValueChange={([v]) => onChange({ ...value, r: v / 100 })}
+            onValueChange={([v]) => onChange({ ...value, r: (v ?? 1) / 100 })}
           />
         </div>
       )}

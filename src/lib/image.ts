@@ -51,7 +51,7 @@ export function analyseQuality(img: HTMLImageElement, circle: Circle | null): Qu
   const gray = new Float32Array(W * H);
   let sum = 0;
   for (let i = 0; i < W * H; i++) {
-    const g = 0.299 * data[i * 4] + 0.587 * data[i * 4 + 1] + 0.114 * data[i * 4 + 2];
+    const g = 0.299 * data[i * 4]! + 0.587 * data[i * 4 + 1]! + 0.114 * data[i * 4 + 2]!;
     gray[i] = g;
     sum += g;
   }
@@ -67,14 +67,14 @@ export function analyseQuality(img: HTMLImageElement, circle: Circle | null): Qu
       const dx = x - cx, dy = y - cy;
       if (dx * dx + dy * dy > rr * rr * 1.5) continue;
       const i = y * W + x;
-      const lap = gray[i - 1] + gray[i + 1] + gray[i - W] + gray[i + W] - 4 * gray[i];
+      const lap = gray[i - 1]! + gray[i + 1]! + gray[i - W]! + gray[i + W]! - 4 * gray[i]!;
       n++;
       const d = lap - mean;
       mean += d / n;
       m2 += d * (lap - mean);
       if (dx * dx + dy * dy <= rr * rr) {
         inside++;
-        if (data[i * 4] > 240 && data[i * 4 + 1] > 240 && data[i * 4 + 2] > 240) glareCount++;
+        if (data[i * 4]! > 240 && data[i * 4 + 1]! > 240 && data[i * 4 + 2]! > 240) glareCount++;
       }
     }
   }
