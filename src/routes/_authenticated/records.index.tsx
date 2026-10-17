@@ -10,7 +10,7 @@ import { QualityBadge } from "@/components/QualityBadge";
 import { Input } from "@/components/ui/input";
 
 export const Route = createFileRoute("/_authenticated/records/")({
-  head: () => ({ meta: [{ title: "Records – Netra AI" }, { name: "description", content: "All screening records." }] }),
+  head: () => ({ meta: [{ title: "Records – Netra AI" }, { name: "description", content: "All screening records." }, { property: "og:title", content: "Records – Netra AI" }, { property: "og:description", content: "All screening records." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin", "health_worker", "doctor"]}>
       <Records />

@@ -25,8 +25,8 @@ export function ZoomImage({ src, circle }: { src: string | undefined; circle: { 
         </div>
       </div>
       <div className="flex gap-2">
-        <Button type="button" variant="outline" size="icon" className="h-11 w-11" onClick={() => setZoom((z) => Math.max(1, z - 0.5))} aria-label="Zoom out"><ZoomOut /></Button>
-        <Button type="button" variant="outline" size="icon" className="h-11 w-11" onClick={() => setZoom((z) => Math.min(4, z + 0.5))} aria-label="Zoom in"><ZoomIn /></Button>
+        <Button type="button" variant="outline" size="icon" className="h-11 w-11" onClick={() => setZoom((z) => Math.max(1, z - 0.5))} aria-label={L('Zoom out','ছোট করুন')}><ZoomOut /></Button>
+        <Button type="button" variant="outline" size="icon" className="h-11 w-11" onClick={() => setZoom((z) => Math.min(4, z + 0.5))} aria-label={L('Zoom in','বড় করুন')}><ZoomIn /></Button>
         {circle && (
           <Button type="button" variant={show ? "default" : "outline"} className="h-11" onClick={() => setShow(!show)}>
             <CircleIcon className="h-4 w-4" /> {L("Pupil circle", "মণির বৃত্ত")}

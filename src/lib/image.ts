@@ -1,3 +1,4 @@
+import { pupilCropGeometry } from './capture';
 export type Circle = { cx: number; cy: number; r: number }; // cx, cy: fraction of width/height; r: fraction of width
 
 export type QualityStatus = "good" | "fair" | "poor";
@@ -28,8 +29,10 @@ export async function compressImage(file: Blob, maxSide = 1600, quality = 0.9): 
     const c = document.createElement("canvas");
     c.width = Math.round(img.naturalWidth * scale);
     c.height = Math.round(img.naturalHeight * scale);
-    c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
-    return await new Promise((r) => c.toBlob((b) => r(b!), "image/jpeg", quality));
+    const ctx = c.getContext("2d");
+    if (!ctx) throw new Error('Canvas unavailable');
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    return await canvasToBlob(c, "image/jpeg", quality);
   } finally {
     URL.revokeObjectURL(url);
   }
@@ -44,14 +47,15 @@ export function analyseQuality(img: HTMLImageElement, circle: Circle | null): Qu
   const c = document.createElement("canvas");
   c.width = W;
   c.height = H;
-  const ctx = c.getContext("2d", { willReadFrequently: true })!;
+  const ctx = c.getContext("2d", { willReadFrequently: true });
+  if (!ctx) throw new Error('Canvas unavailable');
   ctx.drawImage(img, 0, 0, W, H);
   const { data } = ctx.getImageData(0, 0, W, H);
 
   const gray = new Float32Array(W * H);
   let sum = 0;
   for (let i = 0; i < W * H; i++) {
-    const g = 0.299 * data[i * 4]! + 0.587 * data[i * 4 + 1]! + 0.114 * data[i * 4 + 2]!;
+    const g = 0.299 * (data[i * 4] ?? 0) + 0.587 * (data[i * 4 + 1] ?? 0) + 0.114 * (data[i * 4 + 2] ?? 0);
     gray[i] = g;
     sum += g;
   }
@@ -67,14 +71,14 @@ export function analyseQuality(img: HTMLImageElement, circle: Circle | null): Qu
       const dx = x - cx, dy = y - cy;
       if (dx * dx + dy * dy > rr * rr * 1.5) continue;
       const i = y * W + x;
-      const lap = gray[i - 1]! + gray[i + 1]! + gray[i - W]! + gray[i + W]! - 4 * gray[i]!;
+      const lap = (gray[i - 1] ?? 0) + (gray[i + 1] ?? 0) + (gray[i - W] ?? 0) + (gray[i + W] ?? 0) - 4 * (gray[i] ?? 0);
       n++;
       const d = lap - mean;
       mean += d / n;
       m2 += d * (lap - mean);
       if (dx * dx + dy * dy <= rr * rr) {
         inside++;
-        if (data[i * 4]! > 240 && data[i * 4 + 1]! > 240 && data[i * 4 + 2]! > 240) glareCount++;
+        if ((data[i * 4] ?? 0) > 240 && (data[i * 4 + 1] ?? 0) > 240 && (data[i * 4 + 2] ?? 0) > 240) glareCount++;
       }
     }
   }
@@ -98,13 +102,12 @@ export function analyseQuality(img: HTMLImageElement, circle: Circle | null): Qu
 /** Square crop of side 2.5×r centred on the circle, resized to `size`. */
 export function cropPupil(img: HTMLImageElement, circle: Circle, size = 224): HTMLCanvasElement {
   const W = img.naturalWidth, H = img.naturalHeight;
-  const side = 2.5 * circle.r * W;
-  const sx = circle.cx * W - side / 2;
-  const sy = circle.cy * H - side / 2;
+  const { side, sx, sy } = pupilCropGeometry(W, H, circle, size);
   const c = document.createElement("canvas");
   c.width = size;
   c.height = size;
-  const ctx = c.getContext("2d")!;
+  const ctx = c.getContext("2d");
+  if (!ctx) throw new Error('Canvas unavailable');
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, size, size);
   ctx.drawImage(img, sx, sy, side, side, 0, 0, size, size);
@@ -112,7 +115,17 @@ export function cropPupil(img: HTMLImageElement, circle: Circle, size = 224): HT
 }
 
 export function canvasToBlob(c: HTMLCanvasElement, type = "image/jpeg", q = 0.92): Promise<Blob> {
-  return new Promise((r) => c.toBlob((b) => r(b!), type, q));
+  return new Promise((resolve, reject) => c.toBlob((b) => b ? resolve(b) : reject(new Error('Could not encode photo')), type, q));
+}
+
+/** Training ROI only; inference must continue using the unmasked cropPupil. */
+export function maskedPupil(img: HTMLImageElement, circle: Circle): HTMLCanvasElement {
+  const crop = cropPupil(img, circle, 448);
+  const c = document.createElement('canvas'); c.width = 448; c.height = 448;
+  const ctx = c.getContext('2d'); if (!ctx) throw new Error('Canvas unavailable');
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 448, 448);
+  ctx.save(); ctx.beginPath(); ctx.arc(224,224,448/2.5,0,Math.PI*2); ctx.clip(); ctx.drawImage(crop,0,0); ctx.restore();
+  return c;
 }
 
 export function downloadBlob(blob: Blob, filename: string) {

@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
 import { useSites, recordsKey } from "@/lib/data";
-import { compressImage } from "@/lib/image";
+import { compressImage, loadImage, maskedPupil, canvasToBlob } from "@/lib/image";
 import { uploadPhoto } from "@/lib/storage";
 import { guessPhoneModel } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
@@ -20,7 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/screening")({
-  head: () => ({ meta: [{ title: "New screening – Netra AI" }, { name: "description", content: "Record a new consented eye screening." }] }),
+  head: () => ({ meta: [{ title: "New screening – Netra AI" }, { name: "description", content: "Record a new consented eye screening." }, { property: "og:title", content: "New screening – Netra AI" }, { property: "og:description", content: "Record a new consented eye screening." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin", "health_worker"]}>
       <ScreeningWizard />
@@ -86,10 +86,15 @@ function ScreeningWizard() {
       for (const [eye, d] of [["left", left], ["right", right]] as const) {
         if (!d) continue;
         const path = await uploadPhoto(`eyes/${p.study_id}`, d.blob);
+        const img = d.circle ? await loadImage(d.url) : null;
+        const roiPath = img && d.circle ? await uploadPhoto(`roi/${p.study_id}`, await canvasToBlob(maskedPupil(img, d.circle))) : null;
         const { error: e2 } = await supabase.from("eye_images").insert({
           patient_id: p.id,
           eye,
           storage_path: path,
+          roi_storage_path: roiPath,
+          guide_box: d.guide ? { ...d.guide } : null,
+          capture_checks: d.captureChecks ? { ...d.captureChecks } : null,
           circle_cx: d.circle?.cx ?? null,
           circle_cy: d.circle?.cy ?? null,
           circle_r: d.circle?.r ?? null,

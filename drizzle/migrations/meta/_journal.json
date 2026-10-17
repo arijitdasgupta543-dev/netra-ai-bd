@@ -8,6 +8,13 @@
       "when": 1792172844345,
       "tag": "0000_netra_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792214584047,
+      "tag": "0001_guided_eye_capture_settings",
+      "breakpoints": true
     }
   ]
 }

@@ -7,7 +7,7 @@ import { ageGroup, diagnosisLabel, DIAGNOSES, majority, sexLabel } from "@/lib/l
 import { PageTitle, RoleGate } from "@/components/AppShell";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard – Netra AI" }, { name: "description", content: "Data collection progress." }] }),
+  head: () => ({ meta: [{ title: "Dashboard – Netra AI" }, { name: "description", content: "Data collection progress." }, { property: "og:title", content: "Dashboard – Netra AI" }, { property: "og:description", content: "Data collection progress." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin", "health_worker", "doctor"]}>
       <Dashboard />
