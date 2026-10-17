@@ -34,6 +34,7 @@
   --color-warning: var(--warning);
   --color-warning-soft: var(--warning-soft);
   --color-danger-soft: var(--danger-soft);
+  --color-camera: var(--camera);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -54,6 +55,9 @@
 }
 
 :root {
+  --camera: #000;
+  --camera-guide: #fff;
+  --pupil-shade: rgba(0,0,0,.6);
   --radius: 0.875rem;
   --background: oklch(0.99 0.004 190);
   --foreground: oklch(0.24 0.03 210);
@@ -121,3 +125,7 @@
 @utility shadow-soft {
   box-shadow: var(--shadow-soft);
 }
+
+.capture-ready { background: var(--success); color: var(--primary-foreground); animation: capture-pulse 1.5s ease-in-out infinite; }
+@keyframes capture-pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--success) 20%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .capture-ready { animation: none; } }
