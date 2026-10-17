@@ -70,7 +70,16 @@ export function GuidedCamera({ onCapture, onGallery }: { onCapture: (photo: Guid
     try {
       const c=document.createElement('canvas'); c.width=v.videoWidth; c.height=v.videoHeight;
       const ctx=c.getContext('2d'); if (!ctx) return; ctx.drawImage(v,0,0);
-      const photo={blob:await canvasToBlob(c,'image/jpeg',.92),circle:latest.current.circle ?? {cx:.5,cy:.5,r:GUIDE_RADIUS},guide:guideBox(c.width,c.height),checks:latest.current.checks,torch};
+      const box=guideBox(c.width,c.height), small=document.createElement('canvas');small.width=256;small.height=128;
+      const sc=small.getContext('2d',{willReadFrequently:true});
+      let capturedChecks=latest.current.checks;
+      if(sc){
+        sc.drawImage(c,box.x*c.width,box.y*c.height,box.width*c.width,box.height*c.height,0,0,256,128);
+        const iris=latest.current.circle;
+        const values={...checkPixels(sc.getImageData(0,0,256,128).data,256,128,{cx:.5,cy:.5,r:GUIDE_RADIUS/box.width}),iris_found:!!iris,iris_ratio:iris?iris.r/GUIDE_RADIUS:null,offset_x:iris?iris.cx-.5:null,offset_y:iris?(iris.cy-.5)*c.height/c.width:null};
+        const hint=hintFor(values);capturedChecks={...values,hint,ready:hint==='ready'};
+      }
+      const photo={blob:await canvasToBlob(c,'image/jpeg',.92),circle:latest.current.circle ?? {cx:.5,cy:.5,r:GUIDE_RADIUS},guide:box,checks:capturedChecks,torch};
       stop(); onCapture(photo);
     } finally { busy.current=false; }
   };

@@ -64,8 +64,10 @@ export function Choice<T extends string>({
   return (
     <div className="flex flex-wrap gap-2">
       {options.map((o) => (
-        <button
+        <Button
           type="button"
+          variant="outline"
+          aria-pressed={value === o.v}
           key={o.v}
           onClick={() => onChange(o.v)}
           className={cn(
@@ -74,7 +76,7 @@ export function Choice<T extends string>({
           )}
         >
           {o.label}
-        </button>
+        </Button>
       ))}
     </div>
   );
