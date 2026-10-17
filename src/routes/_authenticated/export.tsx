@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
 export const Route = createFileRoute("/_authenticated/export")({
-  head: () => ({ meta: [{ title: "Export – Netra AI" }, { name: "description", content: "Export labelled data for model training." }] }),
+  head: () => ({ meta: [{ title: "Export – Netra AI" }, { name: "description", content: "Export labelled data for model training." }, { property: "og:title", content: "Export – Netra AI" }, { property: "og:description", content: "Export labelled data for model training." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin"]}>
       <ExportPage />

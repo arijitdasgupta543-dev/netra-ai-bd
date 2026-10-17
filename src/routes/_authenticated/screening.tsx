@@ -20,7 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/screening")({
-  head: () => ({ meta: [{ title: "New screening – Netra AI" }, { name: "description", content: "Record a new consented eye screening." }] }),
+  head: () => ({ meta: [{ title: "New screening – Netra AI" }, { name: "description", content: "Record a new consented eye screening." }, { property: "og:title", content: "New screening – Netra AI" }, { property: "og:description", content: "Record a new consented eye screening." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin", "health_worker"]}>
       <ScreeningWizard />

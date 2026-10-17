@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { PupilFocus } from '@/components/PupilFocus';
 
 export const Route = createFileRoute("/_authenticated/review")({
-  head: () => ({ meta: [{ title: "Doctor review – Netra AI" }, { name: "description", content: "Label eye photos independently." }] }),
+  head: () => ({ meta: [{ title: "Doctor review – Netra AI" }, { name: "description", content: "Label eye photos independently." }, { property: "og:title", content: "Doctor review – Netra AI" }, { property: "og:description", content: "Label eye photos independently." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin", "doctor"]}>
       <ReviewQueue />

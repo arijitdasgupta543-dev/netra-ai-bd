@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/_authenticated/records/$studyId")({
-  head: ({ params }) => ({ meta: [{ title: `${params.studyId} – Netra AI` }, { name: "description", content: "Screening record detail." }] }),
+  head: ({ params }) => ({ meta: [{ title: `${params.studyId} – Netra AI` }, { name: "description", content: "Screening record detail." }, { property: "og:title", content: `${params.studyId} – Netra AI` }, { property: "og:description", content: "Screening record detail." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin", "health_worker", "doctor"]}>
       <Detail />

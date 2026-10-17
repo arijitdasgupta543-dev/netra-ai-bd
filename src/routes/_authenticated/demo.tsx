@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/demo")({
-  head: () => ({ meta: [{ title: "AI research demo – Netra AI" }, { name: "description", content: "Research demo, not a diagnosis." }] }),
+  head: () => ({ meta: [{ title: "AI research demo – Netra AI" }, { name: "description", content: "Research demo, not a diagnosis." }, { property: "og:title", content: "AI research demo – Netra AI" }, { property: "og:description", content: "Research demo, not a diagnosis." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin", "health_worker", "doctor"]}>
       <Demo />

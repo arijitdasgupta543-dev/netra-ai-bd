@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ModelSettings } from '@/components/ModelSettings';
 
 export const Route = createFileRoute("/_authenticated/users")({
-  head: () => ({ meta: [{ title: "Users & sites – Netra AI" }, { name: "description", content: "Manage team roles and screening sites." }] }),
+  head: () => ({ meta: [{ title: "Users & sites – Netra AI" }, { name: "description", content: "Manage team roles and screening sites." }, { property: "og:title", content: "Users & sites – Netra AI" }, { property: "og:description", content: "Manage team roles and screening sites." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: () => (
     <RoleGate roles={["admin"]}>
       <UsersPage />
