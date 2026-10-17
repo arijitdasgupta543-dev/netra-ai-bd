@@ -1,6 +1,8 @@
 # Eye-photo upgrade
-- [ ] Shared live camera, guidance and capture metadata
-- [ ] Pupil preview and private masked ROI saving
-- [ ] Doctor full/focus toggle and training exports
-- [ ] Admin model URL setting without preprocessing changes
-- [ ] Tests and browser verification; report phone-only limitations
+- [x] Shared live camera, guidance and capture metadata
+- [x] Pupil preview and private masked ROI saving
+- [x] Doctor full/focus toggle and training exports
+- [x] Admin model URL setting without preprocessing changes
+- [x] Tests and signed-in browser verification, including synthetic camera, auto-capture, fallback, full-photo/ROI readback and ZIP metadata
+
+Phone-only verification remains outside this environment: rear-camera autofocus/tap-focus/torch, real iris accuracy, field-lighting thresholds and performance. A real remote model is not installed, so external model inference remains unverified.
