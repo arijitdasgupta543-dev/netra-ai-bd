@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           blur_score: number | null
           brightness: number | null
+          capture_checks: Json | null
           circle_cx: number | null
           circle_cy: number | null
           circle_r: number | null
@@ -26,18 +27,21 @@ export type Database = {
           eye: string
           flash_used: boolean | null
           glare_fraction: number | null
+          guide_box: Json | null
           id: string
           lighting: string | null
           notes: string | null
           patient_id: string
           phone_model: string | null
           quality_status: string | null
+          roi_storage_path: string | null
           storage_path: string
           visual_acuity: string | null
         }
         Insert: {
           blur_score?: number | null
           brightness?: number | null
+          capture_checks?: Json | null
           circle_cx?: number | null
           circle_cy?: number | null
           circle_r?: number | null
@@ -46,18 +50,21 @@ export type Database = {
           eye: string
           flash_used?: boolean | null
           glare_fraction?: number | null
+          guide_box?: Json | null
           id?: string
           lighting?: string | null
           notes?: string | null
           patient_id: string
           phone_model?: string | null
           quality_status?: string | null
+          roi_storage_path?: string | null
           storage_path: string
           visual_acuity?: string | null
         }
         Update: {
           blur_score?: number | null
           brightness?: number | null
+          capture_checks?: Json | null
           circle_cx?: number | null
           circle_cy?: number | null
           circle_r?: number | null
@@ -66,12 +73,14 @@ export type Database = {
           eye?: string
           flash_used?: boolean | null
           glare_fraction?: number | null
+          guide_box?: Json | null
           id?: string
           lighting?: string | null
           notes?: string | null
           patient_id?: string
           phone_model?: string | null
           quality_status?: string | null
+          roi_storage_path?: string | null
           storage_path?: string
           visual_acuity?: string | null
         }
@@ -202,6 +211,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      settings: {
+        Row: {
+          key: string
+          model_url: string
+          updated_at: string
+        }
+        Insert: {
+          key: string
+          model_url?: string
+          updated_at?: string
+        }
+        Update: {
+          key?: string
+          model_url?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       sites: {
         Row: {
