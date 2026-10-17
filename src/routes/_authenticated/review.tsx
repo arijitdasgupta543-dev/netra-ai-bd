@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { PupilFocus } from '@/components/PupilFocus';
 
 export const Route = createFileRoute("/_authenticated/review")({
   head: () => ({ meta: [{ title: "Doctor review – Netra AI" }, { name: "description", content: "Label eye photos independently." }] }),
@@ -76,7 +77,8 @@ function ReviewForm({ item }: { item: QueueItem }) {
   const [referral, setReferral] = useState<"yes" | "no" | "">("");
   const [comments, setComments] = useState("");
   const [busy, setBusy] = useState(false);
-  const circle = item.circle_r != null ? { cx: item.circle_cx!, cy: item.circle_cy!, r: item.circle_r } : null;
+  const [view, setView] = useState<'full' | 'focus'>('full');
+  const circle = item.circle_r != null && item.circle_cx != null && item.circle_cy != null ? { cx: item.circle_cx, cy: item.circle_cy, r: item.circle_r } : null;
   const p = item.patients;
 
   const submit = async () => {
@@ -106,7 +108,9 @@ function ReviewForm({ item }: { item: QueueItem }) {
         <span className="rounded-full bg-secondary px-3 py-1">{L("Age", "বয়স")} {p?.age ?? "?"}</span>
         {p?.sex && <span className="rounded-full bg-secondary px-3 py-1">{T(sexLabel[p.sex])}</span>}
       </div>
-      <ZoomImage src={url.data} circle={circle} />
+      <Choice value={view} onChange={setView} options={[{v:'full',label:L('Full photo','সম্পূর্ণ ছবি')},{v:'focus',label:L('Pupil focus','মণির ফোকাস')}]}/>
+      {view === 'focus' && circle && url.data ? <PupilFocus src={url.data} circle={circle}/> : <ZoomImage src={url.data} circle={circle}/>}
+      {view === 'focus' && !circle && <p className="text-sm text-muted-foreground">{L('No pupil circle recorded; showing full photo.','মণির বৃত্ত নেই; সম্পূর্ণ ছবি দেখানো হচ্ছে।')}</p>}
 
       <div className="space-y-2">
         <Label className="text-base">{L("Diagnosis", "রোগ নির্ণয়")}</Label>

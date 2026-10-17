@@ -8,7 +8,7 @@ import { useLang } from "@/lib/i18n";
 import { useProfiles, useRecords } from "@/lib/data";
 import { buildCsv } from "@/lib/export";
 import { BUCKET } from "@/lib/storage";
-import { canvasToBlob, cropPupil, downloadBlob, loadImage } from "@/lib/image";
+import { canvasToBlob, cropPupil, maskedPupil, downloadBlob, loadImage } from "@/lib/image";
 import { folderFor } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
@@ -42,18 +42,27 @@ function ExportPage() {
     setProgress(0);
     try {
       for (let i = 0; i < eyes.length; i++) {
-        const { p, e } = eyes[i]!;
+        const entry = eyes[i];
+        if (!entry) continue;
+        const { p, e } = entry;
         const folder = folderFor(e.reviews.map((r) => r.diagnosis));
         const name = `${p.study_id}_${e.eye}.jpg`;
         const { data, error } = await supabase.storage.from(BUCKET).download(e.storage_path);
         if (error || !data) throw error ?? new Error("download failed");
         z.file(`images/${folder}/${name}`, data);
-        if (e.circle_r != null) {
+        if (e.roi_storage_path) {
+          const roi = await supabase.storage.from(BUCKET).download(e.roi_storage_path);
+          if (roi.error || !roi.data) throw roi.error ?? new Error('ROI download failed');
+          z.file(`roi_masked/${folder}/${name}`, roi.data);
+        }
+        if (e.circle_r != null && e.circle_cx != null && e.circle_cy != null) {
           const url = URL.createObjectURL(data);
-          const img = await loadImage(url);
-          const crop = cropPupil(img, { cx: e.circle_cx!, cy: e.circle_cy!, r: e.circle_r }, 224);
-          z.file(`cropped_224/${folder}/${name}`, await canvasToBlob(crop));
-          URL.revokeObjectURL(url);
+          try {
+            const img = await loadImage(url);
+            const circle = { cx: e.circle_cx, cy: e.circle_cy, r: e.circle_r };
+            z.file(`cropped_224/${folder}/${name}`, await canvasToBlob(cropPupil(img, circle, 224)));
+            if (!e.roi_storage_path) z.file(`roi_masked/${folder}/${name}`, await canvasToBlob(maskedPupil(img, circle)));
+          } finally { URL.revokeObjectURL(url); }
         }
         setProgress(((i + 1) / eyes.length) * 100);
       }
@@ -82,7 +91,7 @@ function ExportPage() {
       <div className="rounded-2xl border bg-card p-5">
         <p className="flex items-center gap-2 font-semibold"><FolderArchive className="h-5 w-5 text-primary" /> ZIP</p>
         <p className="mt-1 text-sm text-muted-foreground">
-          {L("images/<label>/ and cropped_224/<label>/ (normal, cataract, other, ungradable, unlabelled) plus the CSV.", "images/<লেবেল>/ ও cropped_224/<লেবেল>/ ফোল্ডার এবং CSV।")}
+          {L("images/<label>/, cropped_224/<label>/ and roi_masked/<label>/ plus the CSV.", "images/<লেবেল>/, cropped_224/<লেবেল>/ ও roi_masked/<লেবেল>/ ফোল্ডার এবং CSV।")}
         </p>
         {progress != null && <Progress value={progress} className="mt-4" />}
         {!zip ? (

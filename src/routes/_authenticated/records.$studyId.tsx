@@ -39,7 +39,7 @@ function Detail() {
   if (!p) return <p>{L("Record not found", "রেকর্ড পাওয়া যায়নি")}</p>;
 
   const remove = async () => {
-    const paths = [...p.eye_images.map((e) => e.storage_path), ...(p.consent_photo_path ? [p.consent_photo_path] : [])];
+    const paths = [...p.eye_images.flatMap((e) => [e.storage_path, ...(e.roi_storage_path ? [e.roi_storage_path] : [])]), ...(p.consent_photo_path ? [p.consent_photo_path] : [])];
     if (paths.length) await supabase.storage.from(BUCKET).remove(paths);
     const { error } = await supabase.from("patients").delete().eq("id", p.id);
     if (error) {
@@ -96,7 +96,7 @@ function EyeBlock({ e }: { e: EyeRow }) {
   const url = useSignedUrl(e.storage_path);
   const profiles = useProfiles();
   const cons = majority(e.reviews.map((r) => r.diagnosis));
-  const circle = e.circle_r != null ? { cx: e.circle_cx!, cy: e.circle_cy!, r: e.circle_r } : null;
+  const circle = e.circle_r != null && e.circle_cx != null && e.circle_cy != null ? { cx: e.circle_cx, cy: e.circle_cy, r: e.circle_r } : null;
   return (
     <section className="space-y-3 rounded-2xl border bg-card p-4">
       <div className="flex items-center justify-between">

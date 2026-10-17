@@ -15,6 +15,7 @@ export function buildCsv(patients: PatientRow[], doctorNames: Record<string, str
     "study_id", "eye", "age", "sex", "site", "date", "phone_model", "flash", "lighting",
     "circle_cx", "circle_cy", "circle_r", "blur_score", "brightness", "glare_fraction", "quality_status",
     "visual_acuity", "image_file", "n_reviews", "consensus_diagnosis", "consensus_category",
+    "roi_file", "guide_x", "guide_y", "guide_width", "guide_height", "capture_brightness", "capture_blur", "capture_glare", "capture_contrast", "capture_iris_found", "capture_iris_ratio", "capture_offset_x", "capture_offset_y", "capture_ready", "capture_hint",
   ];
   const rev: string[] = [];
   for (let i = 1; i <= maxReviews; i++)
@@ -28,6 +29,10 @@ export function buildCsv(patients: PatientRow[], doctorNames: Record<string, str
       e.circle_cx, e.circle_cy, e.circle_r, e.blur_score, e.brightness, e.glare_fraction, e.quality_status,
       e.visual_acuity, `${folderFor(diags)}/${p.study_id}_${e.eye}.jpg`, reviews.length,
       majority(diags), diags.length ? majority(diags.map(categoryOf)) : null,
+      e.roi_storage_path || e.circle_r != null ? `roi_masked/${folderFor(diags)}/${p.study_id}_${e.eye}.jpg` : null,
+      e.guide_box?.x, e.guide_box?.y, e.guide_box?.width, e.guide_box?.height,
+      e.capture_checks?.brightness, e.capture_checks?.blur, e.capture_checks?.glare, e.capture_checks?.contrast,
+      e.capture_checks?.iris_found, e.capture_checks?.iris_ratio, e.capture_checks?.offset_x, e.capture_checks?.offset_y, e.capture_checks?.ready, e.capture_checks?.hint,
     ];
     for (let i = 0; i < maxReviews; i++) {
       const r = reviews[i];

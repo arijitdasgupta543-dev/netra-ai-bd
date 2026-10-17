@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Diagnosis } from "./labels";
+import type { CaptureChecks, GuideBox } from './capture';
 
 export type ReviewRow = {
   id: string;
@@ -18,6 +19,9 @@ export type EyeRow = {
   patient_id: string;
   eye: "left" | "right";
   storage_path: string;
+  roi_storage_path?: string | null;
+  guide_box?: GuideBox | null;
+  capture_checks?: CaptureChecks | null;
   circle_cx: number | null;
   circle_cy: number | null;
   circle_r: number | null;

@@ -15,3 +15,6 @@
 - Photos live in private bucket `eye-photos`, read only through signed URLs (`src/lib/storage.ts`). Why: patient privacy.
 - Pupil circle is stored normalised: cx/width, cy/height, r/width. Crops (export + demo) use `cropPupil` (side 2.5×r, 224px). Why: training/inference must match.
 - Consensus label = strict majority (`majority` in `src/lib/labels.ts`); ties count as no consensus/unlabelled.
+- Shared guided capture owns camera tracks and closes them on exit; browser-only iris detection is dynamically imported with externalized WASM assets. Why: privacy and SSR safety.
+- Capture metadata is normalized to the full video frame; masked ROI storage is additive and uses a separate image helper from inference. Why: preserve existing data and model preprocessing.
+- Research model settings are read by approved roles and writable only under admin RLS. Why: configuration cannot grant client-side privileges.

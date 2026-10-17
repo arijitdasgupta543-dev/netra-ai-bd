@@ -11,6 +11,7 @@ import { PageTitle, RoleGate } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ModelSettings } from '@/components/ModelSettings';
 
 export const Route = createFileRoute("/_authenticated/users")({
   head: () => ({ meta: [{ title: "Users & sites – Netra AI" }, { name: "description", content: "Manage team roles and screening sites." }] }),
@@ -72,6 +73,7 @@ function UsersPage() {
         </div>
       </section>
       <Sites />
+      <ModelSettings />
     </div>
   );
 }

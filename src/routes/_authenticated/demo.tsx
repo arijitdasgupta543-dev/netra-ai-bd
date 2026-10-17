@@ -5,7 +5,9 @@ import { useLang } from "@/lib/i18n";
 import { cropPupil, loadImage, type Circle } from "@/lib/image";
 import { PageTitle, RoleGate } from "@/components/AppShell";
 import { CircleEditor } from "@/components/CircleEditor";
-import { PhotoPicker } from "@/components/EyeCapture";
+import { GuidedCamera } from "@/components/GuidedCamera";
+import { PupilFocus } from '@/components/PupilFocus';
+import { ModelSettings, useModelUrl } from '@/components/ModelSettings';
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -18,10 +20,9 @@ export const Route = createFileRoute("/_authenticated/demo")({
   ),
 });
 
-const MODEL_URL = "/model/model.json";
-
 function Demo() {
   const { L } = useLang();
+  const modelSetting = useModelUrl();
   const [url, setUrl] = useState<string | null>(null);
   const [circle, setCircle] = useState<Circle | null>(null);
   const [prob, setProb] = useState<number | null>(null);
@@ -35,6 +36,8 @@ function Demo() {
     setStatus("running");
     setProb(null);
     try {
+      if (!modelSetting.data || modelSetting.error) throw new Error(L('Model setting unavailable.','মডেল সেটিং পাওয়া যায়নি।'));
+      const MODEL_URL = modelSetting.data;
       const res = await fetch(MODEL_URL, { cache: "no-cache" });
       const text = res.ok ? await res.text() : "";
       let json: unknown = null;
@@ -50,6 +53,7 @@ function Demo() {
       const out = model.predict(input) as import("@tensorflow/tfjs").Tensor;
       const v = (await out.data())[0];
       tf.dispose([input, out]);
+      model.dispose();
       setProb(v ?? null);
       setStatus("idle");
     } catch (e) {
@@ -72,13 +76,14 @@ function Demo() {
       </div>
 
       {!url ? (
-        <PhotoPicker onPick={(f) => setUrl(URL.createObjectURL(f))} />
+        <GuidedCamera onGallery={f => {setUrl(URL.createObjectURL(f));setCircle({cx:.5,cy:.5,r:.065});}} onCapture={photo => {setUrl(URL.createObjectURL(photo.blob));setCircle(photo.circle);}} />
       ) : (
         <>
           <CircleEditor src={url} value={circle} onChange={(c) => { setCircle(c); setProb(null); }} />
+          {circle && <PupilFocus src={url} circle={circle}/>}
           <div className="flex gap-2">
             <Button variant="outline" className="h-12" onClick={reset}><RefreshCw className="h-4 w-4" /> {L("New photo", "নতুন ছবি")}</Button>
-            <Button className="h-12 flex-1 text-base" disabled={!circle || status === "running"} onClick={run}>
+            <Button className="h-12 flex-1 text-base" disabled={!circle || status === "running" || !modelSetting.data || !!modelSetting.error} onClick={run}>
               {status === "running" ? L("Running…", "চলছে…") : L("Run model", "মডেল চালান")}
             </Button>
           </div>
@@ -90,6 +95,7 @@ function Demo() {
       )}
       {status === "error" && <div className="rounded-xl border bg-danger-soft p-4 text-sm">{L("Model error: ", "মডেল ত্রুটি: ")}{err}</div>}
       {prob != null && <ResultBar p={prob} />}
+      <ModelSettings/>
     </div>
   );
 }

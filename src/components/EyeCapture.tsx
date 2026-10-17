@@ -8,6 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { GuidedCamera, type GuidedPhoto } from './GuidedCamera';
+import { PupilFocus } from './PupilFocus';
+import type { GuideBox, CaptureChecks } from '@/lib/capture';
 
 export type EyeData = {
   blob: Blob;
@@ -19,6 +22,8 @@ export type EyeData = {
   quality: Quality | null;
   acuity: string;
   notes: string;
+  guide: GuideBox | null;
+  captureChecks: CaptureChecks | null;
 };
 
 export function PhotoPicker({ onPick, label }: { onPick: (f: File) => void; label?: string }) {
@@ -131,15 +136,17 @@ export function EyeCapture({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [img, value?.circle?.cx, value?.circle?.cy, value?.circle?.r]);
 
-  const pick = async (f: File) => {
-    const blob = await compressImage(f);
+  const pick = async (f: Blob, guided?: GuidedPhoto) => {
+    const blob = guided ? f : await compressImage(f);
     if (value?.url) URL.revokeObjectURL(value.url);
     onChange({
       blob,
       url: URL.createObjectURL(blob),
-      circle: null,
+      circle: guided?.circle ?? { cx: 0.5, cy: 0.5, r: 0.065 },
+      guide: guided?.guide ?? null,
+      captureChecks: guided?.checks ?? null,
       flash: value?.flash ?? false,
-      lighting: value?.lighting ?? "indoor",
+      lighting: guided?.torch ? 'torch' : value?.lighting ?? "indoor",
       phoneModel: value?.phoneModel ?? defaultPhone,
       quality: null,
       acuity: value?.acuity ?? "",
@@ -147,13 +154,14 @@ export function EyeCapture({
     });
   };
 
-  if (!value) return <PhotoPicker onPick={pick} />;
+  if (!value) return <GuidedCamera onGallery={pick} onCapture={photo => void pick(photo.blob, photo)} />;
 
   const set = (patch: Partial<EyeData>) => onChange({ ...value, ...patch });
 
   return (
     <div className="space-y-5">
       <CircleEditor src={value.url} value={value.circle} onChange={(circle) => set({ circle })} />
+      {value.circle && <div className="space-y-2"><p className="font-medium">{L('Pupil focus','মণির ফোকাস')}</p><PupilFocus src={value.url} circle={value.circle}/></div>}
       {value.quality && <QualityPanel q={value.quality} />}
       <Button type="button" variant="outline" className="h-12 w-full" onClick={() => onChange(null)}>
         <RefreshCw className="h-4 w-4" /> {L("Retake photo", "আবার ছবি তুলুন")}

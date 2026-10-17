@@ -22,7 +22,7 @@ export function CircleEditor({
   const mode = useRef<null | { kind: "move"; ox: number; oy: number } | { kind: "resize" }>(null);
 
   const toNorm = (e: React.PointerEvent) => {
-    const r = box.current!.getBoundingClientRect();
+    const r = box.current?.getBoundingClientRect() ?? { left: 0, top: 0, width: 1, height: 1 };
     return { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, rw: r.width, rh: r.height };
   };
 
