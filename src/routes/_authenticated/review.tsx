@@ -46,6 +46,7 @@ function ReviewQueue() {
       const { data, error } = await supabase
         .from("eye_images")
         .select("id, eye, storage_path, pupil_roi_path, pupil_circle_confirmed, circle_cx, circle_cy, circle_r, patients(study_id, age, sex), reviews(doctor_id)")
+        .eq('pupil_circle_confirmed', true)
         .order("created_at", { ascending: true });
       if (error) throw error;
       return data as unknown as QueueItem[];
