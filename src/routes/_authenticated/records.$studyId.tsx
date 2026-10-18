@@ -102,7 +102,7 @@ function EyeBlock({ e }: { e: EyeRow }) {
         <h2 className="text-lg font-semibold">{T(eyeLabel[e.eye])}</h2>
         <QualityBadge status={e.quality_status} />
       </div>
-      <StoredEyePhoto original={e.storage_path} roi={e.pupil_roi_path} circle={circle} />
+      <StoredEyePhoto id={e.id} original={e.storage_path} roi={e.pupil_roi_path} circle={circle} confirmed={e.pupil_circle_confirmed === true} />
       <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground sm:grid-cols-3">
         <span>{L("Flash", "ফ্ল্যাশ")}: {e.flash_used ? L("Yes", "হ্যাঁ") : L("No", "না")}</span>
         <span>{L("Lighting", "আলো")}: {e.lighting}</span>

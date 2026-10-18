@@ -95,6 +95,7 @@ function ScreeningWizard() {
           eye,
           storage_path: path,
           pupil_roi_path: roiPath,
+          pupil_circle_confirmed: true,
           guide_box: d.guide ? { ...d.guide } : null,
           capture_checks: d.captureChecks ? { ...d.captureChecks } : null,
           circle_cx: d.circle?.cx ?? null,

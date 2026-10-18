@@ -29,6 +29,7 @@ type QueueItem = {
   eye: string;
   storage_path: string;
   pupil_roi_path: string | null;
+  pupil_circle_confirmed: boolean;
   circle_cx: number | null;
   circle_cy: number | null;
   circle_r: number | null;
@@ -44,7 +45,7 @@ function ReviewQueue() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("eye_images")
-        .select("id, eye, storage_path, pupil_roi_path, circle_cx, circle_cy, circle_r, patients(study_id, age, sex), reviews(doctor_id)")
+        .select("id, eye, storage_path, pupil_roi_path, pupil_circle_confirmed, circle_cx, circle_cy, circle_r, patients(study_id, age, sex), reviews(doctor_id)")
         .order("created_at", { ascending: true });
       if (error) throw error;
       return data as unknown as QueueItem[];
@@ -105,7 +106,7 @@ function ReviewForm({ item }: { item: QueueItem }) {
         <span className="rounded-full bg-secondary px-3 py-1">{L("Age", "বয়স")} {p?.age ?? "?"}</span>
         {p?.sex && <span className="rounded-full bg-secondary px-3 py-1">{T(sexLabel[p.sex])}</span>}
       </div>
-      <StoredEyePhoto original={item.storage_path} roi={item.pupil_roi_path} circle={circle}/>
+      <StoredEyePhoto id={item.id} original={item.storage_path} roi={item.pupil_roi_path} circle={circle} confirmed={item.pupil_circle_confirmed}/>
 
       <div className="space-y-2">
         <Label className="text-base">{L("Diagnosis", "রোগ নির্ণয়")}</Label>
@@ -143,7 +144,7 @@ function ReviewForm({ item }: { item: QueueItem }) {
         <Textarea value={comments} onChange={(e) => setComments(e.target.value)} />
       </div>
 
-      <Button className="h-14 w-full text-base" disabled={busy || !diagnosis || !referral} onClick={submit}>
+      <Button className="h-14 w-full text-base" disabled={busy || !diagnosis || !referral || !item.pupil_circle_confirmed} onClick={submit}>
         {L("Save & next", "সংরক্ষণ ও পরবর্তী")}
       </Button>
     </div>
