@@ -36,6 +36,13 @@
       "when": 1792326696241,
       "tag": "0004_require_confirmed_pupil_rois",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792328319388,
+      "tag": "0005_performance_and_thumbnails",
+      "breakpoints": true
     }
   ]
 }
