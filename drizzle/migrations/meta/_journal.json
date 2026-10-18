@@ -29,6 +29,13 @@
       "when": 1792326402045,
       "tag": "0003_restrict_pupil_roi_prefix",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792326696241,
+      "tag": "0004_require_confirmed_pupil_rois",
+      "breakpoints": true
     }
   ]
 }
