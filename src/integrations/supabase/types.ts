@@ -21,6 +21,7 @@ export type Database = {
           capture_checks: Json | null
           circle_cx: number | null
           circle_cy: number | null
+          circle_method: string | null
           circle_r: number | null
           created_at: string
           created_by: string
@@ -38,6 +39,7 @@ export type Database = {
           quality_status: string | null
           roi_storage_path: string | null
           storage_path: string
+          thumb_path: string | null
           visual_acuity: string | null
         }
         Insert: {
@@ -46,6 +48,7 @@ export type Database = {
           capture_checks?: Json | null
           circle_cx?: number | null
           circle_cy?: number | null
+          circle_method?: string | null
           circle_r?: number | null
           created_at?: string
           created_by?: string
@@ -63,6 +66,7 @@ export type Database = {
           quality_status?: string | null
           roi_storage_path?: string | null
           storage_path: string
+          thumb_path?: string | null
           visual_acuity?: string | null
         }
         Update: {
@@ -71,6 +75,7 @@ export type Database = {
           capture_checks?: Json | null
           circle_cx?: number | null
           circle_cy?: number | null
+          circle_method?: string | null
           circle_r?: number | null
           created_at?: string
           created_by?: string
@@ -88,6 +93,7 @@ export type Database = {
           quality_status?: string | null
           roi_storage_path?: string | null
           storage_path?: string
+          thumb_path?: string | null
           visual_acuity?: string | null
         }
         Relationships: [
@@ -277,6 +283,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      dashboard_stats: { Args: never; Returns: Json }
       has_any_role: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {
