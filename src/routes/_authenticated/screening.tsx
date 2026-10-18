@@ -9,7 +9,7 @@ import { useAuth } from "@/lib/auth";
 import { useSites, recordsKey } from "@/lib/data";
 import { compressImage, loadImage, maskedPupil, canvasToBlob } from "@/lib/image";
 import { uploadPhoto } from "@/lib/storage";
-import { guessPhoneModel } from "@/lib/labels";
+import { detectPhoneModel } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
 import { EyeCapture, PhotoPicker, Choice, type EyeData } from "@/components/EyeCapture";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { PupilFocus } from '@/components/PupilFocus';
+import { circleConfirmed } from '@/lib/capture';
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/screening")({
@@ -46,7 +48,7 @@ function ScreeningWizard() {
   const [saved, setSaved] = useState<string | null>(null);
   const [phone, setPhone] = useState("Unknown");
 
-  useEffect(() => setPhone(guessPhoneModel(navigator.userAgent)), []);
+  useEffect(() => { void detectPhoneModel(navigator).then(setPhone); }, []);
   useEffect(() => {
     if (!patient.siteId && sites.data?.length) {
       const def = sites.data.find((s) => s.name === "Medical Centre 1") ?? sites.data[0];
@@ -64,7 +66,7 @@ function ScreeningWizard() {
   };
 
   const save = async () => {
-    if (!userId) return;
+    if (!userId || !consent || !patientOk || (!left && !right) || (left && !circleConfirmed(left.circle, left.circleConfirmed)) || (right && !circleConfirmed(right.circle, right.circleConfirmed))) return;
     setSaving(true);
     try {
       const consentPath = consentPhoto ? await uploadPhoto("consent", consentPhoto) : null;
@@ -87,12 +89,12 @@ function ScreeningWizard() {
         if (!d) continue;
         const path = await uploadPhoto(`eyes/${p.study_id}`, d.blob);
         const img = d.circle ? await loadImage(d.url) : null;
-        const roiPath = img && d.circle ? await uploadPhoto(`roi/${p.study_id}`, await canvasToBlob(maskedPupil(img, d.circle))) : null;
+        const roiPath = img && d.circle ? await uploadPhoto(`pupil-roi/${p.study_id}`, await canvasToBlob(maskedPupil(img, d.circle))) : null;
         const { error: e2 } = await supabase.from("eye_images").insert({
           patient_id: p.id,
           eye,
           storage_path: path,
-          roi_storage_path: roiPath,
+          pupil_roi_path: roiPath,
           guide_box: d.guide ? { ...d.guide } : null,
           capture_checks: d.captureChecks ? { ...d.captureChecks } : null,
           circle_cx: d.circle?.cx ?? null,
@@ -127,6 +129,7 @@ function ScreeningWizard() {
         <p className="mt-3 text-lg font-semibold">{L("Screening saved", "স্ক্রিনিং সংরক্ষিত হয়েছে")}</p>
         <p className="mt-2 text-sm text-muted-foreground">{L("Study ID", "স্টাডি আইডি")}</p>
         <p className="font-mono text-3xl font-bold tracking-wider">{saved}</p>
+        <div className="mt-4 grid grid-cols-2 gap-3">{[left,right].map((d,i) => d?.circle ? <PupilFocus key={i} src={d.url} circle={d.circle}/> : null)}</div>
         <div className="mt-6 grid gap-2">
           <Button className="h-12 text-base" onClick={reset}>{L("New screening", "নতুন স্ক্রিনিং")}</Button>
           <Button asChild variant="outline" className="h-12">
@@ -136,7 +139,7 @@ function ScreeningWizard() {
       </div>
     );
 
-  const eyeMissingCircle = (d: EyeData | null) => d && !d.circle;
+  const eyeMissingCircle = (d: EyeData | null) => d && !circleConfirmed(d.circle, d.circleConfirmed);
 
   return (
     <div className="mx-auto max-w-xl">
@@ -228,13 +231,13 @@ function ScreeningWizard() {
           </Button>
         )}
         {step === 4 && (
-          <Button className="h-12 flex-1 text-base" disabled={saving || (!left && !right)} onClick={save}>
+          <Button className="h-12 flex-1 text-base" disabled={saving || (!left && !right) || !!eyeMissingCircle(left) || !!eyeMissingCircle(right)} onClick={save}>
             {saving ? L("Saving…", "সংরক্ষণ হচ্ছে…") : L("Save", "সংরক্ষণ করুন")}
           </Button>
         )}
       </div>
       {(step === 2 || step === 3) && eyeMissingCircle(step === 2 ? left : right) && (
-        <p className="text-center text-sm text-muted-foreground">{L("Mark the pupil circle to continue.", "চালিয়ে যেতে মণির বৃত্ত চিহ্নিত করুন।")}</p>
+        <p className="text-center text-sm text-muted-foreground">{L("Confirm the pupil circle to continue.", "চালিয়ে যেতে মণির বৃত্ত নিশ্চিত করুন।")}</p>
       )}
     </div>
   );

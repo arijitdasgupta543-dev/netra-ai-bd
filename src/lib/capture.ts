@@ -9,6 +9,17 @@ export function guideBox(width: number, height: number): GuideBox {
   const h = w * width / (2 * height);
   return { x: (1 - w) / 2, y: (1 - h) / 2, width: w, height: h };
 }
+export const PUPIL_ROI_FACTOR = 2.2;
+export const MAX_INITIAL_RADIUS = GUIDE_RADIUS * 1.45;
+export function initialPupilCircle(detected: Circle | null, box: GuideBox, aspect = 1): Circle {
+  if (detected && Number.isFinite(detected.r) && detected.r >= GUIDE_RADIUS * .35 && detected.r <= MAX_INITIAL_RADIUS && Math.hypot(detected.cx - (box.x + box.width / 2), (detected.cy - (box.y + box.height / 2)) * aspect) <= GUIDE_RADIUS) return detected;
+  return { cx: box.x + box.width / 2, cy: box.y + box.height / 2, r: GUIDE_RADIUS };
+}
+export function circleConfirmed(circle: Circle | null, confirmed: boolean) { return !!circle && confirmed; }
+export function pupilRoiGeometry(width: number, height: number, circle: Circle) {
+  const side = PUPIL_ROI_FACTOR * circle.r * width;
+  return { side, sx: circle.cx * width - side / 2, sy: circle.cy * height - side / 2, size: 448, radius: 448 / PUPIL_ROI_FACTOR };
+}
 export function pupilCropGeometry(width: number, height: number, circle: Circle, size: number) {
   const side = 2.5 * circle.r * width;
   return { side, sx: circle.cx * width - side / 2, sy: circle.cy * height - side / 2, size, radius: size / 2.5 };

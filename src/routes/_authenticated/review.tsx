@@ -5,17 +5,15 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
-import { useSignedUrl } from "@/lib/storage";
 import { DIAGNOSES, diagnosisLabel, eyeLabel, sexLabel, type Diagnosis } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
-import { ZoomImage } from "@/components/ZoomImage";
+import { StoredEyePhoto } from "@/components/StoredEyePhoto";
 import { Choice } from "@/components/EyeCapture";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { PupilFocus } from '@/components/PupilFocus';
 
 export const Route = createFileRoute("/_authenticated/review")({
   head: () => ({ meta: [{ title: "Doctor review – Netra AI" }, { name: "description", content: "Label eye photos independently." }, { property: "og:title", content: "Doctor review – Netra AI" }, { property: "og:description", content: "Label eye photos independently." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
@@ -30,6 +28,7 @@ type QueueItem = {
   id: string;
   eye: string;
   storage_path: string;
+  pupil_roi_path: string | null;
   circle_cx: number | null;
   circle_cy: number | null;
   circle_r: number | null;
@@ -45,7 +44,7 @@ function ReviewQueue() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("eye_images")
-        .select("id, eye, storage_path, circle_cx, circle_cy, circle_r, patients(study_id, age, sex), reviews(doctor_id)")
+        .select("id, eye, storage_path, pupil_roi_path, circle_cx, circle_cy, circle_r, patients(study_id, age, sex), reviews(doctor_id)")
         .order("created_at", { ascending: true });
       if (error) throw error;
       return data as unknown as QueueItem[];
@@ -70,14 +69,12 @@ function ReviewForm({ item }: { item: QueueItem }) {
   const { L, T } = useLang();
   const { userId } = useAuth();
   const qc = useQueryClient();
-  const url = useSignedUrl(item.storage_path);
   const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
   const [otherText, setOtherText] = useState("");
   const [confidence, setConfidence] = useState<number>(3);
   const [referral, setReferral] = useState<"yes" | "no" | "">("");
   const [comments, setComments] = useState("");
   const [busy, setBusy] = useState(false);
-  const [view, setView] = useState<'full' | 'focus'>('full');
   const circle = item.circle_r != null && item.circle_cx != null && item.circle_cy != null ? { cx: item.circle_cx, cy: item.circle_cy, r: item.circle_r } : null;
   const p = item.patients;
 
@@ -108,9 +105,7 @@ function ReviewForm({ item }: { item: QueueItem }) {
         <span className="rounded-full bg-secondary px-3 py-1">{L("Age", "বয়স")} {p?.age ?? "?"}</span>
         {p?.sex && <span className="rounded-full bg-secondary px-3 py-1">{T(sexLabel[p.sex])}</span>}
       </div>
-      <Choice value={view} onChange={setView} options={[{v:'full',label:L('Full photo','সম্পূর্ণ ছবি')},{v:'focus',label:L('Pupil focus','মণির ফোকাস')}]}/>
-      {view === 'focus' && circle && url.data ? <PupilFocus src={url.data} circle={circle}/> : <ZoomImage src={url.data} circle={circle}/>}
-      {view === 'focus' && !circle && <p className="text-sm text-muted-foreground">{L('No pupil circle recorded; showing full photo.','মণির বৃত্ত নেই; সম্পূর্ণ ছবি দেখানো হচ্ছে।')}</p>}
+      <StoredEyePhoto original={item.storage_path} roi={item.pupil_roi_path} circle={circle}/>
 
       <div className="space-y-2">
         <Label className="text-base">{L("Diagnosis", "রোগ নির্ণয়")}</Label>

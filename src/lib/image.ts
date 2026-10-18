@@ -1,4 +1,4 @@
-import { pupilCropGeometry } from './capture';
+import { pupilCropGeometry, pupilRoiGeometry } from './capture';
 export type Circle = { cx: number; cy: number; r: number }; // cx, cy: fraction of width/height; r: fraction of width
 
 export type QualityStatus = "good" | "fair" | "poor";
@@ -118,13 +118,22 @@ export function canvasToBlob(c: HTMLCanvasElement, type = "image/jpeg", q = 0.92
   return new Promise((resolve, reject) => c.toBlob((b) => b ? resolve(b) : reject(new Error('Could not encode photo')), type, q));
 }
 
-/** Training ROI only; inference must continue using the unmasked cropPupil. */
+/** Privacy ROI only; inference must continue using the unmasked cropPupil. */
 export function maskedPupil(img: HTMLImageElement, circle: Circle): HTMLCanvasElement {
-  const crop = cropPupil(img, circle, 448);
-  const c = document.createElement('canvas'); c.width = 448; c.height = 448;
+  const { side, sx, sy, size, radius } = pupilRoiGeometry(img.naturalWidth, img.naturalHeight, circle);
+  const c = document.createElement('canvas'); c.width = size; c.height = size;
   const ctx = c.getContext('2d'); if (!ctx) throw new Error('Canvas unavailable');
-  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 448, 448);
-  ctx.save(); ctx.beginPath(); ctx.arc(224,224,448/2.5,0,Math.PI*2); ctx.clip(); ctx.drawImage(crop,0,0); ctx.restore();
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, size, size);
+  ctx.save(); ctx.beginPath(); ctx.arc(size/2,size/2,radius,0,Math.PI*2); ctx.clip();
+  ctx.drawImage(img,sx,sy,side,side,0,0,size,size); ctx.restore();
+  // JPEG ringing at the circle edge must not expose surrounding pixels.
+  const pixels = ctx.getImageData(0,0,size,size);
+  for (let y=0;y<size;y++) for(let x=0;x<size;x++) {
+    if (Math.hypot(x+.5-size/2,y+.5-size/2) >= radius) {
+      const i=(y*size+x)*4; pixels.data[i]=0; pixels.data[i+1]=0; pixels.data[i+2]=0; pixels.data[i+3]=255;
+    }
+  }
+  ctx.putImageData(pixels,0,0);
   return c;
 }
 

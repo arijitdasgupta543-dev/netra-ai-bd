@@ -1,0 +1,4 @@
+ALTER TABLE public.eye_images ADD COLUMN pupil_roi_path text;
+COMMENT ON COLUMN public.eye_images.roi_storage_path IS 'DEPRECATED: replaced by pupil_roi_path for tight 2.2-radius pupil-only ROIs';
+CREATE POLICY "admin regenerate pupil ROI" ON public.eye_images FOR UPDATE TO authenticated USING (public.has_role(auth.uid(), 'admin')) WITH CHECK (public.has_role(auth.uid(), 'admin'));
+ALTER POLICY "role read eye photos" ON storage.objects USING (bucket_id = 'eye-photos' AND (public.has_role(auth.uid(), 'admin') OR (public.has_any_role(auth.uid()) AND EXISTS (SELECT 1 FROM public.eye_images e WHERE e.pupil_roi_path = storage.objects.name))));

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { useLang } from '@/lib/i18n';
 import { canvasToBlob, type Circle } from '@/lib/image';
-import { checkPixels, guideBox, GUIDE_RADIUS, hintFor, readySince, shouldAutoCapture, type CaptureChecks, type GuideBox } from '@/lib/capture';
+import { checkPixels, initialPupilCircle, guideBox, GUIDE_RADIUS, hintFor, readySince, shouldAutoCapture, type CaptureChecks, type GuideBox } from '@/lib/capture';
 import { cn } from '@/lib/utils';
 
 export type GuidedPhoto = { blob: Blob; circle: Circle; guide: GuideBox; checks: CaptureChecks | null; torch: boolean };
@@ -79,7 +79,7 @@ export function GuidedCamera({ onCapture, onGallery }: { onCapture: (photo: Guid
         const values={...checkPixels(sc.getImageData(0,0,256,128).data,256,128,{cx:.5,cy:.5,r:GUIDE_RADIUS/box.width}),iris_found:!!iris,iris_ratio:iris?iris.r/GUIDE_RADIUS:null,offset_x:iris?iris.cx-.5:null,offset_y:iris?(iris.cy-.5)*c.height/c.width:null};
         const hint=hintFor(values);capturedChecks={...values,hint,ready:hint==='ready'};
       }
-      const photo={blob:await canvasToBlob(c,'image/jpeg',.92),circle:latest.current.circle ?? {cx:.5,cy:.5,r:GUIDE_RADIUS},guide:box,checks:capturedChecks,torch};
+      const photo={blob:await canvasToBlob(c,'image/jpeg',.92),circle:initialPupilCircle(latest.current.circle,box,c.height/c.width),guide:box,checks:capturedChecks,torch};
       stop(); onCapture(photo);
     } finally { busy.current=false; }
   };

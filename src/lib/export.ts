@@ -29,7 +29,7 @@ export function buildCsv(patients: PatientRow[], doctorNames: Record<string, str
       e.circle_cx, e.circle_cy, e.circle_r, e.blur_score, e.brightness, e.glare_fraction, e.quality_status,
       e.visual_acuity, `${folderFor(diags)}/${p.study_id}_${e.eye}.jpg`, reviews.length,
       majority(diags), diags.length ? majority(diags.map(categoryOf)) : null,
-      e.roi_storage_path || e.circle_r != null ? `roi_masked/${folderFor(diags)}/${p.study_id}_${e.eye}.jpg` : null,
+      e.circle_r != null && e.circle_cx != null && e.circle_cy != null ? `roi_masked/${folderFor(diags)}/${p.study_id}_${e.eye}.jpg` : null,
       e.guide_box?.x, e.guide_box?.y, e.guide_box?.width, e.guide_box?.height,
       e.capture_checks?.brightness, e.capture_checks?.blur, e.capture_checks?.glare, e.capture_checks?.contrast,
       e.capture_checks?.iris_found, e.capture_checks?.iris_ratio, e.capture_checks?.offset_x, e.capture_checks?.offset_y, e.capture_checks?.ready, e.capture_checks?.hint,

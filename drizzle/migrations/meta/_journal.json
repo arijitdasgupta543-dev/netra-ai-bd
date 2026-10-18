@@ -15,6 +15,20 @@
       "when": 1792214584047,
       "tag": "0001_guided_eye_capture_settings",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792326252799,
+      "tag": "0002_pupil_only_privacy",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792326402045,
+      "tag": "0003_restrict_pupil_roi_prefix",
+      "breakpoints": true
     }
   ]
 }

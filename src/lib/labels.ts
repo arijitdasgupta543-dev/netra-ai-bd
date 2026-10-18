@@ -41,8 +41,8 @@ export function majority<T extends string>(values: T[]): T | null {
   const counts = new Map<T, number>();
   for (const v of values) counts.set(v, (counts.get(v) ?? 0) + 1);
   const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
-  if (sorted.length > 1 && sorted[0]![1] === sorted[1]![1]) return null;
-  return sorted[0]![0];
+  if (sorted.length > 1 && sorted[0]?.[1] === sorted[1]?.[1]) return null;
+  return sorted[0]?.[0] ?? null;
 }
 
 /** Folder name used in the training ZIP. */
@@ -61,7 +61,20 @@ export function ageGroup(age: number | null): string {
 
 export function guessPhoneModel(ua: string): string {
   const m = ua.match(/Android [\d.]+;\s*([^;)]+?)(?:\s+Build|\))/);
-  if (m?.[1]) return m[1].trim();
+  if (m?.[1]) {
+    const model = m[1].trim().replace(/^(?:[a-z]{2}[-_][A-Z]{2};\s*)/, '');
+    if (model !== 'K' && model !== 'Generic') return model;
+  }
+  if (/Android/.test(ua)) return 'Android';
   if (/iPhone/.test(ua)) return "iPhone";
   return "Unknown";
+}
+
+export async function detectPhoneModel(browser: { userAgent: string; userAgentData?: { getHighEntropyValues?: (hints: string[]) => Promise<{ model?: string }> } }): Promise<string> {
+  try {
+    const data = await browser.userAgentData?.getHighEntropyValues?.(['model']);
+    const model = data?.model?.trim();
+    if (model && model !== 'K' && model !== 'Generic') return model;
+  } catch { /* high-entropy hints may be denied */ }
+  return guessPhoneModel(browser.userAgent);
 }

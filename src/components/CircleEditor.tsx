@@ -48,7 +48,7 @@ export function CircleEditor({
         return;
       }
     }
-    onChange({ cx: p.x, cy: p.y, r: value?.r ?? 0.08 });
+    onChange({ cx: p.x, cy: p.y, r: value?.r ?? 0.065 });
     mode.current = { kind: "resize" };
   };
 
@@ -59,7 +59,7 @@ export function CircleEditor({
       onChange({ ...value, cx: clamp(p.x - mode.current.ox), cy: clamp(p.y - mode.current.oy) });
     } else {
       const r = distW(p, value);
-      if (r > 0.01) onChange({ ...value, r: Math.min(0.6, r) });
+      if (r > 0.01) onChange({ ...value, r: Math.min(0.25, r) });
     }
   };
 
@@ -113,7 +113,7 @@ export function CircleEditor({
           <span className="text-sm">{L("Size", "আকার")}</span>
           <Slider
             min={1}
-            max={60}
+            max={25}
             step={0.5}
             value={[value.r * 100]}
             onValueChange={([v]) => onChange({ ...value, r: (v ?? 1) / 100 })}

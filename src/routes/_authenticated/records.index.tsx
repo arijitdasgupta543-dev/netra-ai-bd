@@ -26,7 +26,7 @@ function Records() {
     const s = q.trim().toLowerCase();
     return (data ?? []).filter((p) => !s || [p.study_id, p.area, p.sites?.name, p.sex].some((v) => v?.toLowerCase().includes(s)));
   }, [data, q]);
-  const paths = rows.flatMap((p) => p.eye_images.map((e) => e.storage_path));
+  const paths = rows.flatMap((p) => p.eye_images.flatMap((e) => e.pupil_roi_path ? [e.pupil_roi_path] : []));
   const urls = useSignedUrls(paths);
 
   return (
@@ -53,7 +53,7 @@ function Records() {
                 return (
                   <div key={e.id} className="flex gap-2">
                     <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-muted">
-                      {urls.data?.[e.storage_path] && <img src={urls.data[e.storage_path]} alt="" loading="lazy" className="h-full w-full object-cover" />}
+                      {e.pupil_roi_path && urls.data?.[e.pupil_roi_path] && <img src={urls.data[e.pupil_roi_path]} alt="" loading="lazy" className="h-full w-full object-cover" />}
                     </div>
                     <div className="min-w-0 space-y-1 text-xs">
                       <p className="font-medium">{T(eyeLabel[e.eye])}</p>
