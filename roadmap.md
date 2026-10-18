@@ -1,9 +1,11 @@
-# Pupil-only privacy update
-- [x] Tight masked previews, conservative auto-circle and required confirmation
-- [x] Pupil-only normal displays and admin-only stored original access
-- [x] Tight ROI saving, existing record regeneration and training ZIP
-- [x] Improved editable phone model detection
-- [x] Rule tests and signed-in end-to-end browser verification
-
-Physical Android autofocus, torch and real iris accuracy cannot be tested in this environment.
-Existing four eye images regenerated; their legacy circles remain hidden pending admin correction and confirmation on each record. Signed-in admin capture→save→detail→thumbnail→regenerate→ZIP and large review zoom verified; synthetic screening removed. Non-admin path selection covered by tests and storage policy inspection; no separate doctor/worker account exists to test directly. Previously issued original signed links remain usable until their one-hour expiry.
+# Real-phone feedback round 2
+- [ ] Compact 3:4 camera (max 55svh), tap-to-capture (focus+300ms), shutter flash + vibrate, visible capture/back buttons
+- [ ] Tic-tac-toe 3×3 guide (white 2px + dark outline), teal centre cell + target circle + label; checks/default circle use centre cell; saved as guide_box
+- [ ] Auto/Manual pupil tabs after capture; auto falls back to manual; manual gets drag, slider, +/- buttons, zoom; record circle_method (auto/manual/auto-then-edited) in data + CSV
+- [ ] Perf: lazy MediaPipe/TFJS (verify), PWA manifest + guarded service worker, route code splitting check
+- [ ] Pupil-only 160×160 thumbnails at save; records/review pagination (20/page) + server search; batch signed URLs; narrow column selects
+- [ ] Dashboard aggregates via SQL (RPC/view), not full-row downloads
+- [ ] DB indexes on FKs and filter/sort columns
+- [ ] Upload: 1600px JPEG q0.85, background retry, IndexedDB offline queue, "pending upload" status
+- [ ] Tests, typecheck, signed-in Playwright verification
+- [ ] Report: changes + Lovable Cloud plan limits for ~1000 concurrent users
