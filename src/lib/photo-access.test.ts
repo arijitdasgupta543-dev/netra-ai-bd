@@ -2,6 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { storedPhotoPath } from './photo-access';
 
 describe('stored eye photo access', () => {
+  it('hides older unconfirmed circles even when a regenerated ROI exists', () => {
+    expect(storedPhotoPath('doctor',false,'eyes/full.jpg','pupil-roi/tight.jpg',false)).toBeNull();
+    expect(storedPhotoPath('admin',false,'eyes/full.jpg','pupil-roi/tight.jpg',false)).toBeNull();
+  });
   it('defaults admins to pupil-only and requires explicit original selection', () => {
     expect(storedPhotoPath('admin',false,'eyes/full.jpg','pupil-roi/tight.jpg')).toBe('pupil-roi/tight.jpg');
     expect(storedPhotoPath('admin',true,'eyes/full.jpg','pupil-roi/tight.jpg')).toBe('eyes/full.jpg');

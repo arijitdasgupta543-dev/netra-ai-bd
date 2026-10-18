@@ -23,7 +23,7 @@ export function StoredEyePhoto({ id, original, roi, circle, confirmed }: { id: s
   const [saving, setSaving] = useState(false);
   const qc = useQueryClient();
   const showFull = role === 'admin' && full;
-  const url = useSignedUrl(storedPhotoPath(role, full, original, confirmed ? roi : null));
+  const url = useSignedUrl(storedPhotoPath(role, full, original, roi, confirmed));
   const confirm = async () => {
     if(role !== 'admin' || !url.data || !showFull) return;
     setSaving(true);

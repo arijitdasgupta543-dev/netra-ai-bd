@@ -80,7 +80,7 @@ function ReviewForm({ item }: { item: QueueItem }) {
   const p = item.patients;
 
   const submit = async () => {
-    if (!diagnosis || !referral || !userId) return;
+    if (!diagnosis || !referral || !userId || !item.pupil_circle_confirmed) return;
     setBusy(true);
     const { error } = await supabase.from("reviews").insert({
       eye_image_id: item.id,

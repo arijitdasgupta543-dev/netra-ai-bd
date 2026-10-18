@@ -43,6 +43,7 @@ export function RegenerateRoi({ records }: { records: PatientRow[] | undefined }
   };
   return <div className="space-y-2">
     <Button variant="outline" className="min-h-12 w-full whitespace-normal" disabled={!records || progress != null} onClick={regenerate}><RefreshCw/>{progress != null ? L(`Regenerating ${progress}`,`পুনরায় তৈরি হচ্ছে ${progress}`) : L('Regenerate ROI images','মণির ROI ছবি পুনরায় তৈরি করুন')}</Button>
+    {(records ?? []).some(p=>p.eye_images.some(e=>!e.pupil_circle_confirmed)) && <p className="text-sm text-muted-foreground">{L('Older pupil circles need admin confirmation on each record before the images become visible.','ছবি দেখানোর আগে প্রতিটি পুরোনো রেকর্ডে অ্যাডমিনকে মণির বৃত্ত নিশ্চিত করতে হবে।')}</p>}
     {!!skipped.length && <p role="status" className="text-sm text-destructive">{L('Missing pupil circle; skipped: ','মণির বৃত্ত নেই; বাদ: ')}{skipped.join(', ')}</p>}
   </div>;
 }

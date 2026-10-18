@@ -22,3 +22,4 @@
 - Circle confirmation is invalidated by every circle edit and gates screening save and demo inference. Why: automatic landmarks alone are not trustworthy for pupil selection.
 - Admin regeneration and ZIP masked exports derive current ROIs from saved circles and originals, never legacy wide masks. Why: all privacy images must share the same crop geometry.
 - Stored-photo path selection is centralized and fail-closed when a current ROI is absent. Why: no view may accidentally fall back to an original for non-admin roles.
+- Stored pupil images require explicit circle confirmation; legacy circles remain hidden until admin correction on record detail. Why: regenerating a mask does not validate a historical whole-eye annotation.
