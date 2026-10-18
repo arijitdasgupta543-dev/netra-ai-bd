@@ -16,6 +16,7 @@ export type EyeData = {
   blob: Blob;
   url: string;
   circle: Circle | null;
+  circleConfirmed: boolean;
   flash: boolean;
   lighting: "indoor" | "outdoor" | "torch";
   phoneModel: string;
@@ -124,6 +125,8 @@ export function EyeCapture({
 }) {
   const { L } = useLang();
   const [img, setImg] = useState<HTMLImageElement | null>(null);
+  const latestValue = useRef(value);
+  latestValue.current = value;
 
   useEffect(() => {
     if (!value?.url) return setImg(null);
@@ -133,7 +136,11 @@ export function EyeCapture({
   // Re-run quality check whenever the circle moves
   useEffect(() => {
     if (!img || !value) return;
-    const t = setTimeout(() => onChange({ ...value, quality: analyseQuality(img, value.circle) }), 250);
+    const t = setTimeout(() => {
+      const current = latestValue.current;
+      if (!current || current.url !== value.url) return;
+      onChange({ ...current, quality: analyseQuality(img, current.circle) });
+    }, 250);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [img, value?.circle?.cx, value?.circle?.cy, value?.circle?.r]);
@@ -145,6 +152,7 @@ export function EyeCapture({
       blob,
       url: URL.createObjectURL(blob),
       circle: guided?.circle ?? { cx: 0.5, cy: 0.5, r: 0.065 },
+      circleConfirmed: false,
       guide: guided?.guide ?? null,
       captureChecks: guided?.checks ?? null,
       flash: value?.flash ?? false,
@@ -162,8 +170,14 @@ export function EyeCapture({
 
   return (
     <div className="space-y-5">
-      <CircleEditor src={value.url} value={value.circle} onChange={(circle) => set({ circle })} />
-      {value.circle && <div className="space-y-2"><p className="font-medium">{L('Pupil focus','মণির ফোকাস')}</p><PupilFocus src={value.url} circle={value.circle}/></div>}
+      {!value.circleConfirmed && <>
+        <p className="font-medium">{L('Place the circle on the pupil','মণির ওপর বৃত্ত বসান')}</p>
+        <CircleEditor src={value.url} value={value.circle} onChange={(circle) => set({ circle, circleConfirmed: false })} />
+      </>}
+      {value.circle && <div className="space-y-2"><p className="font-medium">{L('Pupil only','শুধু মণি')}</p><PupilFocus src={value.url} circle={value.circle}/></div>}
+      <Button type="button" variant={value.circleConfirmed ? 'outline' : 'default'} className="min-h-12 w-full whitespace-normal" disabled={!value.circle} onClick={() => set({circleConfirmed: !value.circleConfirmed})}>
+        {value.circleConfirmed ? L('Adjust circle','বৃত্ত ঠিক করুন') : L('Circle is correct','বৃত্ত ঠিক আছে')}
+      </Button>
       {value.quality && <QualityPanel q={value.quality} />}
       <Button type="button" variant="outline" className="h-12 w-full" onClick={() => onChange(null)}>
         <RefreshCw className="h-4 w-4" /> {L("Retake photo", "আবার ছবি তুলুন")}

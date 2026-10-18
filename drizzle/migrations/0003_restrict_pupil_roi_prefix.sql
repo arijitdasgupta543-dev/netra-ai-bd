@@ -1,0 +1,1 @@
+ALTER POLICY "role read eye photos" ON storage.objects USING (bucket_id = 'eye-photos' AND (public.has_role(auth.uid(), 'admin') OR (public.has_any_role(auth.uid()) AND storage.objects.name LIKE 'pupil-roi/%' AND EXISTS (SELECT 1 FROM public.eye_images e WHERE e.pupil_roi_path = storage.objects.name))));

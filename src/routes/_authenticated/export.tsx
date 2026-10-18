@@ -12,6 +12,7 @@ import { canvasToBlob, cropPupil, maskedPupil, downloadBlob, loadImage } from "@
 import { folderFor } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
+import { RegenerateRoi } from "@/components/RegenerateRoi";
 import { Progress } from "@/components/ui/progress";
 
 export const Route = createFileRoute("/_authenticated/export")({
@@ -50,18 +51,13 @@ function ExportPage() {
         const { data, error } = await supabase.storage.from(BUCKET).download(e.storage_path);
         if (error || !data) throw error ?? new Error("download failed");
         z.file(`images/${folder}/${name}`, data);
-        if (e.roi_storage_path) {
-          const roi = await supabase.storage.from(BUCKET).download(e.roi_storage_path);
-          if (roi.error || !roi.data) throw roi.error ?? new Error('ROI download failed');
-          z.file(`roi_masked/${folder}/${name}`, roi.data);
-        }
         if (e.circle_r != null && e.circle_cx != null && e.circle_cy != null) {
           const url = URL.createObjectURL(data);
           try {
             const img = await loadImage(url);
             const circle = { cx: e.circle_cx, cy: e.circle_cy, r: e.circle_r };
             z.file(`cropped_224/${folder}/${name}`, await canvasToBlob(cropPupil(img, circle, 224)));
-            if (!e.roi_storage_path) z.file(`roi_masked/${folder}/${name}`, await canvasToBlob(maskedPupil(img, circle)));
+            z.file(`roi_masked/${folder}/${name}`, await canvasToBlob(maskedPupil(img, circle)));
           } finally { URL.revokeObjectURL(url); }
         }
         setProgress(((i + 1) / eyes.length) * 100);
@@ -79,6 +75,8 @@ function ExportPage() {
   return (
     <div className="mx-auto max-w-xl space-y-5">
       <PageTitle sub={L(`${nEyes} eye photos available`, `${nEyes}টি চোখের ছবি আছে`)}>{L("Export for training", "প্রশিক্ষণের জন্য এক্সপোর্ট")}</PageTitle>
+
+      <RegenerateRoi records={records.data}/>
 
       <div className="rounded-2xl border bg-card p-5">
         <p className="flex items-center gap-2 font-semibold"><FileSpreadsheet className="h-5 w-5 text-primary" /> CSV</p>

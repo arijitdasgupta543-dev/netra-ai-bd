@@ -9,7 +9,8 @@ export function useSignedUrl(path: string | null | undefined) {
     enabled: !!path,
     staleTime: 50 * 60 * 1000,
     queryFn: async () => {
-      const { data, error } = await supabase.storage.from(BUCKET).createSignedUrl(path!, 3600);
+      if (!path) throw new Error('Photo path unavailable');
+      const { data, error } = await supabase.storage.from(BUCKET).createSignedUrl(path, 3600);
       if (error) throw error;
       return data.signedUrl;
     },

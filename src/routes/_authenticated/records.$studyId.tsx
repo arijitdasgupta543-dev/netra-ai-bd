@@ -9,7 +9,7 @@ import { BUCKET, useSignedUrl } from "@/lib/storage";
 import { diagnosisLabel, eyeLabel, majority, sexLabel } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
 import { QualityBadge } from "@/components/QualityBadge";
-import { ZoomImage } from "@/components/ZoomImage";
+import { StoredEyePhoto } from "@/components/StoredEyePhoto";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
@@ -33,13 +33,13 @@ function Detail() {
   const qc = useQueryClient();
   const { data, isLoading } = useRecords();
   const p = data?.find((x) => x.study_id === studyId);
-  const consentUrl = useSignedUrl(p?.consent_photo_path);
+  const consentUrl = useSignedUrl(role === "admin" ? p?.consent_photo_path : null);
 
   if (isLoading) return <p className="text-muted-foreground">{L("Loading…", "লোড হচ্ছে…")}</p>;
   if (!p) return <p>{L("Record not found", "রেকর্ড পাওয়া যায়নি")}</p>;
 
   const remove = async () => {
-    const paths = [...p.eye_images.flatMap((e) => [e.storage_path, ...(e.roi_storage_path ? [e.roi_storage_path] : [])]), ...(p.consent_photo_path ? [p.consent_photo_path] : [])];
+    const paths = [...p.eye_images.flatMap((e) => [e.storage_path, ...(e.roi_storage_path ? [e.roi_storage_path] : []), ...(e.pupil_roi_path ? [e.pupil_roi_path] : [])]), ...(p.consent_photo_path ? [p.consent_photo_path] : [])];
     if (paths.length) await supabase.storage.from(BUCKET).remove(paths);
     const { error } = await supabase.from("patients").delete().eq("id", p.id);
     if (error) {
@@ -93,7 +93,6 @@ function Detail() {
 
 function EyeBlock({ e }: { e: EyeRow }) {
   const { L, T } = useLang();
-  const url = useSignedUrl(e.storage_path);
   const profiles = useProfiles();
   const cons = majority(e.reviews.map((r) => r.diagnosis));
   const circle = e.circle_r != null && e.circle_cx != null && e.circle_cy != null ? { cx: e.circle_cx, cy: e.circle_cy, r: e.circle_r } : null;
@@ -103,7 +102,7 @@ function EyeBlock({ e }: { e: EyeRow }) {
         <h2 className="text-lg font-semibold">{T(eyeLabel[e.eye])}</h2>
         <QualityBadge status={e.quality_status} />
       </div>
-      <ZoomImage src={url.data} circle={circle} />
+      <StoredEyePhoto id={e.id} original={e.storage_path} roi={e.pupil_roi_path} circle={circle} confirmed={e.pupil_circle_confirmed === true} />
       <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground sm:grid-cols-3">
         <span>{L("Flash", "ফ্ল্যাশ")}: {e.flash_used ? L("Yes", "হ্যাঁ") : L("No", "না")}</span>
         <span>{L("Lighting", "আলো")}: {e.lighting}</span>

@@ -19,6 +19,8 @@ export type EyeRow = {
   patient_id: string;
   eye: "left" | "right";
   storage_path: string;
+  pupil_roi_path?: string | null;
+  pupil_circle_confirmed?: boolean;
   roi_storage_path?: string | null;
   guide_box?: GuideBox | null;
   capture_checks?: CaptureChecks | null;

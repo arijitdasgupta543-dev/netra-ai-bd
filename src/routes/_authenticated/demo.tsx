@@ -10,6 +10,7 @@ import { PupilFocus } from '@/components/PupilFocus';
 import { ModelSettings, useModelUrl } from '@/components/ModelSettings';
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { circleConfirmed } from '@/lib/capture';
 
 export const Route = createFileRoute("/_authenticated/demo")({
   head: () => ({ meta: [{ title: "AI research demo – Netra AI" }, { name: "description", content: "Research demo, not a diagnosis." }, { property: "og:title", content: "AI research demo – Netra AI" }, { property: "og:description", content: "Research demo, not a diagnosis." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
@@ -27,12 +28,13 @@ function Demo() {
   const [circle, setCircle] = useState<Circle | null>(null);
   const [prob, setProb] = useState<number | null>(null);
   const [status, setStatus] = useState<"idle" | "running" | "missing" | "error">("idle");
+  const [confirmed, setConfirmed] = useState(false);
   const [err, setErr] = useState("");
 
   useEffect(() => () => { if (url) URL.revokeObjectURL(url); }, [url]);
 
   const run = async () => {
-    if (!url || !circle) return;
+    if (!url || !circle || !circleConfirmed(circle, confirmed)) return;
     setStatus("running");
     setProb(null);
     try {
@@ -62,7 +64,7 @@ function Demo() {
     }
   };
 
-  const reset = () => { setUrl(null); setCircle(null); setProb(null); setStatus("idle"); };
+  const reset = () => { setUrl(null); setCircle(null); setProb(null); setStatus("idle"); setConfirmed(false); };
 
   return (
     <div className="mx-auto max-w-xl space-y-5">
@@ -79,11 +81,15 @@ function Demo() {
         <GuidedCamera onGallery={f => {setUrl(URL.createObjectURL(f));setCircle({cx:.5,cy:.5,r:.065});}} onCapture={photo => {setUrl(URL.createObjectURL(photo.blob));setCircle(photo.circle);}} />
       ) : (
         <>
-          <CircleEditor src={url} value={circle} onChange={(c) => { setCircle(c); setProb(null); }} />
+          {!confirmed && <>
+            <p className="font-medium">{L('Place the circle on the pupil','মণির ওপর বৃত্ত বসান')}</p>
+            <CircleEditor src={url} value={circle} onChange={(c) => { setCircle(c); setProb(null); setConfirmed(false); }} />
+          </>}
           {circle && <PupilFocus src={url} circle={circle}/>}
+          <Button variant={confirmed ? 'outline' : 'default'} className="min-h-12 w-full whitespace-normal" disabled={!circle || status === 'running'} onClick={() => {setConfirmed(!confirmed);setProb(null);}}>{confirmed ? L('Adjust circle','বৃত্ত ঠিক করুন') : L('Circle is correct','বৃত্ত ঠিক আছে')}</Button>
           <div className="flex gap-2">
             <Button variant="outline" className="h-12" onClick={reset}><RefreshCw className="h-4 w-4" /> {L("New photo", "নতুন ছবি")}</Button>
-            <Button className="h-12 flex-1 text-base" disabled={!circle || status === "running" || !modelSetting.data || !!modelSetting.error} onClick={run}>
+            <Button className="h-12 flex-1 text-base" disabled={!circle || !confirmed || status === "running" || !modelSetting.data || !!modelSetting.error} onClick={run}>
               {status === "running" ? L("Running…", "চলছে…") : L("Run model", "মডেল চালান")}
             </Button>
           </div>

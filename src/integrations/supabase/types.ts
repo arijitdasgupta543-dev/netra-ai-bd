@@ -33,6 +33,8 @@ export type Database = {
           notes: string | null
           patient_id: string
           phone_model: string | null
+          pupil_circle_confirmed: boolean
+          pupil_roi_path: string | null
           quality_status: string | null
           roi_storage_path: string | null
           storage_path: string
@@ -56,6 +58,8 @@ export type Database = {
           notes?: string | null
           patient_id: string
           phone_model?: string | null
+          pupil_circle_confirmed?: boolean
+          pupil_roi_path?: string | null
           quality_status?: string | null
           roi_storage_path?: string | null
           storage_path: string
@@ -79,6 +83,8 @@ export type Database = {
           notes?: string | null
           patient_id?: string
           phone_model?: string | null
+          pupil_circle_confirmed?: boolean
+          pupil_roi_path?: string | null
           quality_status?: string | null
           roi_storage_path?: string | null
           storage_path?: string
