@@ -3,11 +3,26 @@ import type { Circle } from './image';
 export type GuideBox = { x: number; y: number; width: number; height: number };
 export type CaptureChecks = { brightness: number; blur: number; glare: number; contrast: number; iris_found: boolean; iris_ratio: number | null; offset_x: number | null; offset_y: number | null; ready: boolean; hint: Hint };
 export type Hint = 'dark' | 'bright' | 'blur' | 'glare' | 'haze' | 'closer' | 'back' | 'centre' | 'ready';
-export const GUIDE_RADIUS = 0.065;
-export function guideBox(width: number, height: number): GuideBox {
-  const w = Math.min(0.6, height / width * 1.5);
-  const h = w * width / (2 * height);
-  return { x: (1 - w) / 2, y: (1 - h) / 2, width: w, height: h };
+/** Target iris radius as a fraction of the (cropped, portrait 3:4) frame width. */
+export const GUIDE_RADIUS = 0.09;
+/** Live camera view and saved photo are cropped to this portrait aspect (width / height). */
+export const VIEW_ASPECT = 3 / 4;
+/** Visible region of a video frame when shown with object-fit: cover in a 3:4 box (source pixels). */
+export function viewRect(videoWidth: number, videoHeight: number, aspect = VIEW_ASPECT) {
+  if (videoWidth / videoHeight > aspect) {
+    const sw = Math.round(videoHeight * aspect);
+    return { sx: Math.round((videoWidth - sw) / 2), sy: 0, sw, sh: videoHeight };
+  }
+  const sh = Math.round(videoWidth / aspect);
+  return { sx: 0, sy: Math.round((videoHeight - sh) / 2), sw: videoWidth, sh };
+}
+/** Tic-tac-toe guide: the centre cell of a 3×3 grid is where the pupil must be. */
+export function guideBox(_width?: number, _height?: number): GuideBox {
+  return { x: 1 / 3, y: 1 / 3, width: 1 / 3, height: 1 / 3 };
+}
+export type CircleMethod = 'auto' | 'manual' | 'auto-then-edited';
+export function nextCircleMethod(current: CircleMethod | null): CircleMethod {
+  return current === 'auto' || current === 'auto-then-edited' ? 'auto-then-edited' : 'manual';
 }
 export const PUPIL_ROI_FACTOR = 2.2;
 export const MAX_INITIAL_RADIUS = GUIDE_RADIUS * 1.45;

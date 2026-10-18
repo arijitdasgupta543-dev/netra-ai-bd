@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { guideBox, pupilCropGeometry, pupilRoiGeometry, initialPupilCircle, circleConfirmed, readySince, shouldAutoCapture, validModelUrl, hintFor, checkPixels } from './capture';
+import { guideBox, viewRect, nextCircleMethod, GUIDE_RADIUS, pupilCropGeometry, pupilRoiGeometry, initialPupilCircle, circleConfirmed, readySince, shouldAutoCapture, validModelUrl, hintFor, checkPixels } from './capture';
 describe('guided capture rules', () => {
-  it('uses a centred 60% landscape 2:1 box', () => { const b=guideBox(1920,1080); expect(b.width).toBe(.6); expect(b.width*1920/(b.height*1080)).toBe(2); expect(b.x).toBe(.2); });
+  it('uses the centre cell of a 3×3 tic-tac-toe grid', () => { const b=guideBox(); expect(b.x).toBeCloseTo(1/3); expect(b.y).toBeCloseTo(1/3); expect(b.width).toBeCloseTo(1/3); expect(b.height).toBeCloseTo(1/3); });
+  it('crops landscape and portrait frames to the visible 3:4 view', () => { expect(viewRect(1920,1080)).toEqual({sx:555,sy:0,sw:810,sh:1080}); expect(viewRect(1080,1920)).toEqual({sx:0,sy:240,sw:1080,sh:1440}); expect(viewRect(300,400)).toEqual({sx:0,sy:0,sw:300,sh:400}); });
+  it('tracks how the circle was placed', () => { expect(nextCircleMethod(null)).toBe('manual'); expect(nextCircleMethod('manual')).toBe('manual'); expect(nextCircleMethod('auto')).toBe('auto-then-edited'); expect(nextCircleMethod('auto-then-edited')).toBe('auto-then-edited'); });
   it('creates a 448 tight masked ROI with side 2.2 times the radius', () => { const roi=pupilRoiGeometry(1000,600,{cx:.5,cy:.5,r:.1}); expect(roi.side).toBeCloseTo(220); expect(roi.sx).toBeCloseTo(390); expect(roi.sy).toBeCloseTo(190); expect(roi.size).toBe(448); expect(roi.radius).toBeCloseTo(448/2.2); });
-  it('rejects oversized automatic circles and falls back to the small guide circle', () => { expect(initialPupilCircle({cx:.5,cy:.5,r:.3},guideBox(1920,1080),1080/1920)).toEqual({cx:.5,cy:.5,r:.065}); });
+  it('rejects oversized automatic circles and falls back to the small guide circle', () => { expect(initialPupilCircle({cx:.5,cy:.5,r:.3},guideBox(),4/3)).toEqual({cx:.5,cy:.5,r:GUIDE_RADIUS}); });
   it('requires explicit circle confirmation', () => { const circle={cx:.5,cy:.5,r:.065}; expect(circleConfirmed(circle,false)).toBe(false); expect(circleConfirmed(null,true)).toBe(false); expect(circleConfirmed(circle,true)).toBe(true); });
   it('retains unmasked model crop geometry at 224', () => { expect(pupilCropGeometry(1000,600,{cx:.5,cy:.5,r:.1},224).side).toBe(250); expect(pupilCropGeometry(1000,600,{cx:.5,cy:.5,r:.1},224).size).toBe(224); });
   it('auto captures only after one continuously ready second', () => { expect(shouldAutoCapture(10,1009)).toBe(false); expect(shouldAutoCapture(10,1010)).toBe(true); expect(readySince(10,false,900)).toBeNull(); expect(readySince(null,true,950)).toBe(950); });

@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
-import { useProfiles, useRecords, recordsKey, type EyeRow } from "@/lib/data";
+import { useProfiles, useRecord, recordsKey, type EyeRow } from "@/lib/data";
 import { BUCKET, useSignedUrl } from "@/lib/storage";
 import { diagnosisLabel, eyeLabel, majority, sexLabel } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
@@ -31,15 +31,15 @@ function Detail() {
   const { role } = useAuth();
   const navigate = useNavigate();
   const qc = useQueryClient();
-  const { data, isLoading } = useRecords();
-  const p = data?.find((x) => x.study_id === studyId);
+  const { data, isLoading } = useRecord(studyId);
+  const p = data ?? undefined;
   const consentUrl = useSignedUrl(role === "admin" ? p?.consent_photo_path : null);
 
   if (isLoading) return <p className="text-muted-foreground">{L("Loading…", "লোড হচ্ছে…")}</p>;
   if (!p) return <p>{L("Record not found", "রেকর্ড পাওয়া যায়নি")}</p>;
 
   const remove = async () => {
-    const paths = [...p.eye_images.flatMap((e) => [e.storage_path, ...(e.roi_storage_path ? [e.roi_storage_path] : []), ...(e.pupil_roi_path ? [e.pupil_roi_path] : [])]), ...(p.consent_photo_path ? [p.consent_photo_path] : [])];
+    const paths = [...p.eye_images.flatMap((e) => [e.storage_path, ...(e.roi_storage_path ? [e.roi_storage_path] : []), ...(e.pupil_roi_path ? [e.pupil_roi_path] : []), ...(e.thumb_path ? [e.thumb_path] : [])]), ...(p.consent_photo_path ? [p.consent_photo_path] : [])];
     if (paths.length) await supabase.storage.from(BUCKET).remove(paths);
     const { error } = await supabase.from("patients").delete().eq("id", p.id);
     if (error) {

@@ -99,6 +99,27 @@ export function analyseQuality(img: HTMLImageElement, circle: Circle | null): Qu
   return { blur, brightness, glare, status, advice };
 }
 
+const decoded = new Map<string, Promise<HTMLImageElement>>();
+/** Decode each photo once (dragging the circle must not re-decode a 1600 px JPEG every frame). */
+export function loadImageCached(src: string): Promise<HTMLImageElement> {
+  let p = decoded.get(src);
+  if (!p) {
+    p = loadImage(src).catch((e) => { decoded.delete(src); throw e; });
+    decoded.set(src, p);
+    if (decoded.size > 8) { const first = decoded.keys().next().value; if (first !== undefined) decoded.delete(first); }
+  }
+  return p;
+}
+
+/** Small pupil-only thumbnail for lists (from the masked ROI canvas). */
+export function thumbnail(source: HTMLCanvasElement, size = 160): HTMLCanvasElement {
+  const c = document.createElement('canvas'); c.width = size; c.height = size;
+  const ctx = c.getContext('2d'); if (!ctx) throw new Error('Canvas unavailable');
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(source, 0, 0, size, size);
+  return c;
+}
+
 /** Square crop of side 2.5×r centred on the circle, resized to `size`. */
 export function cropPupil(img: HTMLImageElement, circle: Circle, size = 224): HTMLCanvasElement {
   const W = img.naturalWidth, H = img.naturalHeight;

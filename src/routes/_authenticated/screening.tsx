@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, CloudOff } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
 import { useSites, recordsKey } from "@/lib/data";
-import { compressImage, loadImage, maskedPupil, canvasToBlob } from "@/lib/image";
-import { uploadPhoto } from "@/lib/storage";
+import { compressImage, loadImageCached, maskedPupil, canvasToBlob, thumbnail } from "@/lib/image";
+import { enqueue, isNetworkError, submitScreening, type PendingScreening } from "@/lib/offline-queue";
 import { detectPhoneModel } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
 import { EyeCapture, PhotoPicker, Choice, type EyeData } from "@/components/EyeCapture";
@@ -46,6 +46,7 @@ function ScreeningWizard() {
   const [right, setRight] = useState<EyeData | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState<string | null>(null);
+  const [queued, setQueued] = useState(false);
   const [phone, setPhone] = useState("Unknown");
 
   useEffect(() => { void detectPhoneModel(navigator).then(setPhone); }, []);
@@ -62,62 +63,70 @@ function ScreeningWizard() {
   const reset = () => {
     setStep(0); setConsent(false); setConsentType("verbal"); setConsentPhoto(null);
     setPatient((p) => ({ age: "", sex: "", area: "", siteId: p.siteId }));
-    setLeft(null); setRight(null); setSaved(null);
+    setLeft(null); setRight(null); setSaved(null); setQueued(false);
   };
 
   const save = async () => {
     if (!userId || !consent || !patientOk || (!left && !right) || (left && !circleConfirmed(left.circle, left.circleConfirmed)) || (right && !circleConfirmed(right.circle, right.circleConfirmed))) return;
     setSaving(true);
+    let item: PendingScreening | null = null;
     try {
-      const consentPath = consentPhoto ? await uploadPhoto("consent", consentPhoto) : null;
-      const { data: p, error } = await supabase
-        .from("patients")
-        .insert({
+      // Prepare everything first (pupil ROI + thumbnail are made on the phone), so a
+      // dropped connection can be retried later without the original photos in memory.
+      const eyes = [];
+      for (const [eye, d] of [["left", left], ["right", right]] as const) {
+        if (!d || !d.circle) continue;
+        const img = await loadImageCached(d.url);
+        const roiCanvas = maskedPupil(img, d.circle);
+        eyes.push({
+          id: crypto.randomUUID(),
+          eye,
+          photo: d.blob,
+          roi: await canvasToBlob(roiCanvas, "image/jpeg", 0.9),
+          thumb: await canvasToBlob(thumbnail(roiCanvas, 160), "image/jpeg", 0.8),
+          row: {
+            pupil_circle_confirmed: true,
+            circle_method: d.circleMethod ?? "manual",
+            guide_box: d.guide ? { ...d.guide } : null,
+            capture_checks: d.captureChecks ? { ...d.captureChecks } : null,
+            circle_cx: d.circle.cx,
+            circle_cy: d.circle.cy,
+            circle_r: d.circle.r,
+            flash_used: d.flash,
+            lighting: d.lighting,
+            phone_model: d.phoneModel,
+            blur_score: d.quality?.blur ?? null,
+            brightness: d.quality?.brightness ?? null,
+            glare_fraction: d.quality?.glare ?? null,
+            quality_status: d.quality?.status ?? null,
+            visual_acuity: d.acuity || null,
+            notes: d.notes || null,
+          },
+        });
+      }
+      item = {
+        key: crypto.randomUUID(),
+        createdAt: Date.now(),
+        userId,
+        consentPhoto,
+        patient: {
           age: Number(patient.age),
           sex: patient.sex || null,
           area: patient.area || null,
           site_id: patient.siteId || null,
           consent_given: true,
           consent_type: consentType,
-          consent_photo_path: consentPath,
-          created_by: userId,
-        })
-        .select("id, study_id")
-        .single();
-      if (error) throw error;
-      for (const [eye, d] of [["left", left], ["right", right]] as const) {
-        if (!d) continue;
-        const path = await uploadPhoto(`eyes/${p.study_id}`, d.blob);
-        const img = d.circle ? await loadImage(d.url) : null;
-        const roiPath = img && d.circle ? await uploadPhoto(`pupil-roi/${p.study_id}`, await canvasToBlob(maskedPupil(img, d.circle))) : null;
-        const { error: e2 } = await supabase.from("eye_images").insert({
-          patient_id: p.id,
-          eye,
-          storage_path: path,
-          pupil_roi_path: roiPath,
-          pupil_circle_confirmed: true,
-          guide_box: d.guide ? { ...d.guide } : null,
-          capture_checks: d.captureChecks ? { ...d.captureChecks } : null,
-          circle_cx: d.circle?.cx ?? null,
-          circle_cy: d.circle?.cy ?? null,
-          circle_r: d.circle?.r ?? null,
-          flash_used: d.flash,
-          lighting: d.lighting,
-          phone_model: d.phoneModel,
-          blur_score: d.quality?.blur ?? null,
-          brightness: d.quality?.brightness ?? null,
-          glare_fraction: d.quality?.glare ?? null,
-          quality_status: d.quality?.status ?? null,
-          visual_acuity: d.acuity || null,
-          notes: d.notes || null,
-          created_by: userId,
-        });
-        if (e2) throw e2;
-      }
+        },
+        eyes,
+      };
+      const studyId = await submitScreening(item);
       qc.invalidateQueries({ queryKey: recordsKey });
-      setSaved(p.study_id);
+      setSaved(studyId);
     } catch (e) {
-      toast.error(L("Could not save: ", "সংরক্ষণ হয়নি: ") + (e as Error).message);
+      if (item && isNetworkError(e)) {
+        try { await enqueue(item); setQueued(true); setSaved("…"); }
+        catch { toast.error(L("Could not store offline: ", "অফলাইনে রাখা যায়নি: ") + (e as Error).message); }
+      } else toast.error(L("Could not save: ", "সংরক্ষণ হয়নি: ") + (e as Error).message);
     } finally {
       setSaving(false);
     }
@@ -125,17 +134,20 @@ function ScreeningWizard() {
 
   if (saved)
     return (
-      <div className="mx-auto max-w-md rounded-2xl border bg-success-soft p-8 text-center">
-        <CheckCircle2 className="mx-auto h-14 w-14 text-success" />
-        <p className="mt-3 text-lg font-semibold">{L("Screening saved", "স্ক্রিনিং সংরক্ষিত হয়েছে")}</p>
+      <div className={cn("mx-auto max-w-md rounded-2xl border p-8 text-center", queued ? "bg-warning-soft" : "bg-success-soft")}>
+        {queued ? <CloudOff className="mx-auto h-14 w-14 text-warning" /> : <CheckCircle2 className="mx-auto h-14 w-14 text-success" />}
+        <p className="mt-3 text-lg font-semibold">{queued ? L("Saved on this phone – pending upload", "ফোনে সংরক্ষিত – আপলোডের অপেক্ষায়") : L("Screening saved", "স্ক্রিনিং সংরক্ষিত হয়েছে")}</p>
+        {queued ? (
+          <p className="mt-2 text-sm text-muted-foreground">{L("No network. It will upload automatically when the internet is back. The Study ID is given after upload.", "নেটওয়ার্ক নেই। ইন্টারনেট ফিরলে নিজে থেকেই আপলোড হবে। আপলোডের পর স্টাডি আইডি পাওয়া যাবে।")}</p>
+        ) : (<>
         <p className="mt-2 text-sm text-muted-foreground">{L("Study ID", "স্টাডি আইডি")}</p>
-        <p className="font-mono text-3xl font-bold tracking-wider">{saved}</p>
+        <p className="font-mono text-3xl font-bold tracking-wider">{saved}</p></>)}
         <div className="mt-4 grid grid-cols-2 gap-3">{[left,right].map((d,i) => d?.circle ? <PupilFocus key={i} src={d.url} circle={d.circle}/> : null)}</div>
         <div className="mt-6 grid gap-2">
           <Button className="h-12 text-base" onClick={reset}>{L("New screening", "নতুন স্ক্রিনিং")}</Button>
-          <Button asChild variant="outline" className="h-12">
+          {!queued && <Button asChild variant="outline" className="h-12">
             <Link to="/records/$studyId" params={{ studyId: saved }}>{L("View record", "রেকর্ড দেখুন")}</Link>
-          </Button>
+          </Button>}
         </div>
       </div>
     );

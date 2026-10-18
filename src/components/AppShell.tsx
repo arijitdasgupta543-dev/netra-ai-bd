@@ -1,6 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Eye, LogOut } from "lucide-react";
-import type { ReactNode } from "react";
+import { Eye, LogOut, CloudUpload } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { onQueueChange, pendingItems, processQueue } from "@/lib/offline-queue";
 import { useLang } from "@/lib/i18n";
 import { useAuth, roleLabel, type Role } from "@/lib/auth";
 import { cn } from "@/lib/utils";
@@ -57,6 +59,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </span>
           </Link>
           <div className="ml-auto flex items-center gap-2">
+            <PendingUploads />
             <LangToggle />
             {session && (
               <button
@@ -124,5 +127,29 @@ export function PageTitle({ children, sub }: { children: ReactNode; sub?: ReactN
       <h1 className="text-2xl font-semibold sm:text-3xl">{children}</h1>
       {sub && <p className="mt-1 text-sm text-muted-foreground">{sub}</p>}
     </div>
+  );
+}
+
+/** Shows how many screenings are waiting on this phone and uploads them when the network returns. */
+function PendingUploads() {
+  const { L } = useLang();
+  const { userId } = useAuth();
+  const qc = useQueryClient();
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (typeof window === "undefined" || !("indexedDB" in window)) return;
+    const refresh = () => void pendingItems().then((items) => setCount(items.length));
+    const flush = () => void processQueue(userId).then((n) => { if (n) void qc.invalidateQueries(); refresh(); });
+    refresh(); flush();
+    const off = onQueueChange(refresh);
+    window.addEventListener("online", flush);
+    const timer = setInterval(flush, 60_000);
+    return () => { off(); window.removeEventListener("online", flush); clearInterval(timer); };
+  }, [userId, qc]);
+  if (!count) return null;
+  return (
+    <span className="flex items-center gap-1 rounded-full border border-warning bg-warning-soft px-2.5 py-1 text-xs font-medium" title={L("Waiting to upload", "আপলোডের অপেক্ষায়")}>
+      <CloudUpload className="h-3.5 w-3.5" /> {count} {L("pending", "অপেক্ষমাণ")}
+    </span>
   );
 }

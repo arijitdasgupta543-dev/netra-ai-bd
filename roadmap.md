@@ -1,11 +1,13 @@
 # Real-phone feedback round 2
-- [ ] Compact 3:4 camera (max 55svh), tap-to-capture (focus+300ms), shutter flash + vibrate, visible capture/back buttons
-- [ ] Tic-tac-toe 3×3 guide (white 2px + dark outline), teal centre cell + target circle + label; checks/default circle use centre cell; saved as guide_box
-- [ ] Auto/Manual pupil tabs after capture; auto falls back to manual; manual gets drag, slider, +/- buttons, zoom; record circle_method (auto/manual/auto-then-edited) in data + CSV
-- [ ] Perf: lazy MediaPipe/TFJS (verify), PWA manifest + guarded service worker, route code splitting check
-- [ ] Pupil-only 160×160 thumbnails at save; records/review pagination (20/page) + server search; batch signed URLs; narrow column selects
-- [ ] Dashboard aggregates via SQL (RPC/view), not full-row downloads
-- [ ] DB indexes on FKs and filter/sort columns
-- [ ] Upload: 1600px JPEG q0.85, background retry, IndexedDB offline queue, "pending upload" status
-- [ ] Tests, typecheck, signed-in Playwright verification
-- [ ] Report: changes + Lovable Cloud plan limits for ~1000 concurrent users
+- [x] Compact 3:4 camera (max 55svh), tap-to-capture (focus+300ms), shutter flash + vibrate, visible capture/back buttons
+- [x] Tic-tac-toe 3×3 guide (white 2px + dark outline), teal centre cell + target circle + label; checks/default circle use centre cell; saved as guide_box
+- [x] Auto/Manual pupil tabs after capture; auto falls back to manual; manual has drag, slider, +/- buttons, zoom, arrow nudges; circle_method (auto/manual/auto-then-edited) saved + CSV
+- [x] Perf: MediaPipe/TFJS lazy-loaded; one shared iris detector; detection on a 240×320 frame every other tick; checks on a 120×160 centre-cell frame; decoded photo cache; route code splitting (existing)
+- [x] Installable app: web manifest + icons (no service worker yet)
+- [x] Pupil-only 160×160 thumbnails at save; records pagination (20/page) + server search; one batch signed-URL call per page; narrow column selects; single-record detail query
+- [x] Dashboard aggregates via dashboard_stats() RPC
+- [x] DB indexes on FKs and filter/sort columns (migration 0005)
+- [x] Upload: 1600 px JPEG q0.85; retry-safe save with client ids; IndexedDB offline queue with "pending upload" badge and automatic upload when online
+- [ ] Service worker caching of MediaPipe/TFJS model files
+- [ ] Review queue pagination (currently loads confirmed image ids only)
+- [ ] Real-phone verification of autofocus, torch, iris detection, offline queue

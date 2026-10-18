@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useLang } from "@/lib/i18n";
-import { useRecords } from "@/lib/data";
-import { ageGroup, diagnosisLabel, DIAGNOSES, majority, sexLabel } from "@/lib/labels";
+import { useDashboardStats } from "@/lib/data";
+import { diagnosisLabel, DIAGNOSES, sexLabel } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -17,22 +17,16 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 
 function Dashboard() {
   const { L, T } = useLang();
-  const { data = [] } = useRecords();
+  const { data, isLoading } = useDashboardStats();
   const s = useMemo(() => {
-    const eyes = data.flatMap((p) => p.eye_images.map((e) => ({ ...e, site: p.sites?.name ?? "?" })));
-    const reviewed = eyes.filter((e) => e.reviews.length > 0).length;
-    const labels = DIAGNOSES.map((d) => ({ name: d, value: eyes.filter((e) => majority(e.reviews.map((r) => r.diagnosis)) === d).length }));
-    const pass = eyes.length ? eyes.filter((e) => e.quality_status === "good").length / eyes.length : 0;
-    const count = <T,>(arr: T[], key: (x: T) => string) => {
-      const m = new Map<string, number>();
-      arr.forEach((x) => m.set(key(x), (m.get(key(x)) ?? 0) + 1));
-      return [...m.entries()].map(([name, value]) => ({ name, value }));
-    };
+    const entries = (m: Record<string, number> | undefined) => Object.entries(m ?? {}).map(([name, value]) => ({ name, value: Number(value) }));
+    const eyes = Number(data?.eyes ?? 0), reviewed = Number(data?.reviewed ?? 0);
     return {
-      patients: data.length, eyes: eyes.length, reviewed, unreviewed: eyes.length - reviewed, labels, pass,
-      sex: count(data, (p) => p.sex ?? "?"),
-      age: count(data, (p) => ageGroup(p.age)).sort((a, b) => a.name.localeCompare(b.name)),
-      sites: count(eyes, (e) => e.site),
+      patients: Number(data?.patients ?? 0), eyes, reviewed, unreviewed: Math.max(0, eyes - reviewed), pass: Number(data?.pass ?? 0),
+      labels: DIAGNOSES.map((d) => ({ name: d, value: Number(data?.labels?.[d] ?? 0) })),
+      sex: entries(data?.sex),
+      age: entries(data?.age).sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true })),
+      sites: entries(data?.sites),
     };
   }, [data]);
 
@@ -47,6 +41,7 @@ function Dashboard() {
   return (
     <div className="space-y-6">
       <PageTitle>{L("Dashboard", "ড্যাশবোর্ড")}</PageTitle>
+      {isLoading && <p className="text-muted-foreground">{L("Loading…", "লোড হচ্ছে…")}</p>}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
         {tiles.map((t) => (
           <div key={t.k} className="rounded-2xl border bg-card p-4">
