@@ -1,0 +1,122 @@
+[
+ {
+  "idx": 28,
+  "key": "test/normal/image_302.jpg",
+  "label": "normal",
+  "old": [
+   0.5,
+   0.7,
+   0.11
+  ],
+  "new": [
+   0.64,
+   0.57,
+   0.12
+  ]
+ },
+ {
+  "idx": 44,
+  "key": "train/cataract/image_120.jpg",
+  "label": "cataract",
+  "old": [
+   0.4,
+   0.53,
+   0.11
+  ],
+  "new": [
+   0.69,
+   0.62,
+   0.07
+  ]
+ },
+ {
+  "idx": 48,
+  "key": "train/cataract/image_131.jpg",
+  "label": "cataract",
+  "old": [
+   0.35,
+   0.37,
+   0.1
+  ],
+  "new": [
+   0.36,
+   0.62,
+   0.08
+  ]
+ },
+ {
+  "idx": 131,
+  "key": "train/normal/image_101.jpg",
+  "label": "normal",
+  "old": [
+   0.5,
+   0.2,
+   0.14
+  ],
+  "new": [
+   0.54,
+   0.5,
+   0.17
+  ]
+ },
+ {
+  "idx": 170,
+  "key": "train/normal/image_178.jpg",
+  "label": "normal",
+  "old": [
+   0.65,
+   0.8,
+   0.11
+  ],
+  "new": [
+   0.64,
+   0.52,
+   0.07
+  ]
+ },
+ {
+  "idx": 189,
+  "key": "train/normal/image_203.jpg",
+  "label": "normal",
+  "old": [
+   0.5,
+   0.38,
+   0.14
+  ],
+  "new": [
+   0.51,
+   0.52,
+   0.12
+  ]
+ },
+ {
+  "idx": 200,
+  "key": "train/normal/image_216.jpg",
+  "label": "normal",
+  "old": [
+   0.42,
+   0.28,
+   0.13
+  ],
+  "new": [
+   0.4,
+   0.44,
+   0.12
+  ]
+ },
+ {
+  "idx": 204,
+  "key": "train/normal/image_221.jpg",
+  "label": "normal",
+  "old": [
+   0.45,
+   0.4,
+   0.14
+  ],
+  "new": [
+   0.46,
+   0.62,
+   0.15
+  ]
+ }
+]

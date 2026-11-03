@@ -1,0 +1,20 @@
+== screening
+number of transactions actually processed: 11168
+latency average = 14.336 ms
+tps = 558.026541 (without initial connection time)
+== records_page
+number of transactions actually processed: 92582
+latency average = 1.296 ms
+tps = 6173.219820 (without initial connection time)
+== review_new
+number of transactions actually processed: 3102
+latency average = 19.351 ms
+tps = 206.711555 (without initial connection time)
+== review_old
+number of transactions actually processed: 79
+latency average = 382.003 ms
+tps = 5.235566 (without initial connection time)
+== dashboard
+number of transactions actually processed: 40
+latency average = 757.988 ms
+tps = 2.638564 (without initial connection time)

@@ -1,0 +1,234 @@
+<title>Netra Photo Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow working column like a clinic worksheet; one task on screen at a time. */
+:root {
+  --bg: #f4f7f6;        /* paper with a faint green bias */
+  --surface: #ffffff;
+  --ink: #12302f;       /* deep teal ink */
+  --muted: #5b6f6d;
+  --line: #d6e0de;
+  --accent: #0e7c74;    /* teal, primary actions */
+  --lamp: #b97a12;      /* slit-lamp amber, highlights */
+  --flag: #c0392b;      /* marked as wrong */
+  --flag-soft: #fbe9e7;
+  --ok-soft: #e3f2ef;
+  --font-body: "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1b1b; --surface: #162525; --ink: #e3eeec; --muted: #9fb3b0; --line: #2b3d3c;
+  --accent: #3fb7ac; --lamp: #e0a940; --flag: #ef6b5b; --flag-soft: #3a1f1c; --ok-soft: #173230; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1b1b; --surface: #162525; --ink: #e3eeec; --muted: #9fb3b0; --line: #2b3d3c;
+  --accent: #3fb7ac; --lamp: #e0a940; --flag: #ef6b5b; --flag-soft: #3a1f1c; --ok-soft: #173230; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px }
+.wrap { max-width: 720px; margin: 0 auto; display: grid; gap: 18px }
+h1 { font-size: 1.6rem; line-height: 1.25; margin: 0; text-wrap: balance; font-weight: 700 }
+h2 { font-size: 1.2rem; margin: 0; text-wrap: balance; font-weight: 600 }
+p { margin: 0 }
+.en { color: var(--muted); font-size: .9em }
+.eyebrow { font-size: .85rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--lamp) }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 12px }
+.steps { display: grid; gap: 10px }
+.step { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start }
+.step b.n { font-family: var(--font-mono); color: var(--accent); font-size: .95rem; padding-top: 2px }
+label { font-weight: 600 }
+input[type=text] { width: 100%; font: inherit; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink) }
+button, .btn { font: inherit; font-weight: 600; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: 14px 16px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; text-align: center }
+button:focus-visible, .btn:focus-visible, .tile:focus-visible { outline: 3px solid var(--lamp); outline-offset: 2px }
+.primary { background: var(--accent); border-color: var(--accent); color: var(--surface) }
+.row { display: flex; gap: 10px; flex-wrap: wrap }
+.row > * { flex: 1 1 180px }
+.bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden }
+.bar i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .2s }
+.count { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--muted); font-size: .85rem }
+.eye { width: 100%; max-width: 380px; aspect-ratio: 1; margin: 0 auto; border-radius: 50%; overflow: hidden; border: 6px solid var(--surface); box-shadow: 0 0 0 1px var(--line) }
+.eye img { width: 100%; height: 100%; object-fit: cover; display: block }
+.answers { display: grid; gap: 10px }
+.answers button { justify-content: flex-start; text-align: left; min-height: 58px }
+.answers button .k { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); margin-left: auto }
+.a-cat { border-left: 6px solid var(--lamp) } .a-no { border-left: 6px solid var(--accent) } .a-unk { border-left: 6px solid var(--muted) }
+.ask { background: var(--ok-soft); border-radius: 12px; padding: 12px 14px; font-weight: 600 }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px }
+@media (min-width: 560px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)) } }
+.tile { position: relative; border: 3px solid transparent; border-radius: 12px; padding: 0; overflow: hidden; background: var(--surface); min-height: 0; aspect-ratio: 1; cursor: pointer }
+.tile img { width: 100%; height: 100%; object-fit: cover; display: block }
+.tile[aria-pressed="true"] { border-color: var(--flag) }
+.tile[aria-pressed="true"]::after { content: "✕ ভুল"; position: absolute; inset: auto 0 0 0; background: var(--flag); color: var(--surface); font-size: .8rem; font-weight: 700; padding: 3px 0 }
+.tile .id { position: absolute; top: 4px; left: 4px; font-family: var(--font-mono); font-size: .65rem; background: var(--surface); color: var(--muted); border-radius: 6px; padding: 0 5px }
+textarea { width: 100%; font-family: var(--font-mono); font-size: 1rem; user-select: text; -webkit-user-select: text; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); min-height: 120px; resize: vertical }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px }
+.stat { background: var(--bg); border-radius: 10px; padding: 10px; display: grid }
+.stat b { font-size: 1.4rem; font-variant-numeric: tabular-nums }
+.small { font-size: .85rem; color: var(--muted) }
+.note { font-size: .85rem; color: var(--muted) }
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none } }
+</style>
+
+<div class="wrap" id="app"></div>
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("data").textContent);
+  const PAGE = 12, KEY = "netra-photo-check-v1";
+  const pagesB = [];
+  for (let i = 0; i < D.Bc.length; i += PAGE) pagesB.push({ label: "c", ids: D.Bc.slice(i, i + PAGE) });
+  for (let i = 0; i < D.Bn.length; i += PAGE) pagesB.push({ label: "n", ids: D.Bn.slice(i, i + PAGE) });
+  let S = { stage: "start", name: "", a: {}, ai: 0, b: [], bi: 0, t0: 0 };
+  try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s && s.stage) S = s; } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+  const app = document.getElementById("app");
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const bn = (n) => String(n).replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
+  const totalSteps = D.A.length + pagesB.length;
+
+  function progress(done) {
+    const pct = Math.round(done / totalSteps * 100);
+    return `<div class="bar" aria-hidden="true"><i style="width:${pct}%"></i></div>`;
+  }
+
+  function start() {
+    app.innerHTML = `
+      <p class="eyebrow">Netra AI · গবেষণার ছবি যাচাই</p>
+      <h1>চোখের ছবিগুলো একবার দেখে দিন</h1>
+      <p>গ্রামে ছানি খোঁজার একটি অ্যাপের জন্য ২২৪টি চোখের ছবির লেবেল একজন চক্ষু বিশেষজ্ঞের যাচাই দরকার। মোট সময় প্রায় ১৫ মিনিট। মাঝপথে বন্ধ করলে পরে এখান থেকেই শুরু হবে।</p>
+      <p class="en">Netra AI needs an ophthalmologist to check the labels of 224 eye photographs (pupil-region crops from a public image set). About 15 minutes; progress is kept on this device.</p>
+      <div class="panel steps">
+        <div class="step"><b class="n">১</b><div><b>${bn(D.A.length)}টি ছবি, একটি একটি করে</b> <span class="small">· প্রায় ৫ মিনিট</span><p class="en">One at a time. Choose: cataract, no cataract, or cannot tell. The current label is hidden.</p></div></div>
+        <div class="step"><b class="n">২</b><div><b>${bn(D.Bc.length + D.Bn.length)}টি ছবি, এক পাতায় ১২টি</b> <span class="small">· প্রায় ১০ মিনিট</span><p class="en">Twelve per page with their current label. Tap only the photos whose label is wrong or unclear.</p></div></div>
+        <div class="step"><b class="n">৩</b><div><b>শেষে একটি কোড আসবে</b><p class="en">Copy the result code and send it to Arijit (WhatsApp or e-mail).</p></div></div>
+      </div>
+      <div class="panel">
+        <label for="dname">আপনার নাম ও পদবি <span class="en">Name and designation (for acknowledgement)</span></label>
+        <input type="text" id="dname" autocomplete="name" placeholder="যেমন: ডা. ……, চক্ষু বিভাগ" value="${esc(S.name)}">
+      </div>
+      <button class="primary" id="go">${Object.keys(S.a).length ? "যেখানে ছিলাম সেখান থেকে চালিয়ে যান · Continue" : "শুরু করুন · Start"}</button>
+      ${Object.keys(S.a).length ? `<div class="panel"><p class="small">এই ফোনে আগের উত্তর রাখা আছে। নতুন কেউ (যেমন অন্য ডাক্তার) করলে আগে সব মুছে নতুন করে শুরু করুন। · Earlier answers are saved on this device; clear them before a new reviewer starts.</p>
+        <button id="reset">সব উত্তর মুছে নতুন করে শুরু · Clear and start over</button>
+        <p class="small" id="resetmsg" aria-live="polite"></p></div>` : ""}
+      <p class="note">ছবিগুলো একটি পাবলিক ইন্টারনেট ডেটাসেটের; কোনো রোগীর নাম বা তথ্য নেই। · Images come from a public web dataset and carry no patient identifiers.</p>`;
+    const rs = document.getElementById("reset");
+    if (rs) rs.onclick = () => {
+      if (rs.dataset.armed !== "1") { rs.dataset.armed = "1"; rs.textContent = "নিশ্চিত? আবার চাপুন · Tap again to confirm"; return; }
+      S = { stage: "start", name: "", a: {}, ai: 0, b: [], bi: 0, t0: 0 }; save(); render();
+    };
+    document.getElementById("go").onclick = () => {
+      S.name = document.getElementById("dname").value.trim();
+      if (!S.t0) S.t0 = Date.now();
+      S.stage = S.ai < D.A.length ? "A" : (S.bi < pagesB.length ? "B" : "done"); save(); render();
+    };
+  }
+
+  function partA() {
+    const id = D.A[S.ai];
+    app.innerHTML = `
+      <div class="row" style="align-items:center"><p class="eyebrow" style="flex:1 1 auto">ধাপ ১ · একটি একটি করে</p><p class="count" style="flex:0 0 auto">${S.ai + 1} / ${D.A.length}</p></div>
+      ${progress(S.ai)}
+      <h2>এই চোখে কি ছানি (cataract) আছে?</h2>
+      <div class="eye"><img src="${D.img[id]}" alt="Pupil region photograph ${id}"></div>
+      <div class="answers">
+        <button class="a-cat" data-v="c">ছানি আছে <span class="en">Cataract</span><span class="k">1</span></button>
+        <button class="a-no" data-v="n">ছানি নেই <span class="en">No cataract</span><span class="k">2</span></button>
+        <button class="a-unk" data-v="u">বোঝা যাচ্ছে না <span class="en">Cannot tell</span><span class="k">3</span></button>
+      </div>
+      <div class="row"><button id="back" ${S.ai === 0 ? "disabled" : ""}>← আগের ছবি · Back</button></div>`;
+    app.querySelectorAll("[data-v]").forEach((b) => b.onclick = () => answer(b.dataset.v));
+    document.getElementById("back").onclick = () => { if (S.ai > 0) { S.ai--; save(); render(); } };
+  }
+  function answer(v) {
+    if (S.stage !== "A") return;
+    S.a[D.A[S.ai]] = v; S.ai++;
+    if (S.ai >= D.A.length) S.stage = "B";
+    save(); render();
+  }
+
+  function partB() {
+    const pg = pagesB[S.bi]; const marked = new Set(S.b);
+    const ask = pg.label === "c"
+      ? `এগুলোতে <b>"ছানি আছে"</b> লেবেল দেওয়া। যেগুলোতে ছানি <b>নেই</b> বা বোঝা যায় না, শুধু সেগুলোতে চাপুন।<br><span class="en">Labelled CATARACT. Tap any photo that is not cataract or cannot be judged.</span>`
+      : `এগুলোতে <b>"ছানি নেই"</b> লেবেল দেওয়া। যেগুলোতে ছানি <b>আছে</b> বা বোঝা যায় না, শুধু সেগুলোতে চাপুন।<br><span class="en">Labelled NO CATARACT. Tap any photo that shows cataract or cannot be judged.</span>`;
+    app.innerHTML = `
+      <div class="row" style="align-items:center"><p class="eyebrow" style="flex:1 1 auto">ধাপ ২ · এক পাতায় ১২টি</p><p class="count" style="flex:0 0 auto">পাতা ${S.bi + 1} / ${pagesB.length}</p></div>
+      ${progress(D.A.length + S.bi)}
+      <p class="ask">${ask}</p>
+      <div class="grid">${pg.ids.map((id) => `<button class="tile" data-id="${id}" aria-pressed="${marked.has(id)}" aria-label="Photo ${id}"><img src="${D.img[id]}" alt=""><span class="id">${id}</span></button>`).join("")}</div>
+      <div class="row">
+        <button id="prev" ${S.bi === 0 ? "" : ""}>← আগের পাতা · Back</button>
+        <button class="primary" id="next">${S.bi + 1 < pagesB.length ? "পরের পাতা · Next page" : "শেষ করুন · Finish"}</button>
+      </div>`;
+    app.querySelectorAll(".tile").forEach((t) => t.onclick = () => {
+      const id = Number(t.dataset.id); const on = t.getAttribute("aria-pressed") !== "true";
+      t.setAttribute("aria-pressed", String(on));
+      S.b = on ? [...new Set([...S.b, id])] : S.b.filter((x) => x !== id); save();
+    });
+    document.getElementById("prev").onclick = () => { if (S.bi > 0) S.bi--; else { S.stage = "A"; S.ai = D.A.length - 1; } save(); render(); };
+    document.getElementById("next").onclick = () => { S.bi++; if (S.bi >= pagesB.length) S.stage = "done"; save(); render(); window.scrollTo(0, 0); };
+  }
+
+  function code() {
+    const a = D.A.map((id) => S.a[id] || "-").join("");
+    const mins = S.t0 ? Math.max(1, Math.round((Date.now() - S.t0) / 60000)) : 0;
+    return `NQ1;${(S.name || "").replace(/;/g, ",")};A:${a};B:${[...S.b].sort((x, y) => x - y).join(",")};t:${mins}`;
+  }
+
+  function done() {
+    const vals = D.A.map((id) => S.a[id]);
+    const c = vals.filter((v) => v === "c").length, n = vals.filter((v) => v === "n").length, u = vals.filter((v) => v === "u").length;
+    const txt = code();
+    app.innerHTML = `
+      <p class="eyebrow">শেষ · Finished</p>
+      ${progress(totalSteps)}
+      <h1>ধন্যবাদ! কোডটি অরিজিৎকে পাঠান</h1>
+      <div class="panel">
+        <div class="stats">
+          <div class="stat"><span class="small">ধাপ ১: ছানি</span><b>${bn(c)}</b></div>
+          <div class="stat"><span class="small">ধাপ ১: নেই</span><b>${bn(n)}</b></div>
+          <div class="stat"><span class="small">ধাপ ১: অস্পষ্ট</span><b>${bn(u)}</b></div>
+        </div>
+        <p>ধাপ ২-এ ভুল চিহ্নিত: <b>${bn(S.b.length)}</b>টি ছবি</p>
+      </div>
+      <div class="panel">
+        <label for="code">ফলাফলের কোড · Result code</label>
+        <textarea id="code" readonly>${esc(txt)}</textarea>
+        <div class="row">
+          <button class="primary" id="copy">কোড কপি করুন · Copy</button>
+          <a class="btn" href="https://api.whatsapp.com/send?text=${encodeURIComponent("Netra AI photo check\n" + txt)}" target="_blank" rel="noopener">WhatsApp-এ পাঠান</a>
+        </div>
+        <p class="note" id="copied" aria-live="polite">বোতাম কাজ না করলে: উপরের কোডের উপর আঙুল চেপে ধরে রাখুন → "Select all" → "Copy" → WhatsApp-এ পেস্ট করুন। · If the buttons do nothing, long-press the code, choose Select all, then Copy, and paste it into WhatsApp.</p>
+      </div>
+      <div class="row"><button id="edit">← উত্তর বদলাতে ফিরে যান · Go back</button></div>`;
+    const ta = document.getElementById("code");
+    const msg = document.getElementById("copied");
+    const selectCode = () => { try { ta.focus(); ta.select(); ta.setSelectionRange(0, ta.value.length); } catch (e) {} };
+    ta.addEventListener("click", selectCode);
+    const copied = () => { msg.textContent = "কপি হয়েছে। এখন WhatsApp খুলে মেসেজে পেস্ট করুন। · Copied. Paste it into a WhatsApp message."; };
+    const fallback = () => {
+      selectCode(); let ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      if (ok) copied();
+      else msg.textContent = "কোডটি দাগানো হয়েছে। এখন কোডের উপর আঙুল চেপে ধরে \"Copy\" চাপুন। · The code is highlighted: long-press it and choose Copy.";
+    };
+    document.getElementById("copy").onclick = () => {
+      try {
+        if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(copied, fallback);
+        else fallback();
+      } catch (e) { fallback(); }
+    };
+    document.getElementById("edit").onclick = () => { S.stage = "B"; S.bi = pagesB.length - 1; save(); render(); };
+  }
+
+  function render() { ({ start, A: partA, B: partB, done })[S.stage](); }
+  document.addEventListener("keydown", (e) => {
+    if (S.stage !== "A" || e.target.tagName === "INPUT") return;
+    if (e.key === "1") answer("c"); else if (e.key === "2") answer("n"); else if (e.key === "3") answer("u");
+  });
+  if (S.stage !== "start") S.stage = "start";
+  render();
+})();
+</script>

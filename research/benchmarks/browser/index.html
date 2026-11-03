@@ -1,0 +1,31 @@
+<!doctype html><html><body><canvas id="c" width="224" height="224"></canvas>
+<script src="tf.min.js"></script>
+<script src="tf-backend-wasm.min.js"></script>
+<script>tf.wasm.setWasmPaths("/");</script>
+<script>
+window.runBench = async (backend, n) => {
+  await tf.setBackend(backend); await tf.ready();
+  const t0 = performance.now();
+  const model = await tf.loadGraphModel('model/model.json');
+  const tLoad = performance.now() - t0;
+  const x = tf.randomUniform([1,224,224,3], 0, 255);
+  const w0 = performance.now(); let o = model.predict(x); await o.data(); o.dispose(); const tFirst = performance.now() - w0;
+  const times = [];
+  for (let i = 0; i < n; i++) { const s = performance.now(); const y = model.predict(x); await y.data(); y.dispose(); times.push(performance.now() - s); }
+  x.dispose(); times.sort((a,b)=>a-b);
+  return { backend: tf.getBackend(), load_ms: tLoad, first_ms: tFirst, median_ms: times[Math.floor(n/2)], p90_ms: times[Math.floor(n*0.9)], mem_mb: tf.memory().numBytes/1e6 };
+};
+
+window.runParity = async (backend) => {
+  await tf.setBackend(backend || 'cpu'); await tf.ready();
+  const model = await tf.loadGraphModel('model/model.json');
+  const meta = await (await fetch('model/test_meta.json')).json();
+  const buf = new Uint8Array(await (await fetch('model/test_crops_u8.bin')).arrayBuffer());
+  const n = meta.n, sz = 224*224*3, out = [];
+  for (let i = 0; i < n; i++) {
+    const x = tf.tensor(buf.subarray(i*sz, (i+1)*sz), [1,224,224,3], 'int32').toFloat();
+    const y = model.predict(x); out.push((await y.data())[0]); x.dispose(); y.dispose();
+  }
+  return out;
+};
+</script></body></html>

@@ -1,0 +1,46 @@
+[
+ {
+  "stage": "Pilot",
+  "workers": 10,
+  "patients_day": 200,
+  "eyes_day": 400,
+  "storage_gb_day": 0.04,
+  "storage_tb_year": 0.01,
+  "avg_tps_8h": 0.007,
+  "storm_tps_1h": 0.06,
+  "headroom_x": 12024
+ },
+ {
+  "stage": "District",
+  "workers": 100,
+  "patients_day": 2000,
+  "eyes_day": 4000,
+  "storage_gb_day": 0.38,
+  "storage_tb_year": 0.11,
+  "avg_tps_8h": 0.069,
+  "storm_tps_1h": 0.56,
+  "headroom_x": 1202
+ },
+ {
+  "stage": "Division",
+  "workers": 1000,
+  "patients_day": 20000,
+  "eyes_day": 40000,
+  "storage_gb_day": 3.8,
+  "storage_tb_year": 1.14,
+  "avg_tps_8h": 0.694,
+  "storm_tps_1h": 5.56,
+  "headroom_x": 120
+ },
+ {
+  "stage": "National",
+  "workers": 10000,
+  "patients_day": 200000,
+  "eyes_day": 400000,
+  "storage_gb_day": 38.0,
+  "storage_tb_year": 11.4,
+  "avg_tps_8h": 6.944,
+  "storm_tps_1h": 55.56,
+  "headroom_x": 12
+ }
+]

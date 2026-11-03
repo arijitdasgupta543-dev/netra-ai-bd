@@ -1,0 +1,2250 @@
+{
+ "test/cataract/image_250.jpg": {
+  "cx": 0.53,
+  "cy": 0.5,
+  "r": 0.27,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "val"
+ },
+ "test/cataract/image_253.jpg": {
+  "cx": 0.465,
+  "cy": 0.47,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 450,
+  "h": 450,
+  "label": "cataract",
+  "split": "test"
+ },
+ "test/cataract/image_254.jpg": {
+  "cx": 0.68,
+  "cy": 0.42,
+  "r": 0.27,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 480,
+  "label": "cataract",
+  "split": "train"
+ },
+ "test/cataract/image_260.jpg": {
+  "cx": 0.52,
+  "cy": 0.48,
+  "r": 0.28,
+  "method": "visual_annotation",
+  "w": 630,
+  "h": 430,
+  "label": "cataract",
+  "split": "val"
+ },
+ "test/cataract/image_261.jpg": {
+  "cx": 0.42,
+  "cy": 0.42,
+  "r": 0.35,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 426,
+  "label": "cataract",
+  "split": "test"
+ },
+ "test/cataract/image_267.jpg": {
+  "cx": 0.54,
+  "cy": 0.52,
+  "r": 0.24,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "test/cataract/image_275.jpg": {
+  "cx": 0.62,
+  "cy": 0.42,
+  "r": 0.25,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 320,
+  "label": "cataract",
+  "split": "val"
+ },
+ "test/cataract/image_276.jpg": {
+  "cx": 0.5,
+  "cy": 0.53,
+  "r": 0.42,
+  "method": "visual_annotation",
+  "w": 323,
+  "h": 242,
+  "label": "cataract",
+  "split": "val"
+ },
+ "test/cataract/image_277.jpg": {
+  "cx": 0.5,
+  "cy": 0.4,
+  "r": 0.3,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 563,
+  "label": "cataract",
+  "split": "train"
+ },
+ "test/cataract/image_280.jpg": {
+  "cx": 0.49400004744529724,
+  "cy": 0.4494623839855194,
+  "r": 0.41413334012031555,
+  "method": "auto_verified",
+  "w": 300,
+  "h": 279,
+  "label": "cataract",
+  "split": "train"
+ },
+ "test/cataract/image_282.jpg": {
+  "cx": 0.4974874258041382,
+  "cy": 0.448888897895813,
+  "r": 0.28375211358070374,
+  "method": "auto_verified",
+  "w": 597,
+  "h": 405,
+  "label": "cataract",
+  "split": "train"
+ },
+ "test/cataract/image_291.jpg": {
+  "cx": 0.48,
+  "cy": 0.42,
+  "r": 0.23,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 360,
+  "label": "cataract",
+  "split": "train"
+ },
+ "test/cataract/image_293.jpg": {
+  "cx": 0.53,
+  "cy": 0.5,
+  "r": 0.45,
+  "method": "visual_annotation",
+  "w": 300,
+  "h": 300,
+  "label": "cataract",
+  "split": "train"
+ },
+ "test/cataract/image_296.jpg": {
+  "cx": 0.47,
+  "cy": 0.52,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "test/cataract/image_301.jpg": {
+  "cx": 0.56,
+  "cy": 0.5,
+  "r": 0.3,
+  "method": "visual_annotation",
+  "w": 300,
+  "h": 206,
+  "label": "cataract",
+  "split": "test"
+ },
+ "test/normal/image_246.jpg": {
+  "cx": 0.52,
+  "cy": 0.48,
+  "r": 0.16,
+  "method": "visual_annotation",
+  "w": 590,
+  "h": 350,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_252.jpg": {
+  "cx": 0.53,
+  "cy": 0.5,
+  "r": 0.2,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 456,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_254.jpg": {
+  "cx": 0.4845000207424164,
+  "cy": 0.5140000581741333,
+  "r": 0.16380001604557037,
+  "method": "auto_verified",
+  "w": 400,
+  "h": 300,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_257.jpg": {
+  "cx": 0.47,
+  "cy": 0.5,
+  "r": 0.08,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 561,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_258.jpg": {
+  "cx": 0.48,
+  "cy": 0.45,
+  "r": 0.11,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 388,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_262.jpg": {
+  "cx": 0.5,
+  "cy": 0.53,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 274,
+  "h": 236,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_264.jpg": {
+  "cx": 0.47,
+  "cy": 0.5,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_269.jpg": {
+  "cx": 0.5409375429153442,
+  "cy": 0.5156044363975525,
+  "r": 0.1732500046491623,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 455,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_272.jpg": {
+  "cx": 0.55,
+  "cy": 0.55,
+  "r": 0.08,
+  "method": "visual_annotation",
+  "w": 323,
+  "h": 265,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_274.jpg": {
+  "cx": 0.46,
+  "cy": 0.55,
+  "r": 0.09,
+  "method": "visual_annotation",
+  "w": 385,
+  "h": 217,
+  "label": "normal",
+  "split": "val"
+ },
+ "test/normal/image_286.jpg": {
+  "cx": 0.49,
+  "cy": 0.55,
+  "r": 0.09,
+  "method": "visual_annotation",
+  "w": 239,
+  "h": 229,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_298.jpg": {
+  "cx": 0.43,
+  "cy": 0.55,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 379,
+  "h": 216,
+  "label": "normal",
+  "split": "train"
+ },
+ "test/normal/image_299.jpg": {
+  "cx": 0.4468531608581543,
+  "cy": 0.49166667461395264,
+  "r": 0.1383216679096222,
+  "method": "auto_verified",
+  "w": 286,
+  "h": 216,
+  "label": "normal",
+  "split": "val"
+ },
+ "test/normal/image_302.jpg": {
+  "cx": 0.64,
+  "cy": 0.57,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 241,
+  "h": 238,
+  "label": "normal",
+  "split": "train",
+  "qc_corrected": true
+ },
+ "test/normal/image_303.jpg": {
+  "cx": 0.38,
+  "cy": 0.48,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 278,
+  "h": 263,
+  "label": "normal",
+  "split": "val"
+ },
+ "test/normal/image_305.jpg": {
+  "cx": 0.37,
+  "cy": 0.55,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 322,
+  "h": 263,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/cataract/image_100.jpg": {
+  "cx": 0.52,
+  "cy": 0.58,
+  "r": 0.08,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_102.jpg": {
+  "cx": 0.48,
+  "cy": 0.42,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 431,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_103.jpg": {
+  "cx": 0.40031251311302185,
+  "cy": 0.38064515590667725,
+  "r": 0.24831251800060272,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 465,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_104.jpg": {
+  "cx": 0.52,
+  "cy": 0.5,
+  "r": 0.3,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 442,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_105.jpg": {
+  "cx": 0.36,
+  "cy": 0.45,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_106.jpg": {
+  "cx": 0.47,
+  "cy": 0.47,
+  "r": 0.07,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_110.jpg": {
+  "cx": 0.56,
+  "cy": 0.45,
+  "r": 0.35,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 443,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_112.jpg": {
+  "cx": 0.47,
+  "cy": 0.47,
+  "r": 0.38,
+  "method": "visual_annotation",
+  "w": 400,
+  "h": 224,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_114.jpg": {
+  "cx": 0.43,
+  "cy": 0.42,
+  "r": 0.16,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_115.jpg": {
+  "cx": 0.4811538755893707,
+  "cy": 0.39840003848075867,
+  "r": 0.31661537289619446,
+  "method": "auto_verified",
+  "w": 520,
+  "h": 375,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_117.jpg": {
+  "cx": 0.3721875250339508,
+  "cy": 0.5269321203231812,
+  "r": 0.12549999356269836,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_118.jpg": {
+  "cx": 0.5539773106575012,
+  "cy": 0.43896105885505676,
+  "r": 0.2454545497894287,
+  "method": "auto_verified",
+  "w": 352,
+  "h": 231,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_119.jpg": {
+  "cx": 0.55,
+  "cy": 0.53,
+  "r": 0.22,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 413,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_120.jpg": {
+  "cx": 0.69,
+  "cy": 0.62,
+  "r": 0.07,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train",
+  "qc_corrected": true
+ },
+ "train/cataract/image_124.jpg": {
+  "cx": 0.65,
+  "cy": 0.45,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 264,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_126.jpg": {
+  "cx": 0.55,
+  "cy": 0.5,
+  "r": 0.38,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 336,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_127.jpg": {
+  "cx": 0.5,
+  "cy": 0.48,
+  "r": 0.21,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 478,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_131.jpg": {
+  "cx": 0.36,
+  "cy": 0.62,
+  "r": 0.08,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train",
+  "qc_corrected": true
+ },
+ "train/cataract/image_134.jpg": {
+  "cx": 0.45,
+  "cy": 0.5,
+  "r": 0.45,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 368,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_135.jpg": {
+  "cx": 0.42,
+  "cy": 0.38,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 493,
+  "h": 335,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_136.jpg": {
+  "cx": 0.45,
+  "cy": 0.4,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 512,
+  "h": 512,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_139.jpg": {
+  "cx": 0.48,
+  "cy": 0.48,
+  "r": 0.4,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 640,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_14.jpg": {
+  "cx": 0.48847585916519165,
+  "cy": 0.5253112316131592,
+  "r": 0.39405205845832825,
+  "method": "auto_verified",
+  "w": 269,
+  "h": 241,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_140.jpg": {
+  "cx": 0.52,
+  "cy": 0.5,
+  "r": 0.32,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_141.jpg": {
+  "cx": 0.46,
+  "cy": 0.48,
+  "r": 0.16,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_142.jpg": {
+  "cx": 0.47,
+  "cy": 0.42,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 387,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_143.jpg": {
+  "cx": 0.42,
+  "cy": 0.48,
+  "r": 0.45,
+  "method": "visual_annotation",
+  "w": 557,
+  "h": 415,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_144.jpg": {
+  "cx": 0.5,
+  "cy": 0.53,
+  "r": 0.22,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 259,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_146.jpg": {
+  "cx": 0.48,
+  "cy": 0.44,
+  "r": 0.27,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 360,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_148.jpg": {
+  "cx": 0.42,
+  "cy": 0.42,
+  "r": 0.25,
+  "method": "visual_annotation",
+  "w": 611,
+  "h": 305,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_149.jpg": {
+  "cx": 0.53,
+  "cy": 0.45,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 483,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_15.jpg": {
+  "cx": 0.53,
+  "cy": 0.5,
+  "r": 0.25,
+  "method": "visual_annotation",
+  "w": 594,
+  "h": 308,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_150.jpg": {
+  "cx": 0.58,
+  "cy": 0.5,
+  "r": 0.28,
+  "method": "visual_annotation",
+  "w": 493,
+  "h": 335,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_152.jpg": {
+  "cx": 0.52,
+  "cy": 0.42,
+  "r": 0.32,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 480,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_153.jpg": {
+  "cx": 0.48,
+  "cy": 0.48,
+  "r": 0.45,
+  "method": "visual_annotation",
+  "w": 400,
+  "h": 267,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_155.jpg": {
+  "cx": 0.5146875381469727,
+  "cy": 0.43918922543525696,
+  "r": 0.10362499952316284,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 444,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_157.jpg": {
+  "cx": 0.55,
+  "cy": 0.42,
+  "r": 0.32,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 640,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_158.jpg": {
+  "cx": 0.5,
+  "cy": 0.45,
+  "r": 0.38,
+  "method": "visual_annotation",
+  "w": 597,
+  "h": 313,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_159.jpg": {
+  "cx": 0.5,
+  "cy": 0.42,
+  "r": 0.19,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 426,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_163.jpg": {
+  "cx": 0.4846875071525574,
+  "cy": 0.46716418862342834,
+  "r": 0.2551250159740448,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 402,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_166.jpg": {
+  "cx": 0.48,
+  "cy": 0.52,
+  "r": 0.37,
+  "method": "visual_annotation",
+  "w": 461,
+  "h": 285,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_17.jpg": {
+  "cx": 0.5,
+  "cy": 0.45,
+  "r": 0.4,
+  "method": "visual_annotation",
+  "w": 500,
+  "h": 309,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_171.jpg": {
+  "cx": 0.47,
+  "cy": 0.4,
+  "r": 0.23,
+  "method": "visual_annotation",
+  "w": 600,
+  "h": 391,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_175.jpg": {
+  "cx": 0.52,
+  "cy": 0.5,
+  "r": 0.3,
+  "method": "visual_annotation",
+  "w": 615,
+  "h": 409,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_176.jpg": {
+  "cx": 0.52,
+  "cy": 0.4,
+  "r": 0.38,
+  "method": "visual_annotation",
+  "w": 400,
+  "h": 400,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_178.jpg": {
+  "cx": 0.4,
+  "cy": 0.4,
+  "r": 0.26,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 384,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_179.jpg": {
+  "cx": 0.4958823621273041,
+  "cy": 0.47291672229766846,
+  "r": 0.3732941448688507,
+  "method": "auto_verified",
+  "w": 340,
+  "h": 288,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_180.jpg": {
+  "cx": 0.65,
+  "cy": 0.45,
+  "r": 0.35,
+  "method": "visual_annotation",
+  "w": 321,
+  "h": 307,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_181.jpg": {
+  "cx": 0.52,
+  "cy": 0.48,
+  "r": 0.27,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 459,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_187.jpg": {
+  "cx": 0.5,
+  "cy": 0.45,
+  "r": 0.22,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 400,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_191.jpg": {
+  "cx": 0.5278125405311584,
+  "cy": 0.5225352048873901,
+  "r": 0.29725000262260437,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 426,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_192.jpg": {
+  "cx": 0.52,
+  "cy": 0.45,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 424,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_193.jpg": {
+  "cx": 0.52,
+  "cy": 0.48,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_194.jpg": {
+  "cx": 0.43,
+  "cy": 0.55,
+  "r": 0.22,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_197.jpg": {
+  "cx": 0.45,
+  "cy": 0.4,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 469,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_198.jpg": {
+  "cx": 0.47,
+  "cy": 0.5,
+  "r": 0.3,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 262,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_2.jpg": {
+  "cx": 0.55,
+  "cy": 0.46,
+  "r": 0.09,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 267,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_202.jpg": {
+  "cx": 0.37,
+  "cy": 0.48,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 439,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_205.jpg": {
+  "cx": 0.52,
+  "cy": 0.5,
+  "r": 0.38,
+  "method": "visual_annotation",
+  "w": 600,
+  "h": 330,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_209.jpg": {
+  "cx": 0.5259374976158142,
+  "cy": 0.4124999940395355,
+  "r": 0.16593751311302185,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 304,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_210.jpg": {
+  "cx": 0.52,
+  "cy": 0.38,
+  "r": 0.2,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_211.jpg": {
+  "cx": 0.5,
+  "cy": 0.4,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 425,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_213.jpg": {
+  "cx": 0.53,
+  "cy": 0.48,
+  "r": 0.11,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 338,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_214.jpg": {
+  "cx": 0.5,
+  "cy": 0.48,
+  "r": 0.33,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 480,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_215.jpg": {
+  "cx": 0.55,
+  "cy": 0.42,
+  "r": 0.11,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_217.jpg": {
+  "cx": 0.4,
+  "cy": 0.48,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_218.jpg": {
+  "cx": 0.4,
+  "cy": 0.58,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 438,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_221.jpg": {
+  "cx": 0.44,
+  "cy": 0.52,
+  "r": 0.27,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_225.jpg": {
+  "cx": 0.15,
+  "cy": 0.47,
+  "r": 0.06,
+  "method": "visual_annotation",
+  "w": 632,
+  "h": 319,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_227.jpg": {
+  "cx": 0.47,
+  "cy": 0.47,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 426,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_23.jpg": {
+  "cx": 0.55,
+  "cy": 0.45,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 429,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_230.jpg": {
+  "cx": 0.49781250953674316,
+  "cy": 0.381447970867157,
+  "r": 0.24425001442432404,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 442,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_234.jpg": {
+  "cx": 0.42,
+  "cy": 0.4,
+  "r": 0.36,
+  "method": "visual_annotation",
+  "w": 602,
+  "h": 401,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_237.jpg": {
+  "cx": 0.446835458278656,
+  "cy": 0.5413407683372498,
+  "r": 0.3269198536872864,
+  "method": "auto_verified",
+  "w": 474,
+  "h": 358,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_239.jpg": {
+  "cx": 0.47,
+  "cy": 0.47,
+  "r": 0.32,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 360,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_243.jpg": {
+  "cx": 0.58,
+  "cy": 0.48,
+  "r": 0.18,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 421,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_246.jpg": {
+  "cx": 0.48,
+  "cy": 0.53,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 489,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_25.jpg": {
+  "cx": 0.47,
+  "cy": 0.55,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 430,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_35.jpg": {
+  "cx": 0.55,
+  "cy": 0.45,
+  "r": 0.37,
+  "method": "visual_annotation",
+  "w": 493,
+  "h": 335,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_39.jpg": {
+  "cx": 0.48,
+  "cy": 0.48,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 550,
+  "h": 367,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_45.jpg": {
+  "cx": 0.48316431045532227,
+  "cy": 0.44597017765045166,
+  "r": 0.2973631024360657,
+  "method": "auto_verified",
+  "w": 493,
+  "h": 335,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_47.jpg": {
+  "cx": 0.54,
+  "cy": 0.4,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 332,
+  "h": 256,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_50.jpg": {
+  "cx": 0.7,
+  "cy": 0.5,
+  "r": 0.07,
+  "method": "visual_annotation",
+  "w": 450,
+  "h": 307,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_52.jpg": {
+  "cx": 0.2,
+  "cy": 0.62,
+  "r": 0.07,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 329,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_61.jpg": {
+  "cx": 0.4724999964237213,
+  "cy": 0.49425286054611206,
+  "r": 0.2572999894618988,
+  "method": "auto_verified",
+  "w": 400,
+  "h": 261,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_62.jpg": {
+  "cx": 0.53,
+  "cy": 0.48,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 448,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_63.jpg": {
+  "cx": 0.49031251668930054,
+  "cy": 0.5047826170921326,
+  "r": 0.1550625115633011,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 460,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_64.jpg": {
+  "cx": 0.5,
+  "cy": 0.55,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 400,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_68.jpg": {
+  "cx": 0.5,
+  "cy": 0.4,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 500,
+  "h": 500,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_69.jpg": {
+  "cx": 0.47343748807907104,
+  "cy": 0.45211270451545715,
+  "r": 0.2096875160932541,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 426,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_7.jpg": {
+  "cx": 0.55,
+  "cy": 0.38,
+  "r": 0.22,
+  "method": "visual_annotation",
+  "w": 200,
+  "h": 264,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_70.jpg": {
+  "cx": 0.55,
+  "cy": 0.53,
+  "r": 0.16,
+  "method": "visual_annotation",
+  "w": 200,
+  "h": 200,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_76.jpg": {
+  "cx": 0.48,
+  "cy": 0.42,
+  "r": 0.3,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_79.jpg": {
+  "cx": 0.47,
+  "cy": 0.42,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 640,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_82.jpg": {
+  "cx": 0.52,
+  "cy": 0.5,
+  "r": 0.43,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 480,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_83.jpg": {
+  "cx": 0.48,
+  "cy": 0.38,
+  "r": 0.11,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "test"
+ },
+ "train/cataract/image_84.jpg": {
+  "cx": 0.48,
+  "cy": 0.48,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_85.jpg": {
+  "cx": 0.6,
+  "cy": 0.45,
+  "r": 0.3,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 422,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/cataract/image_89.jpg": {
+  "cx": 0.43,
+  "cy": 0.47,
+  "r": 0.09,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 426,
+  "label": "cataract",
+  "split": "train"
+ },
+ "train/cataract/image_99.jpg": {
+  "cx": 0.53,
+  "cy": 0.5,
+  "r": 0.08,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "cataract",
+  "split": "val"
+ },
+ "train/normal/image_101.jpg": {
+  "cx": 0.54,
+  "cy": 0.5,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 211,
+  "h": 217,
+  "label": "normal",
+  "split": "test",
+  "qc_corrected": true
+ },
+ "train/normal/image_106.jpg": {
+  "cx": 0.4,
+  "cy": 0.58,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 266,
+  "h": 218,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_110.jpg": {
+  "cx": 0.5390625,
+  "cy": 0.44521278142929077,
+  "r": 0.21131248772144318,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 376,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_113.jpg": {
+  "cx": 0.5071874856948853,
+  "cy": 0.4482435882091522,
+  "r": 0.2680000066757202,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 427,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_114.jpg": {
+  "cx": 0.47,
+  "cy": 0.47,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 566,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_116.jpg": {
+  "cx": 0.45,
+  "cy": 0.58,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 311,
+  "h": 236,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_12.jpg": {
+  "cx": 0.52,
+  "cy": 0.48,
+  "r": 0.32,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 466,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_120.jpg": {
+  "cx": 0.48,
+  "cy": 0.48,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 312,
+  "h": 381,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_121.jpg": {
+  "cx": 0.45,
+  "cy": 0.45,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 296,
+  "h": 254,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_122.jpg": {
+  "cx": 0.48,
+  "cy": 0.78,
+  "r": 0.11,
+  "method": "visual_annotation",
+  "w": 312,
+  "h": 292,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_123.jpg": {
+  "cx": 0.5,
+  "cy": 0.47,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 302,
+  "h": 384,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_124.jpg": {
+  "cx": 0.4,
+  "cy": 0.6,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 361,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_126.jpg": {
+  "cx": 0.48,
+  "cy": 0.45,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_127.jpg": {
+  "cx": 0.48,
+  "cy": 0.48,
+  "r": 0.18,
+  "method": "visual_annotation",
+  "w": 450,
+  "h": 271,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_132.jpg": {
+  "cx": 0.47,
+  "cy": 0.48,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 381,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_133.jpg": {
+  "cx": 0.4,
+  "cy": 0.68,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 334,
+  "h": 301,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_134.jpg": {
+  "cx": 0.4,
+  "cy": 0.65,
+  "r": 0.11,
+  "method": "visual_annotation",
+  "w": 285,
+  "h": 200,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_136.jpg": {
+  "cx": 0.5,
+  "cy": 0.48,
+  "r": 0.08,
+  "method": "visual_annotation",
+  "w": 251,
+  "h": 249,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_139.jpg": {
+  "cx": 0.47,
+  "cy": 0.55,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 469,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_141.jpg": {
+  "cx": 0.53,
+  "cy": 0.45,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 480,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_147.jpg": {
+  "cx": 0.47,
+  "cy": 0.52,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 311,
+  "h": 235,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_148.jpg": {
+  "cx": 0.5353125333786011,
+  "cy": 0.4313817620277405,
+  "r": 0.15456250309944153,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 427,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_149.jpg": {
+  "cx": 0.43,
+  "cy": 0.58,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 320,
+  "h": 301,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_150.jpg": {
+  "cx": 0.42,
+  "cy": 0.53,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 284,
+  "h": 313,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_152.jpg": {
+  "cx": 0.47,
+  "cy": 0.57,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 273,
+  "h": 341,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_153.jpg": {
+  "cx": 0.5,
+  "cy": 0.62,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 342,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_157.jpg": {
+  "cx": 0.4,
+  "cy": 0.45,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 507,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_158.jpg": {
+  "cx": 0.52,
+  "cy": 0.5,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 579,
+  "h": 449,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_159.jpg": {
+  "cx": 0.48,
+  "cy": 0.47,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 465,
+  "h": 347,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_163.jpg": {
+  "cx": 0.52,
+  "cy": 0.4,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 425,
+  "h": 282,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_166.jpg": {
+  "cx": 0.5034375190734863,
+  "cy": 0.44893619418144226,
+  "r": 0.17518749833106995,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 282,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_167.jpg": {
+  "cx": 0.6084375381469727,
+  "cy": 0.47353634238243103,
+  "r": 0.11743750423192978,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 427,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_168.jpg": {
+  "cx": 0.5,
+  "cy": 0.5,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 360,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_169.jpg": {
+  "cx": 0.52,
+  "cy": 0.57,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 446,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_170.jpg": {
+  "cx": 0.5,
+  "cy": 0.53,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 300,
+  "h": 300,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_171.jpg": {
+  "cx": 0.55,
+  "cy": 0.44,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 480,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_175.jpg": {
+  "cx": 0.5,
+  "cy": 0.45,
+  "r": 0.11,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_176.jpg": {
+  "cx": 0.5,
+  "cy": 0.47,
+  "r": 0.2,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 416,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_177.jpg": {
+  "cx": 0.52,
+  "cy": 0.5,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 410,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_178.jpg": {
+  "cx": 0.64,
+  "cy": 0.52,
+  "r": 0.07,
+  "method": "visual_annotation",
+  "w": 506,
+  "h": 300,
+  "label": "normal",
+  "split": "train",
+  "qc_corrected": true
+ },
+ "train/normal/image_180.jpg": {
+  "cx": 0.58,
+  "cy": 0.48,
+  "r": 0.1,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 361,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_181.jpg": {
+  "cx": 0.48,
+  "cy": 0.48,
+  "r": 0.2,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 412,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_184.jpg": {
+  "cx": 0.45,
+  "cy": 0.52,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 500,
+  "h": 333,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_185.jpg": {
+  "cx": 0.47,
+  "cy": 0.45,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 250,
+  "h": 250,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_186.jpg": {
+  "cx": 0.48,
+  "cy": 0.4,
+  "r": 0.16,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 426,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_187.jpg": {
+  "cx": 0.52,
+  "cy": 0.5,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 509,
+  "h": 339,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_188.jpg": {
+  "cx": 0.5015624761581421,
+  "cy": 0.46839624643325806,
+  "r": 0.25443750619888306,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 424,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_189.jpg": {
+  "cx": 0.53,
+  "cy": 0.47,
+  "r": 0.11,
+  "method": "visual_annotation",
+  "w": 441,
+  "h": 570,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_190.jpg": {
+  "cx": 0.35,
+  "cy": 0.57,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 270,
+  "h": 251,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_191.jpg": {
+  "cx": 0.5,
+  "cy": 0.52,
+  "r": 0.21,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 425,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_192.jpg": {
+  "cx": 0.5,
+  "cy": 0.43,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 630,
+  "h": 420,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_196.jpg": {
+  "cx": 0.27,
+  "cy": 0.32,
+  "r": 0.24,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 436,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_197.jpg": {
+  "cx": 0.4036082625389099,
+  "cy": 0.43909093737602234,
+  "r": 0.13597938418388367,
+  "method": "auto_verified",
+  "w": 388,
+  "h": 220,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_199.jpg": {
+  "cx": 0.55,
+  "cy": 0.45,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 420,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_20.jpg": {
+  "cx": 0.5216748714447021,
+  "cy": 0.6021583080291748,
+  "r": 0.11330049484968185,
+  "method": "auto_verified",
+  "w": 406,
+  "h": 278,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_200.jpg": {
+  "cx": 0.45,
+  "cy": 0.38,
+  "r": 0.16,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 480,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_201.jpg": {
+  "cx": 0.48,
+  "cy": 0.4,
+  "r": 0.23,
+  "method": "visual_annotation",
+  "w": 460,
+  "h": 276,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_202.jpg": {
+  "cx": 0.5503125190734863,
+  "cy": 0.4897637963294983,
+  "r": 0.13575001060962677,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 381,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_203.jpg": {
+  "cx": 0.51,
+  "cy": 0.52,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 450,
+  "h": 319,
+  "label": "normal",
+  "split": "train",
+  "qc_corrected": true
+ },
+ "train/normal/image_206.jpg": {
+  "cx": 0.4,
+  "cy": 0.52,
+  "r": 0.2,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_207.jpg": {
+  "cx": 0.42,
+  "cy": 0.55,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 520,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_208.jpg": {
+  "cx": 0.48,
+  "cy": 0.58,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 479,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_209.jpg": {
+  "cx": 0.5337499976158142,
+  "cy": 0.45093750953674316,
+  "r": 0.16991665959358215,
+  "method": "auto_verified",
+  "w": 480,
+  "h": 640,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_21.jpg": {
+  "cx": 0.4087759852409363,
+  "cy": 0.4122302234172821,
+  "r": 0.132563516497612,
+  "method": "auto_verified",
+  "w": 433,
+  "h": 278,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_210.jpg": {
+  "cx": 0.48,
+  "cy": 0.47,
+  "r": 0.18,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 425,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_211.jpg": {
+  "cx": 0.43,
+  "cy": 0.52,
+  "r": 0.19,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 427,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_212.jpg": {
+  "cx": 0.47,
+  "cy": 0.5,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 383,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_214.jpg": {
+  "cx": 0.55,
+  "cy": 0.5,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 506,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_215.jpg": {
+  "cx": 0.43406254053115845,
+  "cy": 0.5728124976158142,
+  "r": 0.12843748927116394,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 640,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_216.jpg": {
+  "cx": 0.4,
+  "cy": 0.44,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 562,
+  "label": "normal",
+  "split": "train",
+  "qc_corrected": true
+ },
+ "train/normal/image_217.jpg": {
+  "cx": 0.5,
+  "cy": 0.48,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 321,
+  "h": 229,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_218.jpg": {
+  "cx": 0.53,
+  "cy": 0.5,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 595,
+  "h": 370,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_219.jpg": {
+  "cx": 0.52,
+  "cy": 0.4,
+  "r": 0.2,
+  "method": "visual_annotation",
+  "w": 600,
+  "h": 323,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_221.jpg": {
+  "cx": 0.46,
+  "cy": 0.62,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 355,
+  "h": 291,
+  "label": "normal",
+  "split": "train",
+  "qc_corrected": true
+ },
+ "train/normal/image_222.jpg": {
+  "cx": 0.55,
+  "cy": 0.38,
+  "r": 0.19,
+  "method": "visual_annotation",
+  "w": 246,
+  "h": 241,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_223.jpg": {
+  "cx": 0.53,
+  "cy": 0.54,
+  "r": 0.18,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 368,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_225.jpg": {
+  "cx": 0.5,
+  "cy": 0.45,
+  "r": 0.12,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 361,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_226.jpg": {
+  "cx": 0.53,
+  "cy": 0.5,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 360,
+  "label": "normal",
+  "split": "val"
+ },
+ "train/normal/image_230.jpg": {
+  "cx": 0.52,
+  "cy": 0.48,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 570,
+  "h": 640,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_233.jpg": {
+  "cx": 0.45,
+  "cy": 0.52,
+  "r": 0.21,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 426,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_235.jpg": {
+  "cx": 0.499687522649765,
+  "cy": 0.4839285910129547,
+  "r": 0.15031251311302185,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 336,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_236.jpg": {
+  "cx": 0.6140625476837158,
+  "cy": 0.32455089688301086,
+  "r": 0.17893750965595245,
+  "method": "auto_verified",
+  "w": 640,
+  "h": 501,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_237.jpg": {
+  "cx": 0.5,
+  "cy": 0.58,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 456,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_238.jpg": {
+  "cx": 0.47,
+  "cy": 0.58,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 508,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_239.jpg": {
+  "cx": 0.4,
+  "cy": 0.58,
+  "r": 0.22,
+  "method": "visual_annotation",
+  "w": 571,
+  "h": 379,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_241.jpg": {
+  "cx": 0.47,
+  "cy": 0.32,
+  "r": 0.17,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 445,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_243.jpg": {
+  "cx": 0.47,
+  "cy": 0.45,
+  "r": 0.13,
+  "method": "visual_annotation",
+  "w": 411,
+  "h": 283,
+  "label": "normal",
+  "split": "test"
+ },
+ "train/normal/image_244.jpg": {
+  "cx": 0.45,
+  "cy": 0.4,
+  "r": 0.24,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 480,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_245.jpg": {
+  "cx": 0.47,
+  "cy": 0.47,
+  "r": 0.14,
+  "method": "visual_annotation",
+  "w": 612,
+  "h": 448,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_35.jpg": {
+  "cx": 0.25,
+  "cy": 0.45,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 615,
+  "h": 442,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_38.jpg": {
+  "cx": 0.58,
+  "cy": 0.42,
+  "r": 0.15,
+  "method": "visual_annotation",
+  "w": 386,
+  "h": 254,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_46.jpg": {
+  "cx": 0.4,
+  "cy": 0.5,
+  "r": 0.22,
+  "method": "visual_annotation",
+  "w": 640,
+  "h": 558,
+  "label": "normal",
+  "split": "train"
+ },
+ "train/normal/image_47.jpg": {
+  "cx": 0.5385000109672546,
+  "cy": 0.46995073556900024,
+  "r": 0.179500013589859,
+  "method": "auto_verified",
+  "w": 400,
+  "h": 203,
+  "label": "normal",
+  "split": "train"
+ }
+}

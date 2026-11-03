@@ -1,0 +1,23 @@
+== screening
+number of transactions actually processed: 0
+number of failed transactions: 0 (NaN%)
+== records_page
+number of transactions actually processed: 78791
+number of failed transactions: 0 (0.000%)
+latency average = 1.523 ms
+tps = 5253.623297 (without initial connection time)
+== review_new
+number of transactions actually processed: 16
+number of failed transactions: 0 (0.000%)
+latency average = 4223.772 ms
+tps = 0.947021 (without initial connection time)
+== review_old
+number of transactions actually processed: 6
+number of failed transactions: 0 (0.000%)
+latency average = 5985.286 ms
+tps = 0.334153 (without initial connection time)
+== dashboard
+number of transactions actually processed: 73
+number of failed transactions: 0 (0.000%)
+latency average = 419.740 ms
+tps = 4.764855 (without initial connection time)

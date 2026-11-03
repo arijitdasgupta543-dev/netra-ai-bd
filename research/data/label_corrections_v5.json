@@ -1,0 +1,136 @@
+{
+ "changed_or_excluded": [
+  {
+   "idx": 113,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "train/cataract/image_50.jpg"
+  },
+  {
+   "idx": 154,
+   "orig": "normal",
+   "doctor": "ungradable",
+   "key": "train/normal/image_150.jpg"
+  },
+  {
+   "idx": 130,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "train/cataract/image_99.jpg"
+  },
+  {
+   "idx": 189,
+   "orig": "normal",
+   "doctor": "ungradable",
+   "key": "train/normal/image_203.jpg"
+  },
+  {
+   "idx": 91,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "train/cataract/image_210.jpg"
+  },
+  {
+   "idx": 200,
+   "orig": "normal",
+   "doctor": "ungradable",
+   "key": "train/normal/image_216.jpg"
+  },
+  {
+   "idx": 11,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "test/cataract/image_291.jpg"
+  },
+  {
+   "idx": 35,
+   "orig": "cataract",
+   "doctor": "ungradable",
+   "key": "train/cataract/image_105.jpg"
+  },
+  {
+   "idx": 110,
+   "orig": "cataract",
+   "doctor": "ungradable",
+   "key": "train/cataract/image_39.jpg"
+  },
+  {
+   "idx": 84,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "train/cataract/image_194.jpg"
+  },
+  {
+   "idx": 138,
+   "orig": "normal",
+   "doctor": "ungradable",
+   "key": "train/normal/image_120.jpg"
+  },
+  {
+   "idx": 5,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "test/cataract/image_267.jpg"
+  },
+  {
+   "idx": 114,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "train/cataract/image_52.jpg"
+  },
+  {
+   "idx": 92,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "train/cataract/image_211.jpg"
+  },
+  {
+   "idx": 16,
+   "orig": "normal",
+   "doctor": "cataract",
+   "key": "test/normal/image_252.jpg"
+  },
+  {
+   "idx": 6,
+   "orig": "cataract",
+   "doctor": "normal",
+   "key": "test/cataract/image_275.jpg"
+  },
+  {
+   "idx": 13,
+   "orig": "cataract",
+   "doctor": "disputed",
+   "key": "test/cataract/image_296.jpg"
+  },
+  {
+   "idx": 45,
+   "orig": "cataract",
+   "doctor": "disputed",
+   "key": "train/cataract/image_124.jpg"
+  },
+  {
+   "idx": 81,
+   "orig": "cataract",
+   "doctor": "disputed",
+   "key": "train/cataract/image_191.jpg"
+  },
+  {
+   "idx": 85,
+   "orig": "cataract",
+   "doctor": "disputed",
+   "key": "train/cataract/image_197.jpg"
+  },
+  {
+   "idx": 121,
+   "orig": "cataract",
+   "doctor": "disputed",
+   "key": "train/cataract/image_7.jpg"
+  },
+  {
+   "idx": 221,
+   "orig": "normal",
+   "doctor": "disputed",
+   "key": "train/normal/image_38.jpg"
+  }
+ ]
+}

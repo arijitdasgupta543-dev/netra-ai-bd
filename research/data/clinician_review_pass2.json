@@ -1,0 +1,1630 @@
+{
+ "reviewer": "clinician reviewer (see Acknowledgments of the paper)",
+ "minutes": "4",
+ "rows": [
+  {
+   "idx": 174,
+   "key": "train/normal/image_185.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 186,
+   "key": "train/normal/image_200.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 146,
+   "key": "train/normal/image_133.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 113,
+   "key": "train/cataract/image_50.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 125,
+   "key": "train/cataract/image_82.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 34,
+   "key": "train/cataract/image_104.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 129,
+   "key": "train/cataract/image_89.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 199,
+   "key": "train/normal/image_215.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 163,
+   "key": "train/normal/image_168.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 207,
+   "key": "train/normal/image_225.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 154,
+   "key": "train/normal/image_150.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "ungradable"
+  },
+  {
+   "idx": 201,
+   "key": "train/normal/image_217.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 130,
+   "key": "train/cataract/image_99.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 189,
+   "key": "train/normal/image_203.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "ungradable"
+  },
+  {
+   "idx": 192,
+   "key": "train/normal/image_208.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 142,
+   "key": "train/normal/image_124.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 216,
+   "key": "train/normal/image_241.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 175,
+   "key": "train/normal/image_186.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 91,
+   "key": "train/cataract/image_210.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 68,
+   "key": "train/cataract/image_158.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 200,
+   "key": "train/normal/image_216.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "ungradable"
+  },
+  {
+   "idx": 157,
+   "key": "train/normal/image_157.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 158,
+   "key": "train/normal/image_158.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 26,
+   "key": "test/normal/image_298.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 135,
+   "key": "train/normal/image_114.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 162,
+   "key": "train/normal/image_167.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 137,
+   "key": "train/normal/image_12.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 169,
+   "key": "train/normal/image_177.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 11,
+   "key": "test/cataract/image_291.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 35,
+   "key": "train/cataract/image_105.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "ungradable"
+  },
+  {
+   "idx": 58,
+   "key": "train/cataract/image_144.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 197,
+   "key": "train/normal/image_212.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 110,
+   "key": "train/cataract/image_39.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "ungradable"
+  },
+  {
+   "idx": 198,
+   "key": "train/normal/image_214.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 214,
+   "key": "train/normal/image_238.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 107,
+   "key": "train/cataract/image_246.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 60,
+   "key": "train/cataract/image_148.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 181,
+   "key": "train/normal/image_192.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 188,
+   "key": "train/normal/image_202.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 4,
+   "key": "test/cataract/image_261.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 84,
+   "key": "train/cataract/image_194.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 122,
+   "key": "train/cataract/image_70.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 36,
+   "key": "train/cataract/image_106.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 138,
+   "key": "train/normal/image_120.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "ungradable"
+  },
+  {
+   "idx": 131,
+   "key": "train/normal/image_101.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 112,
+   "key": "train/cataract/image_47.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 33,
+   "key": "train/cataract/image_103.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 87,
+   "key": "train/cataract/image_2.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 5,
+   "key": "test/cataract/image_267.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 114,
+   "key": "train/cataract/image_52.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 92,
+   "key": "train/cataract/image_211.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 66,
+   "key": "train/cataract/image_155.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 70,
+   "key": "train/cataract/image_163.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 16,
+   "key": "test/normal/image_252.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 21,
+   "key": "test/normal/image_264.jpg",
+   "part": "A",
+   "set": "random",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 6,
+   "key": "test/cataract/image_275.jpg",
+   "part": "A",
+   "set": "suspicious",
+   "label": "cataract",
+   "doctor": "normal"
+  },
+  {
+   "idx": 0,
+   "key": "test/cataract/image_250.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 1,
+   "key": "test/cataract/image_253.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 2,
+   "key": "test/cataract/image_254.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 3,
+   "key": "test/cataract/image_260.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 7,
+   "key": "test/cataract/image_276.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 8,
+   "key": "test/cataract/image_277.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 9,
+   "key": "test/cataract/image_280.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 10,
+   "key": "test/cataract/image_282.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 12,
+   "key": "test/cataract/image_293.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 13,
+   "key": "test/cataract/image_296.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "disputed"
+  },
+  {
+   "idx": 14,
+   "key": "test/cataract/image_301.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 31,
+   "key": "train/cataract/image_100.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 32,
+   "key": "train/cataract/image_102.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 37,
+   "key": "train/cataract/image_110.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 38,
+   "key": "train/cataract/image_112.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 39,
+   "key": "train/cataract/image_114.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 40,
+   "key": "train/cataract/image_115.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 41,
+   "key": "train/cataract/image_117.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 42,
+   "key": "train/cataract/image_118.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 43,
+   "key": "train/cataract/image_119.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 44,
+   "key": "train/cataract/image_120.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 45,
+   "key": "train/cataract/image_124.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "disputed"
+  },
+  {
+   "idx": 46,
+   "key": "train/cataract/image_126.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 47,
+   "key": "train/cataract/image_127.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 48,
+   "key": "train/cataract/image_131.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 49,
+   "key": "train/cataract/image_134.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 50,
+   "key": "train/cataract/image_135.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 51,
+   "key": "train/cataract/image_136.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 52,
+   "key": "train/cataract/image_139.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 53,
+   "key": "train/cataract/image_14.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 54,
+   "key": "train/cataract/image_140.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 55,
+   "key": "train/cataract/image_141.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 56,
+   "key": "train/cataract/image_142.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 57,
+   "key": "train/cataract/image_143.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 59,
+   "key": "train/cataract/image_146.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 61,
+   "key": "train/cataract/image_149.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 62,
+   "key": "train/cataract/image_15.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 63,
+   "key": "train/cataract/image_150.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 64,
+   "key": "train/cataract/image_152.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 65,
+   "key": "train/cataract/image_153.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 67,
+   "key": "train/cataract/image_157.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 69,
+   "key": "train/cataract/image_159.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 71,
+   "key": "train/cataract/image_166.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 72,
+   "key": "train/cataract/image_17.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 73,
+   "key": "train/cataract/image_171.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 74,
+   "key": "train/cataract/image_175.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 75,
+   "key": "train/cataract/image_176.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 76,
+   "key": "train/cataract/image_178.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 77,
+   "key": "train/cataract/image_179.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 78,
+   "key": "train/cataract/image_180.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 79,
+   "key": "train/cataract/image_181.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 80,
+   "key": "train/cataract/image_187.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 81,
+   "key": "train/cataract/image_191.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "disputed"
+  },
+  {
+   "idx": 82,
+   "key": "train/cataract/image_192.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 83,
+   "key": "train/cataract/image_193.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 85,
+   "key": "train/cataract/image_197.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "disputed"
+  },
+  {
+   "idx": 86,
+   "key": "train/cataract/image_198.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 88,
+   "key": "train/cataract/image_202.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 89,
+   "key": "train/cataract/image_205.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 90,
+   "key": "train/cataract/image_209.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 93,
+   "key": "train/cataract/image_213.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 94,
+   "key": "train/cataract/image_214.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 95,
+   "key": "train/cataract/image_215.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 96,
+   "key": "train/cataract/image_217.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 97,
+   "key": "train/cataract/image_218.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 98,
+   "key": "train/cataract/image_221.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 99,
+   "key": "train/cataract/image_225.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 100,
+   "key": "train/cataract/image_227.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 101,
+   "key": "train/cataract/image_23.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 102,
+   "key": "train/cataract/image_230.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 103,
+   "key": "train/cataract/image_234.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 104,
+   "key": "train/cataract/image_237.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 105,
+   "key": "train/cataract/image_239.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 106,
+   "key": "train/cataract/image_243.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 108,
+   "key": "train/cataract/image_25.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 109,
+   "key": "train/cataract/image_35.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 111,
+   "key": "train/cataract/image_45.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 115,
+   "key": "train/cataract/image_61.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 116,
+   "key": "train/cataract/image_62.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 117,
+   "key": "train/cataract/image_63.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 118,
+   "key": "train/cataract/image_64.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 119,
+   "key": "train/cataract/image_68.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 120,
+   "key": "train/cataract/image_69.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 121,
+   "key": "train/cataract/image_7.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "disputed"
+  },
+  {
+   "idx": 123,
+   "key": "train/cataract/image_76.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 124,
+   "key": "train/cataract/image_79.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 126,
+   "key": "train/cataract/image_83.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 127,
+   "key": "train/cataract/image_84.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 128,
+   "key": "train/cataract/image_85.jpg",
+   "part": "B",
+   "label": "cataract",
+   "doctor": "cataract"
+  },
+  {
+   "idx": 15,
+   "key": "test/normal/image_246.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 17,
+   "key": "test/normal/image_254.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 18,
+   "key": "test/normal/image_257.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 19,
+   "key": "test/normal/image_258.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 20,
+   "key": "test/normal/image_262.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 22,
+   "key": "test/normal/image_269.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 23,
+   "key": "test/normal/image_272.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 24,
+   "key": "test/normal/image_274.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 25,
+   "key": "test/normal/image_286.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 27,
+   "key": "test/normal/image_299.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 28,
+   "key": "test/normal/image_302.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 29,
+   "key": "test/normal/image_303.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 30,
+   "key": "test/normal/image_305.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 132,
+   "key": "train/normal/image_106.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 133,
+   "key": "train/normal/image_110.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 134,
+   "key": "train/normal/image_113.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 136,
+   "key": "train/normal/image_116.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 139,
+   "key": "train/normal/image_121.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 140,
+   "key": "train/normal/image_122.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 141,
+   "key": "train/normal/image_123.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 143,
+   "key": "train/normal/image_126.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 144,
+   "key": "train/normal/image_127.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 145,
+   "key": "train/normal/image_132.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 147,
+   "key": "train/normal/image_134.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 148,
+   "key": "train/normal/image_136.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 149,
+   "key": "train/normal/image_139.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 150,
+   "key": "train/normal/image_141.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 151,
+   "key": "train/normal/image_147.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 152,
+   "key": "train/normal/image_148.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 153,
+   "key": "train/normal/image_149.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 155,
+   "key": "train/normal/image_152.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 156,
+   "key": "train/normal/image_153.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 159,
+   "key": "train/normal/image_159.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 160,
+   "key": "train/normal/image_163.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 161,
+   "key": "train/normal/image_166.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 164,
+   "key": "train/normal/image_169.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 165,
+   "key": "train/normal/image_170.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 166,
+   "key": "train/normal/image_171.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 167,
+   "key": "train/normal/image_175.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 168,
+   "key": "train/normal/image_176.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 170,
+   "key": "train/normal/image_178.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 171,
+   "key": "train/normal/image_180.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 172,
+   "key": "train/normal/image_181.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 173,
+   "key": "train/normal/image_184.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 176,
+   "key": "train/normal/image_187.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 177,
+   "key": "train/normal/image_188.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 178,
+   "key": "train/normal/image_189.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 179,
+   "key": "train/normal/image_190.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 180,
+   "key": "train/normal/image_191.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 182,
+   "key": "train/normal/image_196.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 183,
+   "key": "train/normal/image_197.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 184,
+   "key": "train/normal/image_199.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 185,
+   "key": "train/normal/image_20.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 187,
+   "key": "train/normal/image_201.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 190,
+   "key": "train/normal/image_206.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 191,
+   "key": "train/normal/image_207.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 193,
+   "key": "train/normal/image_209.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 194,
+   "key": "train/normal/image_21.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 195,
+   "key": "train/normal/image_210.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 196,
+   "key": "train/normal/image_211.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 202,
+   "key": "train/normal/image_218.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 203,
+   "key": "train/normal/image_219.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 204,
+   "key": "train/normal/image_221.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 205,
+   "key": "train/normal/image_222.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 206,
+   "key": "train/normal/image_223.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 208,
+   "key": "train/normal/image_226.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 209,
+   "key": "train/normal/image_230.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 210,
+   "key": "train/normal/image_233.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 211,
+   "key": "train/normal/image_235.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 212,
+   "key": "train/normal/image_236.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 213,
+   "key": "train/normal/image_237.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 215,
+   "key": "train/normal/image_239.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 217,
+   "key": "train/normal/image_243.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 218,
+   "key": "train/normal/image_244.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 219,
+   "key": "train/normal/image_245.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 220,
+   "key": "train/normal/image_35.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 221,
+   "key": "train/normal/image_38.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "disputed"
+  },
+  {
+   "idx": 222,
+   "key": "train/normal/image_46.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  },
+  {
+   "idx": 223,
+   "key": "train/normal/image_47.jpg",
+   "part": "B",
+   "label": "normal",
+   "doctor": "normal"
+  }
+ ]
+}
