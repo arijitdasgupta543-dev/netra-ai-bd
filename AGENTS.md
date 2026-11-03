@@ -23,3 +23,8 @@
 - Admin regeneration and ZIP masked exports derive current ROIs from saved circles and originals, never legacy wide masks. Why: all privacy images must share the same crop geometry.
 - Stored-photo path selection is centralized and fail-closed when a current ROI is absent. Why: no view may accidentally fall back to an original for non-admin roles.
 - Stored pupil images require explicit circle confirmation; legacy circles remain hidden until admin correction on record detail. Why: regenerating a mask does not validate a historical whole-eye annotation.
+- Patient name/phone/address live only in `patient_contacts` (RLS: admin, doctor, creator); never join them into exports, training data, logs or SMS text beyond what the patient needs. Why: research data must stay de-identified.
+- AI scores (`predictions`) are hidden from a doctor until that doctor has saved a label for the eye (RLS). Why: unbiased reference labels.
+- Positive predictions create urgent referrals in the database (trigger), and 5% of AI-negative patients get a hidden `random_audit` referral. Why: missed cataracts (sensitivity) must stay measurable.
+- Health workers may only record referral outcomes; clinical fields are changed by doctors/admin (`referrals_guard`). Field referrals go through `field_referral()`.
+- Secrets (SMS gateway, AI assistant key) are used only in `*.functions.ts` server handlers. The assistant answers from the offline KB first and never diagnoses.

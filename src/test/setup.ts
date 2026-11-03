@@ -18,3 +18,10 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: () => {},
   }),
 });
+
+// Radix Slider measures itself; jsdom has no ResizeObserver.
+if (!("ResizeObserver" in window)) {
+  class RO { observe() {} unobserve() {} disconnect() {} }
+  Object.defineProperty(window, "ResizeObserver", { writable: true, value: RO });
+  Object.defineProperty(globalThis, "ResizeObserver", { writable: true, value: RO });
+}

@@ -6,15 +6,20 @@ import { onQueueChange, pendingItems, processQueue } from "@/lib/offline-queue";
 import { useLang } from "@/lib/i18n";
 import { useAuth, roleLabel, type Role } from "@/lib/auth";
 import { cn } from "@/lib/utils";
+import { useUrgentCount } from "@/lib/referral-data";
 
 type NavItem = { to: string; en: string; bn: string; roles: Role[] };
 
 const NAV: NavItem[] = [
   { to: "/screening", en: "New screening", bn: "নতুন স্ক্রিনিং", roles: ["admin", "health_worker"] },
   { to: "/review", en: "Doctor review", bn: "ডাক্তারের মূল্যায়ন", roles: ["admin", "doctor"] },
+  { to: "/referrals", en: "Referrals", bn: "রেফারাল", roles: ["admin", "health_worker", "doctor"] },
   { to: "/records", en: "Records", bn: "রেকর্ড", roles: ["admin", "health_worker", "doctor"] },
   { to: "/dashboard", en: "Dashboard", bn: "ড্যাশবোর্ড", roles: ["admin", "health_worker", "doctor"] },
+  { to: "/assistant", en: "Assistant", bn: "সহায়ক", roles: ["admin", "health_worker", "doctor"] },
+  { to: "/learn", en: "Patient education", bn: "রোগী শিক্ষা", roles: ["admin", "health_worker", "doctor"] },
   { to: "/demo", en: "AI demo", bn: "এআই ডেমো", roles: ["admin", "health_worker", "doctor"] },
+  { to: "/settings", en: "Settings", bn: "সেটিংস", roles: ["admin", "doctor"] },
   { to: "/export", en: "Export", bn: "এক্সপোর্ট", roles: ["admin"] },
   { to: "/users", en: "Users & sites", bn: "ব্যবহারকারী ও সাইট", roles: ["admin"] },
 ];
@@ -44,6 +49,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const { session, role, signOut } = useAuth();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const items = NAV.filter((n) => role && n.roles.includes(role));
+  const urgent = useUrgentCount(role === "doctor" || role === "admin");
 
   return (
     <div className="min-h-screen">
@@ -85,6 +91,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 )}
               >
                 {L(n.en, n.bn)}
+                {n.to === "/referrals" && !!urgent.data && <span className="ml-1.5 rounded-full bg-destructive px-1.5 text-xs text-white">{urgent.data}</span>}
               </Link>
             ))}
           </nav>
@@ -142,9 +149,13 @@ function PendingUploads() {
     const flush = () => void processQueue(userId).then((n) => { if (n) void qc.invalidateQueries(); refresh(); });
     refresh(); flush();
     const off = onQueueChange(refresh);
-    window.addEventListener("online", flush);
-    const timer = setInterval(flush, 60_000);
-    return () => { off(); window.removeEventListener("online", flush); clearInterval(timer); };
+    // Sync-storm protection: after a camp day many phones regain network at once. Spread their uploads with a
+    // random delay (0–30 s) and a per-device retry period (45–75 s) instead of everyone retrying together.
+    let pending: ReturnType<typeof setTimeout> | undefined;
+    const onOnline = () => { clearTimeout(pending); pending = setTimeout(flush, Math.random() * 30_000); };
+    window.addEventListener("online", onOnline);
+    const timer = setInterval(flush, 45_000 + Math.random() * 30_000);
+    return () => { off(); window.removeEventListener("online", onOnline); clearInterval(timer); clearTimeout(pending); };
   }, [userId, qc]);
   if (!count) return null;
   return (

@@ -12,14 +12,19 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated/assistant'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDemoRouteImport } from './routes/_authenticated/demo'
 import { Route as AuthenticatedExportRouteImport } from './routes/_authenticated/export'
+import { Route as AuthenticatedLearnRouteImport } from './routes/_authenticated/learn'
+import { Route as AuthenticatedReferralsRouteImport } from './routes/_authenticated/referrals'
 import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated/review'
 import { Route as AuthenticatedScreeningRouteImport } from './routes/_authenticated/screening'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedRecordsIndexRouteImport } from './routes/_authenticated/records.index'
 import { Route as AuthenticatedRecordsStudyIdRouteImport } from './routes/_authenticated/records.$studyId'
+import { Route as AuthenticatedSlipStudyIdRouteImport } from './routes/_authenticated/slip.$studyId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,6 +39,11 @@ const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
@@ -50,6 +60,16 @@ const AuthenticatedExportRoute = AuthenticatedExportRouteImport.update({
   path: '/export',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedLearnRoute = AuthenticatedLearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedReferralsRoute = AuthenticatedReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
   id: '/review',
   path: '/review',
@@ -58,6 +78,11 @@ const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
 const AuthenticatedScreeningRoute = AuthenticatedScreeningRouteImport.update({
   id: '/screening',
   path: '/screening',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
@@ -77,29 +102,45 @@ const AuthenticatedRecordsStudyIdRoute =
     path: '/records/$studyId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSlipStudyIdRoute =
+  AuthenticatedSlipStudyIdRouteImport.update({
+    id: '/slip/$studyId',
+    path: '/slip/$studyId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/assistant': typeof AuthenticatedAssistantRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/demo': typeof AuthenticatedDemoRoute
   '/export': typeof AuthenticatedExportRoute
+  '/learn': typeof AuthenticatedLearnRoute
+  '/referrals': typeof AuthenticatedReferralsRoute
   '/review': typeof AuthenticatedReviewRoute
   '/screening': typeof AuthenticatedScreeningRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
+  '/slip/$studyId': typeof AuthenticatedSlipStudyIdRoute
   '/records/': typeof AuthenticatedRecordsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/assistant': typeof AuthenticatedAssistantRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/demo': typeof AuthenticatedDemoRoute
   '/export': typeof AuthenticatedExportRoute
+  '/learn': typeof AuthenticatedLearnRoute
+  '/referrals': typeof AuthenticatedReferralsRoute
   '/review': typeof AuthenticatedReviewRoute
   '/screening': typeof AuthenticatedScreeningRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
+  '/slip/$studyId': typeof AuthenticatedSlipStudyIdRoute
   '/records': typeof AuthenticatedRecordsIndexRoute
 }
 export interface FileRoutesById {
@@ -107,13 +148,18 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/demo': typeof AuthenticatedDemoRoute
   '/_authenticated/export': typeof AuthenticatedExportRoute
+  '/_authenticated/learn': typeof AuthenticatedLearnRoute
+  '/_authenticated/referrals': typeof AuthenticatedReferralsRoute
   '/_authenticated/review': typeof AuthenticatedReviewRoute
   '/_authenticated/screening': typeof AuthenticatedScreeningRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/_authenticated/records/$studyId': typeof AuthenticatedRecordsStudyIdRoute
+  '/_authenticated/slip/$studyId': typeof AuthenticatedSlipStudyIdRoute
   '/_authenticated/records/': typeof AuthenticatedRecordsIndexRoute
 }
 export interface FileRouteTypes {
@@ -121,38 +167,53 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/assistant'
     | '/dashboard'
     | '/demo'
     | '/export'
+    | '/learn'
+    | '/referrals'
     | '/review'
     | '/screening'
+    | '/settings'
     | '/users'
     | '/records/$studyId'
+    | '/slip/$studyId'
     | '/records/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/assistant'
     | '/dashboard'
     | '/demo'
     | '/export'
+    | '/learn'
+    | '/referrals'
     | '/review'
     | '/screening'
+    | '/settings'
     | '/users'
     | '/records/$studyId'
+    | '/slip/$studyId'
     | '/records'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/assistant'
     | '/_authenticated/dashboard'
     | '/_authenticated/demo'
     | '/_authenticated/export'
+    | '/_authenticated/learn'
+    | '/_authenticated/referrals'
     | '/_authenticated/review'
     | '/_authenticated/screening'
+    | '/_authenticated/settings'
     | '/_authenticated/users'
     | '/_authenticated/records/$studyId'
+    | '/_authenticated/slip/$studyId'
     | '/_authenticated/records/'
   fileRoutesById: FileRoutesById
 }
@@ -185,6 +246,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/assistant': {
+      id: '/_authenticated/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AuthenticatedAssistantRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -206,6 +274,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedExportRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/learn': {
+      id: '/_authenticated/learn'
+      path: '/learn'
+      fullPath: '/learn'
+      preLoaderRoute: typeof AuthenticatedLearnRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/referrals': {
+      id: '/_authenticated/referrals'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof AuthenticatedReferralsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/review': {
       id: '/_authenticated/review'
       path: '/review'
@@ -218,6 +300,13 @@ declare module '@tanstack/react-router' {
       path: '/screening'
       fullPath: '/screening'
       preLoaderRoute: typeof AuthenticatedScreeningRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/users': {
@@ -241,28 +330,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRecordsStudyIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/slip/$studyId': {
+      id: '/_authenticated/slip/$studyId'
+      path: '/slip/$studyId'
+      fullPath: '/slip/$studyId'
+      preLoaderRoute: typeof AuthenticatedSlipStudyIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDemoRoute: typeof AuthenticatedDemoRoute
   AuthenticatedExportRoute: typeof AuthenticatedExportRoute
+  AuthenticatedLearnRoute: typeof AuthenticatedLearnRoute
+  AuthenticatedReferralsRoute: typeof AuthenticatedReferralsRoute
   AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
   AuthenticatedScreeningRoute: typeof AuthenticatedScreeningRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedRecordsStudyIdRoute: typeof AuthenticatedRecordsStudyIdRoute
+  AuthenticatedSlipStudyIdRoute: typeof AuthenticatedSlipStudyIdRoute
   AuthenticatedRecordsIndexRoute: typeof AuthenticatedRecordsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAssistantRoute: AuthenticatedAssistantRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDemoRoute: AuthenticatedDemoRoute,
   AuthenticatedExportRoute: AuthenticatedExportRoute,
+  AuthenticatedLearnRoute: AuthenticatedLearnRoute,
+  AuthenticatedReferralsRoute: AuthenticatedReferralsRoute,
   AuthenticatedReviewRoute: AuthenticatedReviewRoute,
   AuthenticatedScreeningRoute: AuthenticatedScreeningRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedRecordsStudyIdRoute: AuthenticatedRecordsStudyIdRoute,
+  AuthenticatedSlipStudyIdRoute: AuthenticatedSlipStudyIdRoute,
   AuthenticatedRecordsIndexRoute: AuthenticatedRecordsIndexRoute,
 }
 

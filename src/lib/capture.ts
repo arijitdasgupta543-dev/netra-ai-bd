@@ -52,6 +52,20 @@ export function hintFor(v: Omit<CaptureChecks, 'ready' | 'hint'>): Hint {
   }
   return 'ready';
 }
+/** Average human iris (visible) diameter – nearly constant in adults (~11.7 mm). */
+export const IRIS_DIAMETER_MM = 11.7;
+/** Assumed field of view across the 3:4 portrait view of a typical phone main camera. */
+export const ASSUMED_VIEW_FOV_DEG = 50;
+/**
+ * Approximate camera-to-eye distance from the iris size (pinhole camera model).
+ * irisR = iris radius as a fraction of view width. Phones differ (±25%), so this is for guidance only.
+ */
+export function estimateDistanceCm(irisR: number | null | undefined, fovDeg = ASSUMED_VIEW_FOV_DEG): number | null {
+  if (!irisR || irisR <= 0) return null;
+  const viewWidthMm = IRIS_DIAMETER_MM / (2 * irisR); // real-world width covered by the view at the eye
+  const d = viewWidthMm / (2 * Math.tan((fovDeg * Math.PI) / 360));
+  return Math.round(d / 10);
+}
 export function readySince(previous: number | null, ready: boolean, now: number) { return ready ? previous ?? now : null; }
 export function shouldAutoCapture(since: number | null, now: number) { return since != null && now - since >= 1000; }
 export function validModelUrl(value: string) {

@@ -9,6 +9,7 @@ import { BUCKET, useSignedUrl } from "@/lib/storage";
 import { diagnosisLabel, eyeLabel, majority, sexLabel } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
 import { QualityBadge } from "@/components/QualityBadge";
+import { PatientExtras } from "@/components/PatientExtras";
 import { StoredEyePhoto } from "@/components/StoredEyePhoto";
 import { Button } from "@/components/ui/button";
 import {
@@ -62,6 +63,7 @@ function Detail() {
         <Info k={L("Area", "এলাকা")} v={p.area ?? "–"} />
         <Info k={L("Consent", "সম্মতি")} v={p.consent_type === "written" ? L("Written", "লিখিত") : L("Verbal", "মৌখিক")} />
       </div>
+      <PatientExtras studyId={p.study_id} />
       {consentUrl.data && (
         <details className="rounded-2xl border bg-card p-4">
           <summary className="cursor-pointer text-sm font-medium">{L("Consent form photo", "সম্মতিপত্রের ছবি")}</summary>

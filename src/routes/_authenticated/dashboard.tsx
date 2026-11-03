@@ -5,6 +5,34 @@ import { useLang } from "@/lib/i18n";
 import { useDashboardStats } from "@/lib/data";
 import { diagnosisLabel, DIAGNOSES, sexLabel } from "@/lib/labels";
 import { PageTitle, RoleGate } from "@/components/AppShell";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/lib/auth";
+import { reasonLabel, statusLabel, typeLabel, type ReferralReason, type ReferralStatus, type ReferralType } from "@/lib/referral";
+
+type RefStats = { by_status: Record<string, number>; by_reason: Record<string, number>; by_type: Record<string, number>; median_hours_to_doctor: number | null; completion_rate: number | null };
+function ReferralStats() {
+  const { L, T } = useLang();
+  const { role } = useAuth();
+  const q = useQuery({ queryKey: ["records", "referral-stats"], enabled: role === "admin" || role === "doctor", queryFn: async () => { const { data, error } = await supabase.rpc("referral_stats"); if (error) throw error; return data as unknown as RefStats; } });
+  if (!q.data) return null;
+  const e = (m: Record<string, number>, lab: (k: string) => string) => Object.entries(m).map(([k, v]) => ({ name: lab(k), value: Number(v) }));
+  const d = q.data;
+  return (
+    <div className="space-y-3">
+      <h2 className="text-xl font-semibold">{L("Referrals", "রেফারাল")}</h2>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="rounded-2xl border bg-card p-4"><p className="text-xs text-muted-foreground">{L("Median hours to doctor decision", "ডাক্তারের সিদ্ধান্তে মধ্যমা সময় (ঘণ্টা)")}</p><p className="mt-1 font-display text-3xl font-semibold text-primary">{d.median_hours_to_doctor == null ? "–" : d.median_hours_to_doctor.toFixed(1)}</p></div>
+        <div className="rounded-2xl border bg-card p-4"><p className="text-xs text-muted-foreground">{L("Reached hospital (of known outcomes)", "হাসপাতালে গেছেন (জানা ফলাফলের মধ্যে)")}</p><p className="mt-1 font-display text-3xl font-semibold text-primary">{d.completion_rate == null ? "–" : `${Math.round(d.completion_rate * 100)}%`}</p></div>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Chart title={L("By status", "অবস্থা অনুযায়ী")} data={e(d.by_status, (k) => T(statusLabel[k as ReferralStatus]))} />
+        <Chart title={L("By reason", "কারণ অনুযায়ী")} data={e(d.by_reason, (k) => T(reasonLabel[k as ReferralReason]))} />
+        <Chart title={L("By type", "ধরন অনুযায়ী")} data={e(d.by_type, (k) => T(typeLabel[k as ReferralType]))} />
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard – Netra AI" }, { name: "description", content: "Data collection progress." }, { property: "og:title", content: "Dashboard – Netra AI" }, { property: "og:description", content: "Data collection progress." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
@@ -56,6 +84,7 @@ function Dashboard() {
         <Chart title={L("By age group", "বয়স অনুযায়ী")} data={s.age} />
         <Chart title={L("Photos per site", "সাইট অনুযায়ী ছবি")} data={s.sites} />
       </div>
+      <ReferralStats />
     </div>
   );
 }

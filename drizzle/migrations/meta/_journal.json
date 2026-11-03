@@ -43,6 +43,34 @@
       "when": 1792328319388,
       "tag": "0005_performance_and_thumbnails",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792900000000,
+      "tag": "0006_referrals_contacts_vision",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1792910000000,
+      "tag": "0007_rls_initplan",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793090000000,
+      "tag": "0008_audit_integrity_two_tier_blinding",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793350000000,
+      "tag": "0009_register_model_v3_1",
+      "breakpoints": true
     }
   ]
 }

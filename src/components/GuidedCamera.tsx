@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { useLang } from '@/lib/i18n';
 import { canvasToBlob, type Circle } from '@/lib/image';
-import { checkPixels, initialPupilCircle, guideBox, viewRect, GUIDE_RADIUS, hintFor, readySince, shouldAutoCapture, type CaptureChecks, type GuideBox } from '@/lib/capture';
+import { checkPixels, initialPupilCircle, guideBox, viewRect, GUIDE_RADIUS, hintFor, readySince, shouldAutoCapture, estimateDistanceCm, type CaptureChecks, type GuideBox } from '@/lib/capture';
 import { cn } from '@/lib/utils';
 
 export type GuidedPhoto = { blob: Blob; circle: Circle; autoCircle: Circle | null; guide: GuideBox; checks: CaptureChecks | null; torch: boolean };
@@ -150,6 +150,7 @@ export function GuidedCamera({ onCapture, onGallery }: { onCapture: (photo: Guid
       </div>
       <div aria-live="polite" className={cn('flex min-h-11 items-center justify-center gap-2 rounded-lg border px-3 py-2 text-center text-sm font-semibold', checks?.ready ? 'border-success bg-success-soft text-success' : checks?.hint === 'dark' || checks?.hint === 'bright' || checks?.hint === 'glare' ? 'border-destructive bg-danger-soft text-destructive' : 'border-warning bg-warning-soft')}>
         {checks?.hint === 'centre' && <Arrow className="h-5 w-5 shrink-0" />}{checks ? messages[checks.hint] : L('Checking…', 'যাচাই হচ্ছে…')}
+        {checks?.iris_found && checks.iris_ratio != null && <span className="text-xs font-normal opacity-70">· ≈{estimateDistanceCm(checks.iris_ratio * GUIDE_RADIUS)} {L('cm', 'সেমি')}</span>}
       </div>
       <div className="grid grid-cols-[1fr_auto] items-center gap-3">
         <Button type="button" className={cn('h-12 whitespace-normal text-base', checks?.ready && 'capture-ready')} onClick={() => void capture()}><Camera />{L('Take photo', 'ছবি তুলুন')}</Button>

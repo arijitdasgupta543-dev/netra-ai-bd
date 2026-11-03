@@ -32,9 +32,17 @@ export function useSignedUrls(paths: string[]) {
   });
 }
 
-export async function uploadPhoto(folder: string, blob: Blob): Promise<string> {
-  const path = `${folder}/${crypto.randomUUID()}.jpg`;
+/**
+ * Uploads one photo. With a `name` (the eye/patient id) the path is deterministic, so a retry after a lost
+ * response finds the object already there ("already exists") and reuses it instead of leaving an orphan copy.
+ */
+export async function uploadPhoto(folder: string, blob: Blob, name?: string): Promise<string> {
+  const path = `${folder}/${name ?? crypto.randomUUID()}.jpg`;
   const { error } = await supabase.storage.from(BUCKET).upload(path, blob, { contentType: "image/jpeg" });
-  if (error) throw error;
+  if (error) {
+    const e = error as { message?: string; statusCode?: string | number };
+    if (name && (String(e.statusCode) === "409" || /already exists|duplicate/i.test(e.message ?? ""))) return path;
+    throw error;
+  }
   return path;
 }
